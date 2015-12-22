@@ -1,0 +1,179 @@
+body{
+margin: 0px auto;
+background-color:black;
+
+}
+
+#canvasmap{
+position:absolute;
+width:1465px;
+height:900px;
+top:5px;
+left:5px;
+overflow: hidden;
+margin-top:0px;
+
+/*Um Area unmarkierbar zu machen*/
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+ }
+
+#imgpanel{
+position:absolute;
+border:solid white;
+width:1920px;
+height:1080px;
+
+z-index:1;
+/*fürs zoomen*/
+pointer-events:none;
+
+}
+
+#map{
+position:absolute;
+width:1920px;
+height:1080px;
+
+
+
+z-index:0;
+
+
+
+}
+
+.markerpanel{
+position:absolute;
+width:32px;
+height:32px;
+
+}
+
+
+.marker{
+position:absolute;
+width:32px;
+height:45px;
+z-index:2;
+/*fürs zoomen*/
+pointer-events:all;
+}
+
+.marker:hover{
+cursor:pointer;
+}
+
+.markertext{
+position:absolute;
+max-width: 160px;
+word-break: keep-all ;
+padding:5px;
+display:none;
+}
+
+.allgemein{
+background-color:green;
+}
+
+.nahrung{
+background-color:red;
+}
+
+.spawn{
+background-color:blue;
+}
+
+
+
+
+
+
+#legend{
+position:absolute;
+top:5px;
+left:1475px;
+width:200px;
+height:900px;
+background-color:white;
+}
+
+#legend h1{
+margin-left:10px;
+}
+
+/*----------------------------MEDIAQUERIES---------------------------*/
+
+
+/*Auflösung 1920x1080*/
+@media all and (max-width: 1920px) and (max-height: 1080px) 
+and (min-width: 1680px) and (min-height: 1050px)  {
+
+#canvasmap{
+width:1705px;
+height:930px;
+
+}
+
+#legend{
+left:1715px;
+height:930px;
+}
+
+}
+
+/*Auflösung 1680x1050*/
+@media all and (max-width: 1680px) and (max-height: 1050px)
+and (min-width: 1440px) and (min-height: 900px)   {
+
+#canvasmap{
+width:1465px;
+height:900px;
+
+}
+
+#legend{
+left:1475px;
+height:900px;
+}
+
+}
+
+
+
+/*Auflösung 1440x900*/
+@media all and (max-width: 1440px) and (max-height: 900px) 
+and (min-width: 1280px) and (min-height: 800px) {
+
+#canvasmap{
+width:1225px;
+height:750px;
+
+}
+
+#legend{
+left:1235px;
+height:750px;
+}
+
+}
+
+/*Auflösung 1280x800*/
+@media all and (max-width: 1440px) and (max-height: 900px)  {
+
+#canvasmap{
+width:1065px;
+height:650px;
+
+}
+
+#legend{
+left:1075px;
+height:650px;
+}
+
+}

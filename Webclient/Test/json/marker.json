@@ -1,0 +1,48 @@
+{"markers": [
+        {
+			"id": 1,
+            "name": "Erster Marker", 
+			"text": "Das ist der erste Marker (Allgemein)",
+			"left": 50,
+			"top": 100,
+			"url": "../img/Marker.png",
+			"kategorie" : "allgemein"
+   
+        },
+		
+		{
+			"id": 2,
+            "name": "Zweiter Marker", 
+			"text": "Das ist der zweite Marker (Spawn)",
+			"left": 350,
+			"top": 500,
+			"url": "../img/Marker.png",
+			"kategorie" : "spawn"
+   
+        },
+		
+		{
+			"id": 3,
+            "name": "Dritter Marker", 
+			"text": "Das ist der dritte Marker  (Nahrung)",
+			"left": 392,
+			"top": 305,
+			"url": "../img/Marker.png",
+			"kategorie" : "nahrung"
+   
+        },
+		
+		{
+			"id": 4,
+            "name": "Vierter Marker", 
+			"text": "Das ist der vierte Marker  (Spawn)",
+			"left": 700,
+			"top": 200,
+			"url": "../img/Marker.png",
+			"kategorie" : "spawn"
+   
+        }
+		
+
+
+] }
