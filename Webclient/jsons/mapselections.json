@@ -1,0 +1,29 @@
+{"images": [
+    {
+        "name": "dust2",
+        "url": "images/mapselections/de_dust2.jpg",
+        "mapname" : "dust2",
+        "map": "images/map_dust2.jpg"
+    },
+    {
+
+        "name": "cobblestone",
+        "url": "images/mapselections/de_cobblestone.jpg",
+        "mapname" : "cobblestone",
+        "map": "images/map_cobblestone.jpg"
+    },
+    {
+
+        "name": "inferno",
+        "url": "images/mapselections/de_inferno.jpg",
+        "mapname" : "inferno",
+        "map": "images/map_inferno.jpg"
+    },
+    {
+
+        "name": "mirage",
+        "url": "images/mapselections/de_mirage.jpg",
+        "mapname" : "mirage",
+        "map": "images/map_mirage.jpg"
+    }
+] }
