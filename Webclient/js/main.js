@@ -8,18 +8,29 @@ $( document ).ready(function() {
 
     loadAllImagesMapselector();
 
+
+    $( "#tacticcanvas" ).on( "click", function() {
+
+        return false;
+
+    });
+
     $( "#header" ).on( "click", function() {
         if(openheader == false){
             $( "#header" ).animate({
-                height: "100"
+                top: "0"
             }, 1000, function() {
                 openheader = true;
+                $( "#header_arrow").attr('src',"images/icons/arrowup.png");
+
             });
+
         }else if(openheader == true){
             $( "#header" ).animate({
-                height: "30"
+                top: "-170"
             }, 1000, function() {
                 openheader = false;
+                $( "#header_arrow").attr('src',"images/icons/arrowdown.png");
             });
         }
     });
@@ -72,6 +83,7 @@ function loadMap(id){
 
                     //Erstellt neue HTML Elemente
                     $("#map").attr('src', data.images[i].map);
+                    $("#maketacticthumb").attr('src', data.images[i].url);
 
                 }
                 }
@@ -98,8 +110,14 @@ function loadAllImagesMapselector(){
 
             for (i = 0; i < data.images.length; i++) {
 
-                //Erstellt neue HTML Elemente
-                $("#mapselector").append("<img id='"+ data.images[i].name+"' src='"+ data.images[i].url+"' class='mapselection passive'>");
+
+                // Mache das erste Objekt aktiv
+                if(i == 0){
+                    $("#mapselector").append("<img id='"+ data.images[i].name+"' src='"+ data.images[i].url+"' class='mapselection active'>");
+                    loadMap(data.images[i].name);
+                }else {
+                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
+                }
             }
         },
 
@@ -110,5 +128,8 @@ function loadAllImagesMapselector(){
         }
 
     });
+
+
+
 
 }
