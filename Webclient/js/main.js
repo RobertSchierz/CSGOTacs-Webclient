@@ -1,11 +1,13 @@
 /**
  * Created by Robert on 23.12.2015.
  */
+var socket = io('https://p4dme.shaula.uberspace.de/')
 $( document ).ready(function() {
+
     var openheader = false;
+  
 
-
-
+    draw(socket);
     loadAllImagesMapselector();
 
 
@@ -129,6 +131,69 @@ function loadAllImagesMapselector(){
 
     });
 
+
+}
+
+function draw(socket){
+    context = document.getElementById('imgpanel').getContext("2d");
+    var contextid = '#' + context.canvas.id;
+    var clickX = new Array();
+    var clickY = new Array();
+    var clickDrag = new Array();
+    var paint;
+
+    $(contextid).mousedown(function(e){
+        paint = true;
+
+        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+        redraw(socket);
+    });
+
+    $(contextid).mousemove(function(e){
+        if(paint){
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+          redraw(socket);
+        }
+    });
+
+    $(contextid).mouseup(function(e){
+        paint = false;
+    });
+
+    $(contextid).mouseleave(function(e){
+        paint = false;
+    });
+
+    function addClick(x, y, dragging)
+    {
+        clickX.push(x);
+        clickY.push(y);
+        clickDrag.push(dragging);
+        //socket.emit('json', ({'X': x, 'Y' : y }));
+    }
+
+    function redraw(){
+
+        context.clearRect(0, 0, context.clientHeight, context.canvas.height); // Clears the canvas
+
+        context.strokeStyle = "#df4b26";
+        context.lineJoin = "round";
+        context.lineWidth = 8;
+
+        for(var i=0; i < clickX.length; i++) {
+            context.beginPath();
+            if(clickDrag[i] && i){
+                context.moveTo(clickX[i-1], clickY[i-1]);
+            }else{
+                context.moveTo(clickX[i]-1, clickY[i]);
+            }
+            context.lineTo(clickX[i], clickY[i]);
+
+
+            context.closePath();
+            context.stroke();
+        }
+    }
 
 
 
