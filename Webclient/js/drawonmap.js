@@ -7,6 +7,10 @@ var clickY = new Array();
 var clickDrag = new Array();
 var paint;
 
+$( document ).ready(function() {
+getData(document.getElementById('imgpanel').getContext("2d"));
+
+});
 
 function draw(on){
 
@@ -19,11 +23,6 @@ function draw(on){
         $("#imgpanel").off();
         deleteCanvas(context);
     }
-
-
-
-
-
 
 
 
@@ -59,7 +58,7 @@ function addClick(x, y, dragging)
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(dragging);
-    //sendData(x, y);
+    sendData(x, y);
 
 }
 
@@ -67,7 +66,7 @@ function redraw(context){
 
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
-    context.lineWidth = 8;
+    context.lineWidth = 1118;
 
     for(var i=0; i < clickX.length; i++) {
 
@@ -92,4 +91,22 @@ function deleteCanvas(context){
     clickDrag = new Array();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
+}
+
+function getData(context){
+    socket.on('json', function(msg){
+
+        context.beginPath();
+
+            context.moveTo(msg.X, msg.Y);
+
+
+          //  context.moveTo(msg.X-1, msg.Y);
+
+        context.lineTo(msg.X, msg.Y);
+
+
+        context.closePath();
+        context.stroke();
+    });
 }

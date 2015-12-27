@@ -3,6 +3,7 @@
  */
 
 
+var tactic = new Tactic();
 
 
 $( document ).ready(function() {
@@ -10,11 +11,30 @@ $( document ).ready(function() {
     var openheader = false;
     var maketactic = false;
 
-
-
-
     loadAllImagesMapselector();
+    setListenerToElements(maketactic, openheader);
 
+
+    $(document).ajaxComplete(function () {
+        $( '#mapselector img' ).on( "click", function() {
+
+            if($( this ).hasClass("passive")){
+                setAllChildsClass("passive","active");
+                $(this).removeClass("passive").addClass("active");
+                loadMap($(this).attr('id'));
+            }
+
+        });
+    });
+
+
+
+
+});
+
+
+
+function setListenerToElements(maketactic, openheader){
 
     $( "#tacticcanvas" ).on( "click", function() {
         return false;
@@ -56,27 +76,7 @@ $( document ).ready(function() {
             });
         }
     });
-
-
-
-
-    $(document).ajaxComplete(function () {
-        $( '#mapselector img' ).on( "click", function() {
-
-            if($( this ).hasClass("passive")){
-
-                setAllChildsClass("passive","active");
-                $(this).removeClass("passive").addClass("active");
-                loadMap($(this).attr('id'));
-            }
-
-        });
-    });
-
-
-
-});
-
+}
 
 function setAllChildsClass(setclass, removeclass){
     $('#mapselector').children().each(function (){
@@ -92,7 +92,6 @@ function loadMap(id){
     $.ajax({
 
         url : "./jsons/mapselections.json",
-
         dataType : 'json',
 
         success : function (data) {
@@ -103,6 +102,8 @@ function loadMap(id){
                     //Erstellt neue HTML Elemente
                     $("#map").attr('src', data.images[i].map);
                     $("#maketacticthumb").attr('src', data.images[i].url);
+                    tactic.setMap(data.images[i].name);
+
 
 
                 }
@@ -149,6 +150,4 @@ function loadAllImagesMapselector(){
         }
 
     });
-
-
 }
