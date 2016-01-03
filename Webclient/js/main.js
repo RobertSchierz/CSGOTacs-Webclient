@@ -5,19 +5,28 @@
 
 var tactic = new Tactic();
 
+var socket = io('https://p4dme.shaula.uberspace.de/');
+
+/*
+ function sendData(x, y){
+ socket.emit('json', ({'X': x, 'Y' : y }));
+ }
+
+ */
+
+var openheader = false;
+var maketactic = false;
 
 $( document ).ready(function() {
 
-    var openheader = false;
-    var maketactic = false;
+
 
     loadAllImagesMapselector();
-    setListenerToElements(maketactic, openheader);
+    setListenerToElements();
 
 
     $(document).ajaxComplete(function () {
         $( '#mapselector img' ).on( "click", function() {
-
             if($( this ).hasClass("passive")){
                 setAllChildsClass("passive","active");
                 $(this).removeClass("passive").addClass("active");
@@ -34,28 +43,18 @@ $( document ).ready(function() {
 
 
 
-function setListenerToElements(maketactic, openheader){
+function setListenerToElements(){
 
     $( "#tacticcanvas" ).on( "click", function() {
         return false;
     });
 
     $("#maketacticbutton").on("click", function(){
-        if(!maketactic){
-            maketactic = true;
-
-            draw(maketactic);
-            $(this).attr('class', 'deletetacticbutton');
-            $(this).attr('value', 'Taktik Löschen');
-        }else if(maketactic){
-            maketactic = false;
-            draw(maketactic);
-            $(this).removeClass('deletetacticbutton');
-            $(this).attr('value', 'Taktik Erstellen');
-
-        }
+        handleTacticEvents();
 
     });
+
+
 
     $( "#header" ).on( "click", function() {
         if(openheader == false){
@@ -76,6 +75,10 @@ function setListenerToElements(maketactic, openheader){
             });
         }
     });
+
+    $("#savetacticbutton").on("click", function(){
+        saveTactic();
+    });
 }
 
 function setAllChildsClass(setclass, removeclass){
@@ -85,6 +88,26 @@ function setAllChildsClass(setclass, removeclass){
            $(this).addClass(setclass);
        }
     } )
+}
+
+function handleTacticEvents(){
+
+        if(!maketactic){
+            maketactic = true;
+            draw(maketactic);
+            $("#maketacticbutton").attr('value', 'Taktik Löschen');
+            $("#maketacticbutton").height('30px');
+            $("#savetacticbutton").show();
+        }else if(maketactic){
+            maketactic = false;
+            draw(maketactic);
+            $("#maketacticbutton").attr('value', 'Taktik Erstellen');
+            $("#maketacticbutton").height('60px');
+            $("#savetacticbutton").hide();
+
+        }
+
+
 }
 
 
@@ -103,6 +126,7 @@ function loadMap(id){
                     $("#map").attr('src', data.images[i].map);
                     $("#maketacticthumb").attr('src', data.images[i].url);
                     tactic.setMap(data.images[i].name);
+                    handleTacticEvents();
 
 
 
@@ -136,6 +160,9 @@ function loadAllImagesMapselector(){
                 if(i == 0){
                     $("#mapselector").append("<img id='"+ data.images[i].name+"' src='"+ data.images[i].url+"' class='mapselection active'>");
                     loadMap(data.images[i].name);
+                    maketactic = false;
+                    handleTacticEvents();
+
                 }else {
                     $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
                 }

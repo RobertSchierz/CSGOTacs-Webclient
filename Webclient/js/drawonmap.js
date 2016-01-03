@@ -8,7 +8,7 @@ var clickDrag = new Array();
 var paint;
 
 $( document ).ready(function() {
-getData(document.getElementById('imgpanel').getContext("2d"));
+//getData(document.getElementById('imgpanel').getContext("2d"));
 
 });
 
@@ -58,7 +58,7 @@ function addClick(x, y, dragging)
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(dragging);
-    sendData(x, y);
+    //sendData(x, y);
 
 }
 
@@ -66,7 +66,7 @@ function redraw(context){
 
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
-    context.lineWidth = 1118;
+    context.lineWidth = 8;
 
     for(var i=0; i < clickX.length; i++) {
 
@@ -90,11 +90,14 @@ function deleteCanvas(context){
     clickY = new Array();
     clickDrag = new Array();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-
 }
 
 function getData(context){
     socket.on('json', function(msg){
+
+        context.strokeStyle = "#df4b26";
+        context.lineJoin = "round";
+        context.lineWidth = 8;
 
         context.beginPath();
 
@@ -109,4 +112,12 @@ function getData(context){
         context.closePath();
         context.stroke();
     });
+}
+
+function saveTactic(){
+    tactic.setX(clickX);
+    tactic.setY(clickY);
+    sendLocaltactic(tactic.getMap(), tactic.getX(), tactic.getY());
+
+
 }
