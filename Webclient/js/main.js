@@ -49,9 +49,16 @@ function setListenerToElements(){
         return false;
     });
 
+    $( "#usercanvas" ).on( "click", function() {
+        return false;
+    });
+
     $("#maketacticbutton").on("click", function(){
         handleTacticEvents();
+    });
 
+    $( "#login_submit" ).on( "click", function() {
+        authentification($("#login_username").val(),$("login_password").val());
     });
 
 
@@ -126,6 +133,7 @@ function loadMap(id){
                     $("#map").attr('src', data.images[i].map);
                     $("#maketacticthumb").attr('src', data.images[i].url);
                     tactic.setMap(data.images[i].name);
+                    maketactic = true;
                     handleTacticEvents();
 
 
