@@ -58,7 +58,17 @@ function setListenerToElements(){
     });
 
     $( "#login_submit" ).on( "click", function() {
-        authentification($("#login_username").val(),$("login_password").val());
+        authentification($("#login_username").val(),$("#login_password").val());
+    });
+
+    $( "#login_register" ).on( "click", function() {
+       openRegister();
+
+    });
+
+    $( "#register_close" ).on( "click", function() {
+        closeRegister();
+
     });
 
 
@@ -69,7 +79,7 @@ function setListenerToElements(){
                 top: "0"
             }, 1000, function() {
                 openheader = true;
-                $( "#header_arrow").attr('src',"images/icons/arrowup.png");
+                $( "#header_arrow").attr('src',"images/icons/header/arrowup.png");
 
             });
 
@@ -78,7 +88,7 @@ function setListenerToElements(){
                 top: "-170"
             }, 1000, function() {
                 openheader = false;
-                $( "#header_arrow").attr('src',"images/icons/arrowdown.png");
+                $( "#header_arrow").attr('src',"images/icons/header/arrowdown.png");
             });
         }
     });

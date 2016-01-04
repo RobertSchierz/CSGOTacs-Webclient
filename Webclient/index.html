@@ -9,12 +9,24 @@
     <script type="text/javascript" src="js/tactic.js"></script>
     <script type="text/javascript" src="js/drawonmap.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/register.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 
 
     <link href="css/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+
+<div id="register_panel">
+    <img src="images/icons/login/close.png" id="register_close">
+    <span class="register_elements" id="register_username">Benutzername:</span>
+    <input class="register_elements" id="register_usernameinput" type="input">
+    <span class="register_elements" id="register_password">Passwort:</span>
+    <input class="register_elements" id="register_passwordinput" type="input">
+    <input  class="register_elements" id="register_submit" type="button" value="Registrieren">
+
+</div>
+<div id="register_opacitybox"></div>
 
     <div id="header">
         <div id="tacticcanvas">
@@ -31,9 +43,10 @@
             <input type="input" id="login_password">
 
             <input type="button" id="login_submit" value="Login">
+            <span id="login_register">Registrieren</span>
 
         </div>
-        <img src="images/icons/arrowdown.png" id="header_arrow">
+        <img src="images/icons/header/arrowdown.png" id="header_arrow">
 
     </div>
 
