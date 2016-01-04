@@ -14,12 +14,14 @@ var socket = io('https://p4dme.shaula.uberspace.de/');
 
  */
 
+
+
 var openheader = false;
 var maketactic = false;
 
 $( document ).ready(function() {
 
-
+    checkLoggedIn(false);
 
     loadAllImagesMapselector();
     setListenerToElements();
@@ -57,14 +59,6 @@ function setListenerToElements(){
         handleTacticEvents();
     });
 
-    $( "#login_submit" ).on( "click", function() {
-        authentification($("#login_username").val(),$("#login_password").val());
-    });
-
-    $( "#login_register" ).on( "click", function() {
-       openRegister();
-
-    });
 
     $( "#register_close" ).on( "click", function() {
         closeRegister();
