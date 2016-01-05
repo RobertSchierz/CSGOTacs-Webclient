@@ -3,7 +3,7 @@
  */
 
 
-var tactic = new Tactic();
+
 
 var socket = io('https://p4dme.shaula.uberspace.de/');
 
@@ -136,7 +136,6 @@ function loadMap(id){
                     //Erstellt neue HTML Elemente
                     $("#map").attr('src', data.images[i].map);
                     $("#maketacticthumb").attr('src', data.images[i].url);
-                    tactic.setMap(data.images[i].name);
                     maketactic = true;
                     handleTacticEvents();
 
@@ -190,3 +189,4 @@ function loadAllImagesMapselector(){
 
     });
 }
+

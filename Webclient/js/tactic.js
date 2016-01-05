@@ -4,20 +4,21 @@
 
 function Tactic() {
 
-    this.map;
+    this.maps;
     this.strokestyle;
     this.X;
     this.Y;
+    this.user;
 
 
-    this.setMap = function(Map)
+    this.setMaps = function(Maps)
     {
-        this.map = Map;
+        this.maps = Maps;
     };
 
     this.getMap = function()
     {
-        return this.map;
+        return this.maps;
     };
 
     this.setStrokestyle = function(strokeStyle)
@@ -50,8 +51,15 @@ function Tactic() {
         return this.y;
     };
 
+    this.setUser = function(User)
+    {
+        this.user = User;
+    };
 
-
+    this.getUser = function()
+    {
+        return this.user;
+    };
 
 }
 

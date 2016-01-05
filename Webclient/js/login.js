@@ -8,7 +8,9 @@ function authentification(username, password){
 
 socket.on('authFailed', function (data) {
 
-console.log("AMK");
+$("#login_errormessage").show(1000, function(){
+    $("#login_errormessage").hide(5000);
+});
 });
 
 socket.on('authSuccess', function (data) {
@@ -25,9 +27,8 @@ function checkLoggedIn(logout){
 
     $('#usercanvas').empty();
     var storagevar = localStorage.getItem("benutzername");
-    console.log(storagevar);
     if(storagevar == null){
-        $('#usercanvas').html("<span>Benutzername:</span> <input type='input' id='login_username'> <span>Passwort:</span> <input type='input' id='login_password'> <input type='button' id='login_submit' value='Login'> <span id='login_register'>Registrieren</span>");
+        $('#usercanvas').html("<span>Benutzername:</span> <input type='input' id='login_username'> <span>Passwort:</span> <input type='input' id='login_password'> <input type='button' id='login_submit' value='Login'> <span id='login_register'>Registrieren</span> <div id='login_errormessage'>Datenfehler!</div>");
         $( "#login_submit" ).on( "click", function() {
             authentification($("#login_username").val(),$("#login_password").val());
         });
@@ -35,10 +36,12 @@ function checkLoggedIn(logout){
             openRegister();
 
         });
+        $("#tacticcanvas").hide();
     }else{
         $('#usercanvas').html("Eingeloggt als <span style='color:blue; font-size: 25px;'> "+storagevar+" </span> <br/><input style='margin-top:20px;' value='Logout' type='button' id='login_logout'>");
         $( "#login_logout" ).on( "click", function() {
             checkLoggedIn(true);
         });
+        $("#tacticcanvas").show();
     }
 }
