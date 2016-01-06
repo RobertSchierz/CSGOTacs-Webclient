@@ -60,8 +60,8 @@ function setListenerToElements(){
     });
 
 
-    $( "#register_close" ).on( "click", function() {
-        closeRegister();
+    $( ".overlaypanel_close" ).on( "click", function() {
+        closeOverlaypanel();
 
     });
 

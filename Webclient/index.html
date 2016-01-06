@@ -6,10 +6,12 @@
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
     <script type="text/javascript" src="iosocket/connection.js"></script>
     <script type="text/javascript" src="jquery/jquery 2.1.4.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
     <script type="text/javascript" src="js/tactic.js"></script>
     <script type="text/javascript" src="js/drawonmap.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript" src="js/tacticname.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 
 
@@ -17,14 +19,10 @@
 </head>
 <body>
 
-<div id="register_panel" class="overlaypanel">
-    <img src="images/icons/login/close.png" id="register_close" class="overlaypanel_close">
-    <span class="register_elements" id="register_username">Benutzername:</span>
-    <input class="register_elements" id="register_usernameinput" type="input">
-    <span class="register_elements" id="register_password">Passwort:</span>
-    <input class="register_elements" id="register_passwordinput" type="input">
-    <input  class="register_elements" id="register_submit" type="button" value="Registrieren">
-
+<div class="overlaypanel">
+    <img src="images/icons/login/close.png" class="overlaypanel_close">
+    <div id="overlaypanel_insidebox">
+    </div>
 </div>
 <div class="opacitybox"></div>
 

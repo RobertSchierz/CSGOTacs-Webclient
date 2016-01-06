@@ -9,6 +9,8 @@ function Tactic() {
     this.X;
     this.Y;
     this.user;
+    this.tacticname;
+    this.id;
 
 
     this.setMaps = function(Maps)
@@ -60,6 +62,27 @@ function Tactic() {
     {
         return this.user;
     };
+
+    this.setTacticname = function(Tacticname)
+    {
+        this.tacticname = Tacticname;
+    };
+
+    this.getTacticname = function()
+    {
+        return this.tacticname;
+    };
+
+    this.setId = function(Id)
+    {
+        this.id = Id;
+    };
+
+    this.getId = function()
+    {
+        return this.id;
+    };
+
 
 }
 

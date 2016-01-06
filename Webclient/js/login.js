@@ -33,7 +33,7 @@ function checkLoggedIn(logout){
             authentification($("#login_username").val(),$("#login_password").val());
         });
         $( "#login_register" ).on( "click", function() {
-            openRegister();
+            openOverlaypanel("register");
 
         });
         $("#tacticcanvas").hide();

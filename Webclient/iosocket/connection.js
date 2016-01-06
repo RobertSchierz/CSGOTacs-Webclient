@@ -10,7 +10,7 @@ var socket = io('https://p4dme.shaula.uberspace.de/');
 
  */
 
-function sendLocaltactic(map, x, y){
-    socket.emit('createMap', ({'map': map, 'x' : x, 'y' : y }));
+function sendLocaltactic(id, username, map, x, y, tacticname){
+    socket.emit('createMap', ({'id' : id, 'username' : username ,'map': map, 'tacticname' : tacticname , 'x' : x, 'y' : y}));
 }
 

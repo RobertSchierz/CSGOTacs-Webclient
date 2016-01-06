@@ -115,13 +115,5 @@ function getData(context){
 }
 
 function saveTactic(){
-    var tactic = new Tactic();
-    tactic.setX(clickX);
-    tactic.setY(clickY);
-    tactic.setUser(localStorage.getItem("benutzername"));
-    tactic.setMaps($("#mapselector").find(".active").attr("id"));
-    //$("#tacticcanvas").load("./html/tacticname.html");
-    sendLocaltactic(tactic.getMap(), tactic.getX(), tactic.getY());
-
-
+    openOverlaypanel("tacticname");
 }
