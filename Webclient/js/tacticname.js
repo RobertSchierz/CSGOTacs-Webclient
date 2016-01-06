@@ -14,7 +14,7 @@ function openTacticname(){
             tactic.setTacticname($("#tacticname_tacticnameinput").val());
             tactic.setId((new Date()).getTime());
             console.log(tactic.getId() + " " + tactic.getUser() + " " +  tactic.getMap() + " " + tactic.getX() + " " + tactic.getY() + " " + tactic.getTacticname());
-            //sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getX(), tactic.getY(), tactic.getTacticname());
+            sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getX(), tactic.getY(), tactic.getTacticname());
 
         });
     });

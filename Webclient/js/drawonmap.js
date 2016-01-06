@@ -117,3 +117,7 @@ function getData(context){
 function saveTactic(){
     openOverlaypanel("tacticname");
 }
+
+function loadTactics(){
+    openOverlaypanel("loadtactics");
+}

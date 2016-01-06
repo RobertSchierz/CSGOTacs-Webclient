@@ -8,11 +8,14 @@
 var socket = io('https://p4dme.shaula.uberspace.de/');
 
 /*
- function sendData(x, y){
- socket.emit('json', ({'X': x, 'Y' : y }));
- }
+ socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
+ console.log(localStorage.getItem("benutzername"));
+socket.on('provideMaps', function (data) {
 
- */
+    console.log(data);
+});
+
+*/
 
 
 
@@ -90,6 +93,11 @@ function setListenerToElements(){
     $("#savetacticbutton").on("click", function(){
         saveTactic();
     });
+
+    $("#loadtacticbutton").on("click", function(){
+        loadTactics();
+    });
+
 }
 
 function setAllChildsClass(setclass, removeclass){
@@ -107,14 +115,14 @@ function handleTacticEvents(){
             maketactic = true;
             draw(maketactic);
             $("#maketacticbutton").attr('value', 'Taktik Löschen');
-            $("#maketacticbutton").height('30px');
             $("#savetacticbutton").show();
+            $("#loadtacticbutton").hide();
         }else if(maketactic){
             maketactic = false;
             draw(maketactic);
             $("#maketacticbutton").attr('value', 'Taktik Erstellen');
-            $("#maketacticbutton").height('60px');
             $("#savetacticbutton").hide();
+            $("#loadtacticbutton").show();
 
         }
 

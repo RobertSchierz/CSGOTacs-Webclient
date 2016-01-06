@@ -11,6 +11,6 @@ var socket = io('https://p4dme.shaula.uberspace.de/');
  */
 
 function sendLocaltactic(id, username, map, x, y, tacticname){
-    socket.emit('createMap', ({'id' : id, 'username' : username ,'map': map, 'tacticname' : tacticname , 'x' : x, 'y' : y}));
+    socket.emit('createMap', ({'id' : id, 'user' : username ,'map': map, 'name' : tacticname , 'x' : x, 'y' : y}));
 }
 
