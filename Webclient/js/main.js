@@ -32,12 +32,7 @@ $( document ).ready(function() {
 
     $(document).ajaxComplete(function () {
         $( '#mapselector img' ).on( "click", function() {
-            if($( this ).hasClass("passive")){
-                setAllChildsClass("passive","active");
-                $(this).removeClass("passive").addClass("active");
-                loadMap($(this).attr('id'));
-            }
-
+             handleMapselectorStates(this, false);
         });
     });
 
@@ -45,6 +40,17 @@ $( document ).ready(function() {
 
 
 });
+
+function handleMapselectorStates(map, loadmap){
+
+        if($( map ).hasClass("passive")){
+            setAllChildsClass("passive","active");
+            $(map).removeClass("passive").addClass("active");
+            loadMap($(map).attr('id'), loadmap);
+        }
+
+
+}
 
 
 
@@ -59,7 +65,7 @@ function setListenerToElements(){
     });
 
     $("#maketacticbutton").on("click", function(){
-        handleTacticEvents();
+        handleTacticEvents(false);
     });
 
 
@@ -109,7 +115,10 @@ function setAllChildsClass(setclass, removeclass){
     } )
 }
 
-function handleTacticEvents(){
+function handleTacticEvents(loadtactics){
+        if(loadtactics){
+            maketactic = false;
+        }
 
         if(!maketactic){
             maketactic = true;
@@ -130,7 +139,7 @@ function handleTacticEvents(){
 }
 
 
-function loadMap(id){
+function loadMap(id, loadtactic){
     $.ajax({
 
         url : "./jsons/mapselections.json",
@@ -145,7 +154,7 @@ function loadMap(id){
                     $("#map").attr('src', data.images[i].map);
                     $("#maketacticthumb").attr('src', data.images[i].url);
                     maketactic = true;
-                    handleTacticEvents();
+                    handleTacticEvents(loadtactic);
 
 
 
@@ -178,9 +187,9 @@ function loadAllImagesMapselector(){
                 // Mache das erste Objekt aktiv
                 if(i == 0){
                     $("#mapselector").append("<img id='"+ data.images[i].name+"' src='"+ data.images[i].url+"' class='mapselection active'>");
-                    loadMap(data.images[i].name);
+                    loadMap(data.images[i].name, false);
                     maketactic = false;
-                    handleTacticEvents();
+                    handleTacticEvents(false);
 
                 }else {
                     $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");

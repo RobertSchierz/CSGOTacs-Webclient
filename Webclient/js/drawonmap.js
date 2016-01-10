@@ -114,6 +114,32 @@ function getData(context){
     });
 }
 
+function actualDraw(x, y){
+
+    var context = document.getElementById('imgpanel').getContext("2d");
+    context.strokeStyle = "#df4b26";
+    context.lineJoin = "round";
+    context.lineWidth = 8;
+
+    for(var i=0; i < x.length; i++) {
+
+        context.beginPath();
+
+            context.moveTo(x[i-1], y[i-1]);
+            //context.moveTo(x[i]-1, y[i]);
+
+        context.lineTo(x[i], y[i]);
+
+
+        context.closePath();
+        context.stroke();
+    }
+}
+
+function drawSavedMap(tactic){
+    actualDraw(tactic.x, tactic.y);
+}
+
 function saveTactic(){
     openOverlaypanel("tacticname");
 }

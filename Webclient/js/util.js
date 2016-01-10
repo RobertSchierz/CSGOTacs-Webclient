@@ -3,7 +3,6 @@
  */
 var popup_zustand = false;
 
-
 function openOverlaypanel(source) {
     if (popup_zustand == false) {
 
@@ -18,6 +17,7 @@ function openOverlaypanel(source) {
         if(source == "loadtactics"){
             $(".overlaypanel").css({"width": "550px", "height": "550px", "margin-left" : "-250px"});
             $(".overlaypanel_close").css({"left" : "525px"});
+            getSavedTactics();
         }
 
         $(".overlaypanel").fadeIn("normal");

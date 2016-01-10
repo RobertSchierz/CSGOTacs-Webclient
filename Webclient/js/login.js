@@ -17,6 +17,7 @@ socket.on('authSuccess', function (data) {
 
     localStorage.setItem("benutzername", data.user);
     checkLoggedIn(false);
+    closeOverlaypanel();
 });
 
 function checkLoggedIn(logout){
