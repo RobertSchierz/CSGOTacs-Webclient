@@ -4,6 +4,8 @@
 var popup_zustand = false;
 
 function openOverlaypanel(source) {
+
+
     if (popup_zustand == false) {
 
         if(source == "register"){
@@ -11,7 +13,7 @@ function openOverlaypanel(source) {
         }
 
         if(source == "tacticname"){
-            openTacticname();
+                openTacticname();
         }
 
         if(source == "loadtactics"){
@@ -46,3 +48,33 @@ function closeOverlaypanel(){
 
     }
 }
+
+function ActualSaveTactic(option){
+    if(option == "new"){
+        tactic.setX(clickX);
+        tactic.setY(clickY);
+        tactic.setUser(localStorage.getItem("benutzername"));
+        tactic.setMaps($("#mapselector").find(".active").attr("id"));
+        tactic.setTacticname($("#tacticname_tacticnameinput").val());
+        tactic.setId((new Date()).getTime());
+        console.log(tactic.getId() +" "+ tactic.getUser() +" "+ tactic.getMap()+" "+ tactic.getX()+" "+ tactic.getY()+" "+ tactic.getTacticname());
+        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getX(), tactic.getY(), tactic.getTacticname());
+    }else if(option == "loaded"){
+
+        tactic.setX(tactic.getX().concat(clickX));
+        tactic.setY(tactic.getY().concat(clickY));
+        console.log(tactic.getId() + " " + tactic.getX().length +" " + tactic.getY().length);
+        socket.emit('changeMap', ({'id' : tactic.getId(),  'x' : tactic.getX(), 'y' : tactic.getY()}));
+    }
+
+}
+
+socket.on('changeSuccess', function () { alert("geht");});
+socket.on('changeFailed', function () { alert("geht nicht");});
+
+function ActualDeleteTactic(id){
+    socket.emit('deleteMap', ({'id' : id}));
+}
+
+socket.on('deleteSuccess', function () { alert("geht");});
+socket.on('deleteFailed', function () { alert("geht nicht");});

@@ -20,13 +20,14 @@ function draw(on){
     if(on){
         setListenerToCanvas(context, contextid);
     }else if(!on){
-        $("#imgpanel").off();
+
         deleteCanvas(context);
     }
 
 
 
 }
+
 
 function setListenerToCanvas(context, contextid){
     $(contextid).mousedown(function(e){
@@ -86,9 +87,11 @@ function redraw(context){
 }
 
 function deleteCanvas(context){
+    $("#imgpanel").off();
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();
+    this.tactic = new Tactic();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
@@ -126,7 +129,7 @@ function actualDraw(x, y){
         context.beginPath();
 
             context.moveTo(x[i-1], y[i-1]);
-            //context.moveTo(x[i]-1, y[i]);
+
 
         context.lineTo(x[i], y[i]);
 

@@ -17,7 +17,7 @@ function sendRegisterData(username, password){
     socket.emit('reg', ({'user': username, 'pw' : password }));
 }
 
-socket.on('regSuccess', function () { });
+socket.on('regSuccess', function () { closeOverlaypanel()});
 socket.on('regFailed', function () { });
 
 

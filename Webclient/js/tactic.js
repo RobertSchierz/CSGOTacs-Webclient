@@ -84,7 +84,10 @@ function Tactic() {
     };
 
 
+
 }
+
+var tactic = new Tactic();
 
 
 

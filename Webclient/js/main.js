@@ -43,11 +43,12 @@ $( document ).ready(function() {
 
 function handleMapselectorStates(map, loadmap){
 
-        if($( map ).hasClass("passive")){
-            setAllChildsClass("passive","active");
+        if($( map ).hasClass("passive")) {
+            setAllChildsClass("passive", "active");
             $(map).removeClass("passive").addClass("active");
-            loadMap($(map).attr('id'), loadmap);
         }
+            loadMap($(map).attr('id'), loadmap);
+
 
 
 }
@@ -97,7 +98,11 @@ function setListenerToElements(){
     });
 
     $("#savetacticbutton").on("click", function(){
-        saveTactic();
+        if(tactic.getId() != undefined) {
+            ActualSaveTactic("loaded");
+        }else {
+            saveTactic();
+        }
     });
 
     $("#loadtacticbutton").on("click", function(){
@@ -124,14 +129,17 @@ function handleTacticEvents(loadtactics){
             maketactic = true;
             draw(maketactic);
             $("#maketacticbutton").attr('value', 'Taktik Löschen');
-            $("#savetacticbutton").show();
-            $("#loadtacticbutton").hide();
+            $("#savetacticbutton").removeClass("disabled");
+            $("#savetacticbutton").removeAttr("disabled");
+            $("#savetacticbutton").addClass("active");
+
         }else if(maketactic){
             maketactic = false;
             draw(maketactic);
             $("#maketacticbutton").attr('value', 'Taktik Erstellen');
-            $("#savetacticbutton").hide();
-            $("#loadtacticbutton").show();
+            $("#savetacticbutton").removeClass("active");
+            $("#savetacticbutton").attr("disabled", "true");
+            $("#savetacticbutton").addClass("disabled");
 
         }
 
