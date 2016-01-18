@@ -65,6 +65,10 @@ function setListenerToElements(){
         return false;
     });
 
+    $( "#groupcanvas" ).on( "click", function() {
+        return false;
+    });
+
     $("#maketacticbutton").on("click", function(){
         handleTacticEvents(false);
     });
@@ -128,7 +132,7 @@ function handleTacticEvents(loadtactics){
         if(!maketactic){
             maketactic = true;
             draw(maketactic);
-            $("#maketacticbutton").attr('value', 'Taktik Löschen');
+            $("#maketacticbutton").attr('value', 'Taktik Verwerfen');
             $("#savetacticbutton").removeClass("disabled");
             $("#savetacticbutton").removeAttr("disabled");
             $("#savetacticbutton").addClass("active");

@@ -38,11 +38,23 @@ function checkLoggedIn(logout){
 
         });
         $("#tacticcanvas").hide();
+        $("#groupcanvas").hide();
     }else{
         $('#usercanvas').html("Eingeloggt als <span style='color:blue; font-size: 25px;'> "+storagevar+" </span> <br/><input style='margin-top:20px;' value='Logout' type='button' id='login_logout'>");
         $( "#login_logout" ).on( "click", function() {
             checkLoggedIn(true);
         });
         $("#tacticcanvas").show();
+        $("#groupcanvas").load("./html/groupcanvas.html",function(){
+
+            $("#group_create").on( "click", function() {
+                openOverlaypanel("groupcreate");
+            });
+
+            $("#group_login").on( "click", function() {
+                openOverlaypanel("grouplogin");
+            });
+        });
+        $("#groupcanvas").show();
     }
 }

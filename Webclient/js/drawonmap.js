@@ -33,7 +33,7 @@ function setListenerToCanvas(context, contextid){
     $(contextid).mousedown(function(e){
         paint = true;
 
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
         redraw(context);
     });
 
@@ -117,7 +117,8 @@ function getData(context){
     });
 }
 
-function actualDraw(x, y){
+function actualDraw(x, y, drag){
+    console.log(drag);
 
     var context = document.getElementById('imgpanel').getContext("2d");
     context.strokeStyle = "#df4b26";
@@ -127,11 +128,14 @@ function actualDraw(x, y){
     for(var i=0; i < x.length; i++) {
 
         context.beginPath();
-
+        if(drag[i] /*&& i*/){
             context.moveTo(x[i-1], y[i-1]);
+        }else{
 
-
+            context.moveTo(x[i]-1, y[i]);
+        }
         context.lineTo(x[i], y[i]);
+
 
 
         context.closePath();
@@ -140,7 +144,7 @@ function actualDraw(x, y){
 }
 
 function drawSavedMap(tactic){
-    actualDraw(tactic.x, tactic.y);
+    actualDraw(tactic.x, tactic.y, tactic.drag);
 }
 
 function saveTactic(){

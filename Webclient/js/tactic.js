@@ -11,6 +11,7 @@ function Tactic() {
     this.user;
     this.tacticname;
     this.id;
+    this.drag;
 
 
     this.setMaps = function(Maps)
@@ -82,6 +83,14 @@ function Tactic() {
     {
         return this.id;
     };
+
+    this.setDrag = function(drag){
+        this.drag = drag;
+    }
+
+    this.getDrag = function(){
+        return this.drag;
+    }
 
 
 

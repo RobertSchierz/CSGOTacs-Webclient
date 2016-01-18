@@ -16,13 +16,17 @@ socket.on('provideMaps', function (data) {
             mapnames.push(data[i].map);
     }
 
+
+
+    $("#overlaypanel_insidebox").append( "<div id='loadtactic_canvas' > </div>" );
     for (var j = 0; j < mapnames.length; j++) {
         if (!(mapnames[j] in obj)) {
-            $("#overlaypanel_insidebox").append("<li>"+mapnames[j]+"</li>");
+            $("#loadtactic_canvas").append("<h3>"+mapnames[j]+"</h3>");
+            $("#loadtactic_canvas").append("<div id='loadtactic_section"+j+"'> </div>");
             obj[mapnames[j]] = true;
             for( var o = 0; o < data.length; o++){
                 if(data[o].map == mapnames[j]){
-                    $("#overlaypanel_insidebox").append("<ul><span id="+data[o].id+" class='"+o+"' style='cursor:pointer'>"+data[o].name+"</span> <img src='images/icons/tacticload/delete.png' class='tactic_elements' id='delete_"+data[o].id+"'> <img src='images/icons/tacticload/edit.png' class='tactic_elements' id='edit_"+data[o].id+"'></ul>");
+                    $("#loadtactic_section" + j).append("<div id='tactic_"+ data[o].id +"'><span id="+data[o].id+" class='"+o+"' style='cursor:pointer'>"+data[o].name+"</span> <img src='images/icons/tacticload/delete.png' class='tactic_elements' id='delete_"+data[o].id+"'> <img src='images/icons/tacticload/edit.png' class='tactic_elements' id='edit_"+data[o].id+"'></div></br>");
 
                     $("#edit_" + data[o].id).on("click", function(){
 
@@ -48,6 +52,19 @@ socket.on('provideMaps', function (data) {
         }
     }
 
+
+    $(function() {
+        $( "#loadtactic_canvas" ).accordion({
+            collapsible: true,
+            heightStyle: "content"
+
+        });
+    });
+
+
+
+
+
     function setTacticListener(data, index){
         $("#" + data[index].id).on("click", function(){
             closeOverlaypanel();
@@ -72,5 +89,6 @@ function setArrayData(data){
     tactic.setUser(data.user);
     tactic.setTacticname(data.name);
     tactic.setId(data.id);
+    tactic.setDrag(data.drag);
     return tactic;
 }
