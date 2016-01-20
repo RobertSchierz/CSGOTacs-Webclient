@@ -6,11 +6,8 @@ function authentification(username, password){
 
 }
 
-socket.on('authFailed', function (data) {
-
-$("#login_errormessage").show(1000, function(){
-    $("#login_errormessage").hide(5000);
-});
+socket.on('authFailed', function () {
+alertMessage("Einloggen fehlgeschlagen!","red");
 });
 
 socket.on('authSuccess', function (data) {
@@ -29,7 +26,7 @@ function checkLoggedIn(logout){
     $('#usercanvas').empty();
     var storagevar = localStorage.getItem("benutzername");
     if(storagevar == null){
-        $('#usercanvas').html("<span>Benutzername:</span> <input type='input' id='login_username'> <span>Passwort:</span> <input type='input' id='login_password'> <input type='button' id='login_submit' value='Login'> <span id='login_register'>Registrieren</span> <div id='login_errormessage'>Datenfehler!</div>");
+        $('#usercanvas').html("<span>Benutzername:</span> <input type='input' id='login_username'> <span>Passwort:</span> <input type='input' id='login_password'> <input type='button' id='login_submit' value='Login'> <span id='login_register'>Registrieren</span>");
         $( "#login_submit" ).on( "click", function() {
             authentification($("#login_username").val(),$("#login_password").val());
         });
@@ -39,13 +36,18 @@ function checkLoggedIn(logout){
         });
         $("#tacticcanvas").hide();
         $("#groupcanvas").hide();
+        $("#tacticinfocanvas").hide();
     }else{
         $('#usercanvas').html("Eingeloggt als <span style='color:blue; font-size: 25px;'> "+storagevar+" </span> <br/><input style='margin-top:20px;' value='Logout' type='button' id='login_logout'>");
         $( "#login_logout" ).on( "click", function() {
             checkLoggedIn(true);
         });
+        $("#tacticinfocanvas").show();
         $("#tacticcanvas").show();
         $("#groupcanvas").load("./html/groupcanvas.html",function(){
+
+
+            socket.emit('getGroups', ({'user': storagevar}));
 
             $("#group_create").on( "click", function() {
                 openOverlaypanel("groupcreate");
@@ -58,3 +60,48 @@ function checkLoggedIn(logout){
         $("#groupcanvas").show();
     }
 }
+
+socket.on('provideGroups', function (data) {
+
+    for(var i = 0; i < data.length; i++ ) {
+        appendGroupMenu(data[i]);
+    }
+
+    $("#groupcanvasmenu").menu();
+
+    });
+
+function appendGroupMenu(data){
+    var admin = false;
+
+    if(data.admin == localStorage.getItem("benutzername")){
+         admin = true;
+    }
+
+
+    $("#groupcanvasmenu").append("<li id='" + data.name + "' class ='groupname'>" + data.name + " <img id='groupdeletebutton_"+data.name + "' class='"+data.name+"'  src='images/icons/tacticload/exit.png'> </li>");
+    $("#" + data.name).append("<ul id='member_"+data.name+"'></ul>");
+
+    for(var l = 0 ; l < data.member.length; l++){
+        $("#member_" +data.name).append("<li><table ><tr id='membertable_"+data.member[l]+"' class='"+data.name+"'><td> "+ data.member[l] +" </td> </tr></table></li>");
+
+        if(admin){
+             $("#membertable_"+data.member[l]+"."+data.name).append("<td> <img id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+"' src='images/icons/tacticload/delete.png'></td>");
+        }
+
+        $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
+            alert("test");
+        });
+    }
+
+    $("#groupdeletebutton_"+data.name).on("click", function(){
+        socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name' : $(this).attr("class") }));
+    });
+
+}
+
+socket.on('leaveGroupSuccess', function (data) {
+    $("#" + data.name).hide(2000);
+    });
+
+

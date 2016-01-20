@@ -37,6 +37,7 @@ socket.on('provideMaps', function (data) {
                         $('#edittextarea_'+splittedid[1]).on("focusout",  function() {
                             var newvalue = $('#edittextarea_'+splittedid[1]).val();
                             $('#edittextarea_'+ splittedid[1]).replaceWith("<span id="+splittedid[1]+" class='"+savedclass+"'  style='cursor:pointer'>"+newvalue+"</span>");
+
                             setTacticListener(data,savedclass)
                         });
                     });
@@ -78,7 +79,6 @@ socket.on('provideMaps', function (data) {
 
 });
 
-function setListenerToTactic(){}
 
 
 function setArrayData(data){

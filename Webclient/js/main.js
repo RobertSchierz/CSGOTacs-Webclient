@@ -24,8 +24,8 @@ var maketactic = false;
 
 $( document ).ready(function() {
 
-    checkLoggedIn(false);
 
+    checkLoggedIn(false);
     loadAllImagesMapselector();
     setListenerToElements();
 
