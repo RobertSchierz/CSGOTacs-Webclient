@@ -8,54 +8,54 @@ function getSavedTactics(){
 
 }
 
-socket.on('provideMaps', function (data) {
+function getMaps(data){
     var mapnames = [];
     var obj = {};
 
-    for(var i = 0; i < data.length; i++){
-            mapnames.push(data[i].map);
+    for (var i = 0; i < data.length; i++) {
+        mapnames.push(data[i].map);
     }
 
 
-
-    $("#overlaypanel_insidebox").append( "<div id='loadtactic_canvas' > </div>" );
+    $("#overlaypanel_insidebox").append("<div id='loadtactic_canvas' > </div>");
     for (var j = 0; j < mapnames.length; j++) {
         if (!(mapnames[j] in obj)) {
-            $("#loadtactic_canvas").append("<h3>"+mapnames[j]+"</h3>");
-            $("#loadtactic_canvas").append("<div id='loadtactic_section"+j+"'> </div>");
+            $("#loadtactic_canvas").append("<h3>" + mapnames[j] + "</h3>");
+            $("#loadtactic_canvas").append("<div id='loadtactic_section" + j + "'> </div>");
             obj[mapnames[j]] = true;
-            for( var o = 0; o < data.length; o++){
-                if(data[o].map == mapnames[j]){
-                    $("#loadtactic_section" + j).append("<div id='tactic_"+ data[o].id +"'><span id="+data[o].id+" class='"+o+"' style='cursor:pointer'>"+data[o].name+"</span> <img src='images/icons/tacticload/delete.png' class='tactic_elements' id='delete_"+data[o].id+"'> <img src='images/icons/tacticload/edit.png' class='tactic_elements' id='edit_"+data[o].id+"'></div></br>");
+            for (var o = 0; o < data.length; o++) {
+                if (data[o].map == mapnames[j]) {
+                    $("#loadtactic_section" + j).append("<div id='tactic_" + data[o].id + "'><span id=" + data[o].id + " class='" + o + "' style='cursor:pointer'>" + data[o].name + "</span> <img src='images/icons/tacticload/delete.png' class='tactic_elements' id='delete_" + data[o].id + "'> <img src='images/icons/tacticload/edit.png' class='tactic_elements' id='edit_" + data[o].id + "'></div></br>");
 
-                    $("#edit_" + data[o].id).on("click", function(){
+                    $("#edit_" + data[o].id).on("click", function () {
 
                         var splittedid = $(this).attr("id").split("_");
-                        var savedclass = $('#'+splittedid[1]).attr("class");
-                        $('#'+splittedid[1]).replaceWith("<textarea class='edit_textarea' id='edittextarea_"+splittedid[1]+"'>"+$('#'+splittedid[1]).text()+"</textarea>");
+                        var savedclass = $('#' + splittedid[1]).attr("class");
+                        $('#' + splittedid[1]).replaceWith("<textarea class='edit_textarea' id='edittextarea_" + splittedid[1] + "'>" + $('#' + splittedid[1]).text() + "</textarea>");
 
-                        $('#edittextarea_'+splittedid[1]).on("focusout",  function() {
-                            var newvalue = $('#edittextarea_'+splittedid[1]).val();
-                            $('#edittextarea_'+ splittedid[1]).replaceWith("<span id="+splittedid[1]+" class='"+savedclass+"'  style='cursor:pointer'>"+newvalue+"</span>");
+                        $('#edittextarea_' + splittedid[1]).on("focusout", function () {
+                            var newvalue = $('#edittextarea_' + splittedid[1]).val();
+                            //socket.emit('changeMapName', ({'id' : splittedid[1], 'name' : newvalue }));
+                            $('#edittextarea_' + splittedid[1]).replaceWith("<span id=" + splittedid[1] + " class='" + savedclass + "'  style='cursor:pointer'>" + newvalue + "</span>");
+                            setTacticListener(data, savedclass)
 
-                            setTacticListener(data,savedclass)
                         });
                     });
 
 
-                    $("#delete_" + data[o].id).on("click", function(){
+                    $("#delete_" + data[o].id).on("click", function () {
                         var splittedid = $(this).attr("id").split("_");
                         ActualDeleteTactic(splittedid[1]);
                     });
-                    setTacticListener(data,o)
+                    setTacticListener(data, o)
                 }
             }
         }
     }
 
 
-    $(function() {
-        $( "#loadtactic_canvas" ).accordion({
+    $(function () {
+        $("#loadtactic_canvas").accordion({
             collapsible: true,
             heightStyle: "content"
 
@@ -63,11 +63,8 @@ socket.on('provideMaps', function (data) {
     });
 
 
-
-
-
-    function setTacticListener(data, index){
-        $("#" + data[index].id).on("click", function(){
+    function setTacticListener(data, index) {
+        $("#" + data[index].id).on("click", function () {
             closeOverlaypanel();
             deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
             var tactic = setArrayData(data[$(this).attr("class")]);
@@ -77,7 +74,7 @@ socket.on('provideMaps', function (data) {
     }
 
 
-});
+}
 
 
 

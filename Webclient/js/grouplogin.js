@@ -13,12 +13,12 @@ function sendGroupLogin(groupname, grouppassword){
     socket.emit('authGroup', ({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
 }
 
-socket.on('authGroupSuccess', function (data) {
+function grouplogin(data) {
     data.member.push(localStorage.getItem("benutzername"));
-    var group = ({'name' : $("#grouplogin_nameinput").val(), 'member' : data.member});
+    var group = ({'name': $("#grouplogin_nameinput").val(), 'member': data.member});
     appendGroupMenu(group);
-    $("#groupcanvasmenu").menu( "refresh" );
+    $("#groupcanvasmenu").menu("refresh");
     closeOverlaypanel();
-});
-socket.on('authGroupFailed', function () { alert("Fehler");});
+}
+
 

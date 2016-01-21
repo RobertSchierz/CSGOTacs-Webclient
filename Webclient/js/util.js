@@ -78,8 +78,6 @@ function ActualSaveTactic(option){
 
 }
 
-socket.on('changeSuccess', function () { alert("geht");});
-socket.on('changeFailed', function () { alert("geht nicht");});
 
 function ActualDeleteTactic(id){
     socket.emit('deleteMap', ({'id' : id}));

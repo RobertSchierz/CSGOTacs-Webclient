@@ -7,18 +7,6 @@
 
 var socket = io('https://p4dme.shaula.uberspace.de/');
 
-/*
- socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
- console.log(localStorage.getItem("benutzername"));
-socket.on('provideMaps', function (data) {
-
-    console.log(data);
-});
-
-*/
-
-
-
 var openheader = false;
 var maketactic = false;
 

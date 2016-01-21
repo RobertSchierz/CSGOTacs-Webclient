@@ -6,16 +6,14 @@ function authentification(username, password){
 
 }
 
-socket.on('authFailed', function () {
-alertMessage("Einloggen fehlgeschlagen!","red");
-});
 
-socket.on('authSuccess', function (data) {
+
+function authSuccess(data) {
 
     localStorage.setItem("benutzername", data.user);
     checkLoggedIn(false);
     closeOverlaypanel();
-});
+};
 
 function checkLoggedIn(logout){
 
@@ -58,18 +56,22 @@ function checkLoggedIn(logout){
             });
         });
         $("#groupcanvas").show();
+
+        $("#tacticinfocanvas").load("./html/grouptacticcanvas.html", function(){
+
+        });
     }
 }
 
-socket.on('provideGroups', function (data) {
+function getGroups(data){
+        for(var i = 0; i < data.length; i++ ) {
+            appendGroupMenu(data[i]);
+        }
 
-    for(var i = 0; i < data.length; i++ ) {
-        appendGroupMenu(data[i]);
-    }
+        $("#groupcanvasmenu").menu();
 
-    $("#groupcanvasmenu").menu();
 
-    });
+}
 
 function appendGroupMenu(data){
     var admin = false;
@@ -100,8 +102,8 @@ function appendGroupMenu(data){
 
 }
 
-socket.on('leaveGroupSuccess', function (data) {
-    $("#" + data.name).hide(2000);
-    });
+function leaveGroup(data){
+    $("#" + data.group).hide(2000);
+    }
 
 

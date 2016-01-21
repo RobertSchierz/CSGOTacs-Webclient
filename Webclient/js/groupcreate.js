@@ -13,14 +13,15 @@ function sendGroupCreate(groupname, grouppassword){
     socket.emit('createGroup', ({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
 }
 
-socket.on('createGroupSuccess', function () {
+function createGroup(data) {
 
-    var group = ({'name' : $("#groupcreate_nameinput").val(), 'member' : [localStorage.getItem("benutzername")]});
+    var group = ({'name': $("#groupcreate_nameinput").val(), 'member': [localStorage.getItem("benutzername")], 'admin': localStorage.getItem("benutzername")});
     appendGroupMenu(group);
-    $("#groupcanvasmenu").menu( "refresh" );
+    $("#groupcanvasmenu").menu("refresh");
     closeOverlaypanel()
 
-});
-socket.on('createGroupFailed', function () { alert("Fehler");});
+}
+
+
 
 
