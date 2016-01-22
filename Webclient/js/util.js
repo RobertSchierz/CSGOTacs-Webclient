@@ -30,6 +30,10 @@ function openOverlaypanel(source) {
             logingroup();
         }
 
+        if(source == "grouptactic"){
+
+        }
+
         $(".overlaypanel").fadeIn("normal");
         $(".opacitybox").css("opacity", "0.4");
         $(".opacitybox").fadeIn("normal");

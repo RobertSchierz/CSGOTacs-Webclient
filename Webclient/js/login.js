@@ -47,6 +47,8 @@ function checkLoggedIn(logout){
 
             socket.emit('getGroups', ({'user': storagevar}));
 
+
+
             $("#group_create").on( "click", function() {
                 openOverlaypanel("groupcreate");
             });
@@ -68,6 +70,7 @@ function getGroups(data){
             appendGroupMenu(data[i]);
         }
 
+        socket.emit('getMaps', ({'group' : data}));
         $("#groupcanvasmenu").menu();
 
 
@@ -80,15 +83,25 @@ function appendGroupMenu(data){
          admin = true;
     }
 
-
     $("#groupcanvasmenu").append("<li id='" + data.name + "' class ='groupname'>" + data.name + " <img id='groupdeletebutton_"+data.name + "' class='"+data.name+"'  src='images/icons/tacticload/exit.png'> </li>");
     $("#" + data.name).append("<ul id='member_"+data.name+"'></ul>");
 
+    $("#" + data.name).on("click", function(){
+       // socket.emit("getMaps", ({'group' : data.name}));
+        openOverlaypanel("grouptactic");
+    });
+
     for(var l = 0 ; l < data.member.length; l++){
-        $("#member_" +data.name).append("<li><table ><tr id='membertable_"+data.member[l]+"' class='"+data.name+"'><td> "+ data.member[l] +" </td> </tr></table></li>");
+        $("#member_" +data.name).append("<li><table ><tr id='membertable_"+data.member[l]+"' class='"+data.name+"'> </tr></table></li>");
+
+        if(data.member[l] == data.admin){
+            $("#membertable_"+data.member[l]+"."+data.name).append("<td> <i class='material-icons'>star</i> </td>");
+        }
+
+        $("#membertable_"+data.member[l]+"."+data.name).append("<td> "+ data.member[l] +" </td>");
 
         if(admin){
-             $("#membertable_"+data.member[l]+"."+data.name).append("<td> <img id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+"' src='images/icons/tacticload/delete.png'></td>");
+             $("#membertable_"+data.member[l]+"."+data.name).append("<td> <i id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+" material-icons'>delete</i></td>");
         }
 
         $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
