@@ -23,6 +23,7 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "provideGroups"){
+        user.setGroups(data.groups);
         getGroups(data.groups);
     }
 

@@ -13,6 +13,8 @@ function openOverlaypanel(source) {
         }
 
         if(source == "tacticname"){
+            $(".overlaypanel").css({"height": "300px"});
+           // $(".overlaypanel_close").css({"left" : "525px"});
                 openTacticname();
         }
 
@@ -90,4 +92,6 @@ function ActualDeleteTactic(id){
     });
 
 }
+
+
 

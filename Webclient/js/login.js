@@ -70,7 +70,7 @@ function getGroups(data){
             appendGroupMenu(data[i]);
         }
 
-        socket.emit('getMaps', ({'group' : data}));
+        //socket.emit('getMaps', ({'group' : data}));
         $("#groupcanvasmenu").menu();
 
 
@@ -92,16 +92,20 @@ function appendGroupMenu(data){
     });
 
     for(var l = 0 ; l < data.member.length; l++){
-        $("#member_" +data.name).append("<li><table ><tr id='membertable_"+data.member[l]+"' class='"+data.name+"'> </tr></table></li>");
+        var memberclass = data.member[l] + "_"+ data.name;
+        $("#member_" +data.name).append("<li><table><tr> <td class='admin "+data.name+"'></td><td class='mod "+memberclass+" '></td><td class='member "+memberclass+"'></td><td class='delete "+memberclass+"'></td> </tr></table></li>");
 
         if(data.member[l] == data.admin){
-            $("#membertable_"+data.member[l]+"."+data.name).append("<td> <i class='material-icons'>star</i> </td>");
-        }
 
-        $("#membertable_"+data.member[l]+"."+data.name).append("<td> "+ data.member[l] +" </td>");
+            $(".admin" + "." + data.name).append("<i class='material-icons'>star</i>");
+        }
+        $(".mod" + "." + memberclass).append("<i class='material-icons'>group</i>");
+
+
+        $(".member" + "." + memberclass).append(""+data.member[l]+"");
 
         if(admin){
-             $("#membertable_"+data.member[l]+"."+data.name).append("<td> <i id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+" material-icons'>delete</i></td>");
+             $(".delete" + "." + memberclass).append(" <i id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+" material-icons'>delete</i>");
         }
 
         $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
@@ -117,6 +121,7 @@ function appendGroupMenu(data){
 
 function leaveGroup(data){
     $("#" + data.group).hide(2000);
+    user.deleteGroup(user.getGroups(), data.group);
     }
 
 

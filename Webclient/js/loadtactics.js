@@ -55,6 +55,7 @@ function getMaps(data){
 
 
     $(function () {
+
         $("#loadtactic_canvas").accordion({
             collapsible: true,
             heightStyle: "content"

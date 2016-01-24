@@ -14,8 +14,9 @@ function sendGroupCreate(groupname, grouppassword){
 }
 
 function createGroup(data) {
-
     var group = ({'name': $("#groupcreate_nameinput").val(), 'member': [localStorage.getItem("benutzername")], 'admin': localStorage.getItem("benutzername")});
+    user.addGroup(group);
+
     appendGroupMenu(group);
     $("#groupcanvasmenu").menu("refresh");
     closeOverlaypanel()
