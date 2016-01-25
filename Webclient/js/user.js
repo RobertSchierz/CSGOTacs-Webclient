@@ -34,6 +34,16 @@ function User() {
         this.groups.push(addedgroup);
     }
 
+    this.groupNamesArray = function(){
+        var namesarray = new Array();
+        for(var name = 0; name < this.groups.length; name++){
+
+            namesarray.push(this.groups[name].name);
+        }
+        return namesarray;
+
+    }
+
 
 }
 

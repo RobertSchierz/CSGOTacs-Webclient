@@ -64,6 +64,20 @@ function closeOverlaypanel(){
 }
 
 function ActualSaveTactic(option){
+
+    if(option == "group"){
+        tactic.setX(clickX);
+        tactic.setY(clickY);
+        tactic.setUser(localStorage.getItem("benutzername"));
+        tactic.setMaps($("#mapselector").find(".active").attr("id"));
+        tactic.setTacticname($("#grouptacticname_tacticnameinput").val());
+        tactic.setDrag(clickDrag);
+        tactic.setId((new Date()).getTime());
+        tactic.setGroup($("#grouptacticname_groups option:selected" ).text());
+        console.log(tactic);
+        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), tactic.getGroup());
+    }
+
     if(option == "new"){
         tactic.setX(clickX);
         tactic.setY(clickY);
@@ -72,13 +86,13 @@ function ActualSaveTactic(option){
         tactic.setTacticname($("#tacticname_tacticnameinput").val());
         tactic.setDrag(clickDrag);
         tactic.setId((new Date()).getTime());
-        console.log(tactic.getId() +" "+ tactic.getUser() +" "+ tactic.getMap()+" "+ tactic.getDrag() +" "+ tactic.getX()+" "+ tactic.getY()+" "+ tactic.getTacticname());
-        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname());
+        //console.log(tactic.getId() +" "+ tactic.getUser() +" "+ tactic.getMap()+" "+ tactic.getDrag() +" "+ tactic.getX()+" "+ tactic.getY()+" "+ tactic.getTacticname());
+        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), null);
     }else if(option == "loaded"){
         tactic.setDrag(tactic.getDrag().concat(clickDrag));
         tactic.setX(tactic.getX().concat(clickX));
         tactic.setY(tactic.getY().concat(clickY));
-        console.log(tactic.getId() + " " + tactic.getDrag() + " " + tactic.getX().length +" " + tactic.getY().length);
+        //console.log(tactic.getId() + " " + tactic.getDrag() + " " + tactic.getX().length +" " + tactic.getY().length);
         socket.emit('changeMap', ({'id' : tactic.getId(), 'drag' : tactic.getDrag(),  'x' : tactic.getX(), 'y' : tactic.getY()}));
     }
 

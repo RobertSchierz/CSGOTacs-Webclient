@@ -55,4 +55,12 @@ socket.on('status', function (data) {
     if(data.status == "leaveGroupFailed"){
         alertMessage("Gruppenaustritt Fehlgeschlagen", "red");
     }
+
+    if(data.status == "createMapSuccess"){
+        alertMessage("Taktik erstellt!", "green");
+    }
+
+    if(data.status == "bindMapSuccess"){
+        alertMessage("Taktik an Gruppe geteilt!", "green");
+    }
 });

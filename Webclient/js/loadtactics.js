@@ -25,7 +25,10 @@ function getMaps(data){
             obj[mapnames[j]] = true;
             for (var o = 0; o < data.length; o++) {
                 if (data[o].map == mapnames[j]) {
-                    $("#loadtactic_section" + j).append("<div id='tactic_" + data[o].id + "'><span id=" + data[o].id + " class='" + o + "' style='cursor:pointer'>" + data[o].name + "</span> <img src='images/icons/tacticload/delete.png' class='tactic_elements' id='delete_" + data[o].id + "'> <img src='images/icons/tacticload/edit.png' class='tactic_elements' id='edit_" + data[o].id + "'></div></br>");
+                    $("#loadtactic_section" + j).append("<div id='tactic_" + data[o].id + "'><span id=" + data[o].id + " class='" + o + "' style='cursor:pointer'>" + data[o].name + "</span>" +
+                        " <i class='tactic_elements material-icons' id='delete_" + data[o].id + "'>delete</i> " +
+                        "<i class='tactic_elements material-icons' id='edit_" + data[o].id + "'>edit </i>" +
+                        "<il class = 'tactic_elements material-icons' id='share_"+data[o].id+"'>share</il></div></br>");
 
                     $("#edit_" + data[o].id).on("click", function () {
 
@@ -35,11 +38,36 @@ function getMaps(data){
 
                         $('#edittextarea_' + splittedid[1]).on("focusout", function () {
                             var newvalue = $('#edittextarea_' + splittedid[1]).val();
-                            //socket.emit('changeMapName', ({'id' : splittedid[1], 'name' : newvalue }));
                             $('#edittextarea_' + splittedid[1]).replaceWith("<span id=" + splittedid[1] + " class='" + savedclass + "'  style='cursor:pointer'>" + newvalue + "</span>");
                             setTacticListener(data, savedclass)
 
                         });
+                    });
+
+                    $("#share_" + data[o].id).on("click", function () {
+
+                        var splittedid = $(this).attr("id").split("_");
+                            if ($("#sharegroup_"+splittedid[1]).length == 0){
+                                $("#tactic_" + splittedid[1]).append("<select id='sharegroup_"+splittedid[1]+"' class='tactic_elements' ></select>");
+                                for(var names = 0; names < user.groupNamesArray().length; names++) {
+                                    $("#sharegroup_" + splittedid[1]).append("<option>" + user.groupNamesArray()[names] + "</option> ");
+
+                                }
+                                $("#tactic_" + splittedid[1]).append("<i id='sharegroupadd_"+splittedid[1]+"' class='material-icons tactic_elements'>add</i>");
+
+                                $("#sharegroupadd_"+splittedid[1]).on("click", function () {
+                                    var splittedid = $(this).attr("id").split("_");
+
+                                    socket.emit("bindMap", ({'id' : splittedid[1], 'group' : $("#sharegroup_" + splittedid[1] + " option:selected").text()}));
+                                })
+
+                            }else{
+                                $("#sharegroup_" + splittedid[1]).remove();
+                                $("#sharegroupadd_" + splittedid[1]).remove();
+                            }
+
+
+
                     });
 
 

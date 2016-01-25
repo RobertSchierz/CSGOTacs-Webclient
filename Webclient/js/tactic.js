@@ -12,6 +12,7 @@ function Tactic() {
     this.tacticname;
     this.id;
     this.drag;
+    this.group;
 
 
     this.setMaps = function(Maps)
@@ -90,6 +91,14 @@ function Tactic() {
 
     this.getDrag = function(){
         return this.drag;
+    }
+
+    this.setGroup = function(group){
+        this.group = group;
+    }
+
+    this.getGroup = function(){
+        return this.group;
     }
 
 

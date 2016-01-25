@@ -19,6 +19,7 @@ function checkLoggedIn(logout){
 
     if(logout){
         localStorage.removeItem("benutzername")
+        socket.emit('disconnect');
     }
 
     $('#usercanvas').empty();

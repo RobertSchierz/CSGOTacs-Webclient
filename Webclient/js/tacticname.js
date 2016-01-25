@@ -4,10 +4,21 @@
 function openTacticname(){
 
     $("#overlaypanel_insidebox").load(("./html/tacticname.html"),function(){
-        $( "#tacticname_tabmenu" ).tabs();
 
+        $( "#tacticname_tabmenu" ).tabs();
+        console.log(user.getGroups());
+        if(user.getGroups().length == 0){
+            $( "#tacticname_tabmenu" ).tabs( "option", "disabled", [ 1 ] );
+        }else{
+            $( "#tacticname_tabmenu" ).tabs( "option", "active", [ 1 ] );
+        }
+
+
+        for(var names = 0; names < user.groupNamesArray().length; names++) {
+            $("#grouptacticname_groups").append("<option>" + user.groupNamesArray()[names] + "</option>");
+        }
         $("#grouptacticname_submit").on( "click", function() {
-            ActualSaveTactic("new");
+            ActualSaveTactic("group");
             closeOverlaypanel();
         });
 
