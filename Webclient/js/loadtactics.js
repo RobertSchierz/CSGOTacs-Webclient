@@ -2,11 +2,10 @@
  * Created by Robert on 09.01.2016.
  */
 
-function getSavedTactics(){
 
-    socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
 
-}
+
+
 
 function getMaps(data){
     var mapnames = [];
@@ -38,8 +37,10 @@ function getMaps(data){
 
                         $('#edittextarea_' + splittedid[1]).on("focusout", function () {
                             var newvalue = $('#edittextarea_' + splittedid[1]).val();
+                            socket.emit("changeMapName", ({ 'id' : splittedid[1], 'name' : newvalue }));
+                            user.changeTacticName(splittedid[1], newvalue);
                             $('#edittextarea_' + splittedid[1]).replaceWith("<span id=" + splittedid[1] + " class='" + savedclass + "'  style='cursor:pointer'>" + newvalue + "</span>");
-                            setTacticListener(data, savedclass)
+                            setTacticListener(data, savedclass);
 
                         });
                     });
@@ -57,8 +58,9 @@ function getMaps(data){
 
                                 $("#sharegroupadd_"+splittedid[1]).on("click", function () {
                                     var splittedid = $(this).attr("id").split("_");
-
+                                    user.setLocalToGroupTactic(splittedid[1], $("#sharegroup_" + splittedid[1] + " option:selected").text() );
                                     socket.emit("bindMap", ({'id' : splittedid[1], 'group' : $("#sharegroup_" + splittedid[1] + " option:selected").text()}));
+                                    $("#tactic_" + splittedid[1]).hide(2000);
                                 })
 
                             }else{

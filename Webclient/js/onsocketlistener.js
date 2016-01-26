@@ -28,7 +28,21 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "provideMaps"){
-        getMaps(data.maps);
+        var grouptacticarray = [];
+        var tacticsarray = [];
+
+        for(var w = 0; w < data.maps.length; w++ ){
+            if(data.maps[w].group != null){
+                grouptacticarray.push(data.maps[w]);
+            }else{
+                tacticsarray.push(data.maps[w]);
+            }
+        }
+        user.setGrouptactics(grouptacticarray);
+        user.setTactics(tacticsarray);
+
+
+
     }
 
     if(data.status == "authGroupFailed"){
@@ -62,5 +76,9 @@ socket.on('status', function (data) {
 
     if(data.status == "bindMapSuccess"){
         alertMessage("Taktik an Gruppe geteilt!", "green");
+    }
+
+    if(data.status == "changeMapNameSuccess"){
+        alertMessage("Taktikname erfolgreich geändert!", "green");
     }
 });

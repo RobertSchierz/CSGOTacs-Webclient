@@ -6,14 +6,12 @@ function authentification(username, password){
 
 }
 
-
-
 function authSuccess(data) {
 
     localStorage.setItem("benutzername", data.user);
     checkLoggedIn(false);
     closeOverlaypanel();
-};
+}
 
 function checkLoggedIn(logout){
 
@@ -35,20 +33,15 @@ function checkLoggedIn(logout){
         });
         $("#tacticcanvas").hide();
         $("#groupcanvas").hide();
-        $("#tacticinfocanvas").hide();
     }else{
         $('#usercanvas').html("Eingeloggt als <span style='color:blue; font-size: 25px;'> "+storagevar+" </span> <br/><input style='margin-top:20px;' value='Logout' type='button' id='login_logout'>");
         $( "#login_logout" ).on( "click", function() {
             checkLoggedIn(true);
         });
-        $("#tacticinfocanvas").show();
         $("#tacticcanvas").show();
         $("#groupcanvas").load("./html/groupcanvas.html",function(){
 
-
             socket.emit('getGroups', ({'user': storagevar}));
-
-
 
             $("#group_create").on( "click", function() {
                 openOverlaypanel("groupcreate");
@@ -59,10 +52,8 @@ function checkLoggedIn(logout){
             });
         });
         $("#groupcanvas").show();
+        socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
 
-        $("#tacticinfocanvas").load("./html/grouptacticcanvas.html", function(){
-
-        });
     }
 }
 
@@ -88,7 +79,6 @@ function appendGroupMenu(data){
     $("#" + data.name).append("<ul id='member_"+data.name+"'></ul>");
 
     $("#" + data.name).on("click", function(){
-       // socket.emit("getMaps", ({'group' : data.name}));
         openOverlaypanel("grouptactic");
     });
 

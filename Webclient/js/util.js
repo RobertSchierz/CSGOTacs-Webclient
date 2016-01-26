@@ -21,7 +21,8 @@ function openOverlaypanel(source) {
         if(source == "loadtactics"){
             $(".overlaypanel").css({"width": "550px", "height": "550px", "margin-left" : "-250px"});
             $(".overlaypanel_close").css({"left" : "525px"});
-            getSavedTactics();
+            getMaps(user.getTactics());
+            console.log(user.getTactics());
         }
 
         if(source == "groupcreate"){
@@ -33,7 +34,7 @@ function openOverlaypanel(source) {
         }
 
         if(source == "grouptactic"){
-
+            console.log(user.getTactics());
         }
 
         $(".overlaypanel").fadeIn("normal");
@@ -74,6 +75,7 @@ function ActualSaveTactic(option){
         tactic.setDrag(clickDrag);
         tactic.setId((new Date()).getTime());
         tactic.setGroup($("#grouptacticname_groups option:selected" ).text());
+        user.addGrouptactic(({'group' : tactic.getGroup(), 'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
         console.log(tactic);
         sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), tactic.getGroup());
     }
@@ -86,7 +88,8 @@ function ActualSaveTactic(option){
         tactic.setTacticname($("#tacticname_tacticnameinput").val());
         tactic.setDrag(clickDrag);
         tactic.setId((new Date()).getTime());
-        //console.log(tactic.getId() +" "+ tactic.getUser() +" "+ tactic.getMap()+" "+ tactic.getDrag() +" "+ tactic.getX()+" "+ tactic.getY()+" "+ tactic.getTacticname());
+        user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
+
         sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), null);
     }else if(option == "loaded"){
         tactic.setDrag(tactic.getDrag().concat(clickDrag));
@@ -101,6 +104,7 @@ function ActualSaveTactic(option){
 
 function ActualDeleteTactic(id){
     socket.emit('deleteMap', ({'id' : id}));
+    user.deleteTacticName(id);
     $("#tactic_" + id).hide(2000, function(){
 
     });
