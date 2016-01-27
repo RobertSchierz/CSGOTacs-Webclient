@@ -2,11 +2,6 @@
  * Created by Robert on 09.01.2016.
  */
 
-
-
-
-
-
 function getMaps(data){
     var mapnames = [];
     var obj = {};
@@ -68,8 +63,6 @@ function getMaps(data){
                                 $("#sharegroupadd_" + splittedid[1]).remove();
                             }
 
-
-
                     });
 
 
@@ -103,10 +96,7 @@ function getMaps(data){
             handleMapselectorStates("#" + tactic.getMap(), true);
         });
     }
-
-
 }
-
 
 
 function setArrayData(data){

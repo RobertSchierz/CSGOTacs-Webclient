@@ -78,9 +78,15 @@ function appendGroupMenu(data){
     $("#groupcanvasmenu").append("<li id='" + data.name + "' class ='groupname'>" + data.name + " <img id='groupdeletebutton_"+data.name + "' class='"+data.name+"'  src='images/icons/tacticload/exit.png'> </li>");
     $("#" + data.name).append("<ul id='member_"+data.name+"'></ul>");
 
-    $("#" + data.name).on("click", function(){
-        openOverlaypanel("grouptactic");
+   /* $("#" + data.name + ".groupname").on("click", function(){
+        alert($(this).attr("id"));
+        //openOverlaypanel("grouptactic");
     });
+
+    $( "#groupcanvasmenu" ).on( "menuselect", function( event, ui ) {
+        console.log(event.item.context.id);
+    } );
+    */
 
     for(var l = 0 ; l < data.member.length; l++){
         var memberclass = data.member[l] + "_"+ data.name;
