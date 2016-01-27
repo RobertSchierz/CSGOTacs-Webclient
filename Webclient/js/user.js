@@ -103,6 +103,16 @@ function User() {
         this.deleteTacticName(id);
     }
 
+    this.getGroupByName = function(groupname){
+
+        for(var group = 0; group < this.groups.length; group++){
+
+        if(this.groups[group].name == groupname){
+            return this.groups[group];
+        }
+        }
+    }
+
 
 
 }

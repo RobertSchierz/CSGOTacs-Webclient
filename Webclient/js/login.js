@@ -63,7 +63,7 @@ function getGroups(data){
         }
 
         //socket.emit('getMaps', ({'group' : data}));
-        $("#groupcanvasmenu").menu();
+       // $("#groupcanvasmenu").menu();
 
 
 }
@@ -75,50 +75,17 @@ function appendGroupMenu(data){
          admin = true;
     }
 
-    $("#groupcanvasmenu").append("<li id='" + data.name + "' class ='groupname'>" + data.name + " <img id='groupdeletebutton_"+data.name + "' class='"+data.name+"'  src='images/icons/tacticload/exit.png'> </li>");
-    $("#" + data.name).append("<ul id='member_"+data.name+"'></ul>");
-
-   /* $("#" + data.name + ".groupname").on("click", function(){
-        alert($(this).attr("id"));
-        //openOverlaypanel("grouptactic");
-    });
-
-    $( "#groupcanvasmenu" ).on( "menuselect", function( event, ui ) {
-        console.log(event.item.context.id);
-    } );
-    */
-
-    for(var l = 0 ; l < data.member.length; l++){
-        var memberclass = data.member[l] + "_"+ data.name;
-        $("#member_" +data.name).append("<li><table><tr> <td class='admin "+data.name+"'></td><td class='mod "+memberclass+" '></td><td class='member "+memberclass+"'></td><td class='delete "+memberclass+"'></td> </tr></table></li>");
-
-        if(data.member[l] == data.admin){
-
-            $(".admin" + "." + data.name).append("<i class='material-icons'>star</i>");
-        }
-        $(".mod" + "." + memberclass).append("<i class='material-icons'>group</i>");
+    $("#groupcanvasmenu").append("<div id='" + data.name + "' class ='groupname'>" + data.name + " </div>");
 
 
-        $(".member" + "." + memberclass).append(""+data.member[l]+"");
+    $("#" + data.name + ".groupname").on("click", function(){
+        openOverlaypanel("grouptactic", $(this).attr("id"));
 
-        if(admin){
-             $(".delete" + "." + memberclass).append(" <i id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+" material-icons'>delete</i>");
-        }
+  });
 
-        $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
-            alert("test");
-        });
-    }
-
-    $("#groupdeletebutton_"+data.name).on("click", function(){
-        socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name' : $(this).attr("class") }));
-    });
 
 }
 
-function leaveGroup(data){
-    $("#" + data.group).hide(2000);
-    user.deleteGroup(user.getGroups(), data.group);
-    }
+
 
 

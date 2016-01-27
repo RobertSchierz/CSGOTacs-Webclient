@@ -3,7 +3,7 @@
  */
 var popup_zustand = false;
 
-function openOverlaypanel(source) {
+function openOverlaypanel(source, groupname) {
 
 
     if (popup_zustand == false) {
@@ -13,14 +13,14 @@ function openOverlaypanel(source) {
         }
 
         if(source == "tacticname"){
-            $(".overlaypanel").css({"height": "300px"});
+           // $(".overlaypanel").css({"height": "300px"});
            // $(".overlaypanel_close").css({"left" : "525px"});
                 openTacticname();
         }
 
         if(source == "loadtactics"){
-            $(".overlaypanel").css({"width": "550px", "height": "550px", "margin-left" : "-250px"});
-            $(".overlaypanel_close").css({"left" : "525px"});
+           /* $(".overlaypanel").css({"width": "550px", "height": "550px", "margin-left" : "-250px"});
+            $(".overlaypanel_close").css({"left" : "525px"});*/
             getMaps(user.getTactics());
             console.log(user.getTactics());
         }
@@ -34,7 +34,7 @@ function openOverlaypanel(source) {
         }
 
         if(source == "grouptactic"){
-            console.log(user.getTactics());
+            openGroupTactic(groupname);
         }
 
         $(".overlaypanel").fadeIn("normal");
@@ -52,11 +52,13 @@ function openOverlaypanel(source) {
 function closeOverlaypanel(){
     if(popup_zustand == true) {
 
-        $("#overlaypanel_insidebox").empty();
+
         $(".overlaypanel").fadeOut("normal");
+
         $(".opacitybox").fadeOut("normal", function(){
-            $(".overlaypanel").css({"width": "250px", "height": "190px", "margin-left" : "-125px", "margin-top" : "-500px" });
-            $(".overlaypanel_close").css({"left" : "225px"});
+            $("#overlaypanel_insidebox").empty();
+           // $(".overlaypanel").css({"width": "250px", "height": "190px", "margin-left" : "-125px", "margin-top" : "-500px" });
+           // $(".overlaypanel_close").css({"left" : "225px"});
         });
 
         popup_zustand = false;
