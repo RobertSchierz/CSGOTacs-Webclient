@@ -62,7 +62,7 @@ function setListenerToElements(){
     });
 
 
-    $( ".overlaypanel_close" ).on( "click", function() {
+    $( "#overlaypanel_close" ).on( "click", function() {
         closeOverlaypanel();
 
     });

@@ -2,7 +2,8 @@
 
 
 function openGroupTactic(groupname){
-    $("#overlaypanel_insidebox").append("<h3>"+groupname +"</h3>");
+    overlaypanel_header("Gruppe: " + groupname);
+
     $("#overlaypanel_insidebox").append("<div id='loadtactic_canvas' >fghrtgfsh </div>");
 
     $("#loadtactic_canvas").accordion({

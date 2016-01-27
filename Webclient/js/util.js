@@ -10,12 +10,14 @@ function openOverlaypanel(source, groupname) {
 
         if(source == "register"){
             openRegister();
+            overlaypanel_header("Registrieren");
         }
 
         if(source == "tacticname"){
            // $(".overlaypanel").css({"height": "300px"});
            // $(".overlaypanel_close").css({"left" : "525px"});
                 openTacticname();
+            overlaypanel_header("Taktik Speichern");
         }
 
         if(source == "loadtactics"){
@@ -23,18 +25,22 @@ function openOverlaypanel(source, groupname) {
             $(".overlaypanel_close").css({"left" : "525px"});*/
             getMaps(user.getTactics());
             console.log(user.getTactics());
+            overlaypanel_header("Taktik Laden");
         }
 
         if(source == "groupcreate"){
             creategroup();
+            overlaypanel_header("Gruppe Erstellen");
         }
 
         if(source == "grouplogin"){
             logingroup();
+            overlaypanel_header("Gruppe Beitreten");
         }
 
         if(source == "grouptactic"){
             openGroupTactic(groupname);
+
         }
 
         $(".overlaypanel").fadeIn("normal");
@@ -57,13 +63,19 @@ function closeOverlaypanel(){
 
         $(".opacitybox").fadeOut("normal", function(){
             $("#overlaypanel_insidebox").empty();
-           // $(".overlaypanel").css({"width": "250px", "height": "190px", "margin-left" : "-125px", "margin-top" : "-500px" });
-           // $(".overlaypanel_close").css({"left" : "225px"});
+            if($("#overlaypanel_headertext").length){
+                $("#overlaypanel_headertext").remove();
+            }
+
         });
 
         popup_zustand = false;
 
     }
+}
+
+function overlaypanel_header(headertext){
+        $("#overlaypanel_header").append("<h3 id='overlaypanel_headertext'>"+headertext+"</h3>");
 }
 
 function ActualSaveTactic(option){

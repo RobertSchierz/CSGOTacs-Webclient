@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b63bd385-267d-4bf0-9d65-3a37a9eefd5f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/html/groupcanvas.html" afterPath="$PROJECT_DIR$/Webclient/html/groupcanvas.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/grouptactic.js" afterPath="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/index.html" afterPath="$PROJECT_DIR$/Webclient/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/login.js" afterPath="$PROJECT_DIR$/Webclient/js/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/main.js" afterPath="$PROJECT_DIR$/Webclient/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/css/style.css" afterPath="$PROJECT_DIR$/Webclient/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/user.js" afterPath="$PROJECT_DIR$/Webclient/js/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/util.js" afterPath="$PROJECT_DIR$/Webclient/js/util.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Bachelorarbeit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,28 +75,28 @@
       <file leaf-file-name="grouptactic.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/grouptactic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1045">
-              <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1064">
+              <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="866" max-vertical-offset="4085">
+              <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.678572" vertical-offset="3800" max-vertical-offset="10754">
-              <caret line="229" column="19" selection-start-line="229" selection-start-column="19" selection-end-line="229" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="onsocketlistener.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1691">
-              <caret line="25" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="83" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.6390484" vertical-offset="7942" max-vertical-offset="11077">
+              <caret line="459" column="1" selection-start-line="459" selection-start-column="1" selection-end-line="459" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -117,8 +115,8 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.75" vertical-offset="0" max-vertical-offset="1653">
-              <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
+            <state vertical-scroll-proportion="-21.714285" vertical-offset="0" max-vertical-offset="1653">
+              <caret line="32" column="83" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -144,11 +142,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="util.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="util.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44570503" vertical-offset="552" max-vertical-offset="2337">
-              <caret line="58" column="49" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="106" max-vertical-offset="2565">
+              <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -178,7 +176,6 @@
         <option value="$PROJECT_DIR$/Webclient/html/test.html" />
         <option value="$PROJECT_DIR$/Webclient/js/socketonlistener.js" />
         <option value="$PROJECT_DIR$/Webclient/html/grouptacticcanvas.html" />
-        <option value="$PROJECT_DIR$/Webclient/js/main.js" />
         <option value="$PROJECT_DIR$/Webclient/test.html" />
         <option value="$PROJECT_DIR$/Webclient/js/grouplogin.js" />
         <option value="$PROJECT_DIR$/Webclient/js/groupcreate.js" />
@@ -192,11 +189,12 @@
         <option value="$PROJECT_DIR$/Webclient/js/login.js" />
         <option value="$PROJECT_DIR$/Webclient/js/user.js" />
         <option value="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
-        <option value="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
-        <option value="$PROJECT_DIR$/Webclient/index.html" />
         <option value="$PROJECT_DIR$/Webclient/js/register.js" />
-        <option value="$PROJECT_DIR$/Webclient/css/style.css" />
         <option value="$PROJECT_DIR$/Webclient/js/util.js" />
+        <option value="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
+        <option value="$PROJECT_DIR$/Webclient/js/main.js" />
+        <option value="$PROJECT_DIR$/Webclient/index.html" />
+        <option value="$PROJECT_DIR$/Webclient/css/style.css" />
       </list>
     </option>
   </component>
@@ -444,23 +442,23 @@
     <frame x="1273" y="0" width="1294" height="1407" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1403118" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14021571" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1940532" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39938793" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29150727" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29150727" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298193" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976282" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976282" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -747,14 +745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2008" max-vertical-offset="4085">
-          <caret line="150" column="37" selection-start-line="150" selection-start-column="37" selection-end-line="150" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/groupcreate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
@@ -787,17 +777,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="1843">
-          <caret line="81" column="20" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
-          <folding>
-            <marker date="1453910587934" expanded="false" signature="1222:1250" placeholder="..." />
-            <marker date="1453910587934" expanded="false" signature="1295:1311" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1691">
@@ -814,26 +793,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/grouptactic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1045">
-          <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="912" max-vertical-offset="2394">
           <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.75" vertical-offset="0" max-vertical-offset="1653">
-          <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -862,18 +825,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
+    <entry file="file://$PROJECT_DIR$/Webclient/js/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.678572" vertical-offset="3800" max-vertical-offset="10754">
-          <caret line="229" column="19" selection-start-line="229" selection-start-column="19" selection-end-line="229" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="1843">
+          <caret line="81" column="20" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+          <folding>
+            <marker date="1453910587934" expanded="false" signature="1222:1250" placeholder="..." />
+            <marker date="1453910587934" expanded="false" signature="1295:1311" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/grouptactic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1064">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="866" max-vertical-offset="4085">
+          <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44570503" vertical-offset="552" max-vertical-offset="2337">
-          <caret line="58" column="49" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="106" max-vertical-offset="2565">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.714285" vertical-offset="0" max-vertical-offset="1653">
+          <caret line="32" column="83" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6390484" vertical-offset="7942" max-vertical-offset="11077">
+          <caret line="459" column="1" selection-start-line="459" selection-start-column="1" selection-end-line="459" selection-end-column="1" />
           <folding />
         </state>
       </provider>
