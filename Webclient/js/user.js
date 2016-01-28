@@ -7,9 +7,9 @@
 
 function User() {
 
-    this.groups;
-    this.tactics;
-    this.grouptactics;
+    this.groups = new Array();
+    this.tactics = new Array();;
+    this.grouptactics = new Array();;
 
     this.setGroups = function(Groups)
     {
@@ -121,6 +121,21 @@ function User() {
             }
         }
         return grouptacticsarray;
+    }
+
+    this.changeTacticData = function(tactic){
+
+        if(this.getGrouptacticsByName(tactic.name).length == 0){
+            for(var tactics in this.tactics){
+                if(this.tactics[tactics].name == tactic.getTacticname()){
+
+                    this.tactics[tactics].drag = tactic.getDrag();
+                    this.tactics[tactics].x = tactic.getX();
+                    this.tactics[tactics].y = tactic.getY();
+
+                }
+            }
+        }
     }
 
 

@@ -18,7 +18,6 @@ function createGroup(data) {
     user.addGroup(group);
 
     appendGroupMenu(group);
-    $("#groupcanvasmenu").menu("refresh");
     closeOverlaypanel()
 
 }

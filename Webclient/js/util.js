@@ -63,8 +63,13 @@ function closeOverlaypanel(){
 
         $(".opacitybox").fadeOut("normal", function(){
             $("#overlaypanel_insidebox").empty();
+
             if($("#overlaypanel_headertext").length){
                 $("#overlaypanel_headertext").remove();
+            }
+
+            if($("#groupdelete").length){
+                $("#groupdelete").remove();
             }
 
         });
@@ -109,6 +114,7 @@ function ActualSaveTactic(option){
         tactic.setDrag(tactic.getDrag().concat(clickDrag));
         tactic.setX(tactic.getX().concat(clickX));
         tactic.setY(tactic.getY().concat(clickY));
+        user.changeTacticData(tactic);
         //console.log(tactic.getId() + " " + tactic.getDrag() + " " + tactic.getX().length +" " + tactic.getY().length);
         socket.emit('changeMap', ({'id' : tactic.getId(), 'drag' : tactic.getDrag(),  'x' : tactic.getX(), 'y' : tactic.getY()}));
     }

@@ -118,7 +118,6 @@ function getData(context){
 }
 
 function actualDraw(x, y, drag){
-    console.log(drag);
 
     var context = document.getElementById('imgpanel').getContext("2d");
     context.strokeStyle = "#df4b26";

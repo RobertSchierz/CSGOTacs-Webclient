@@ -2,10 +2,20 @@
 
 
 function openGroupTactic(groupname){
-    overlaypanel_header("Gruppe: " + groupname);
-
     var grouptacticsarray = user.getGrouptacticsByName(groupname);
     var groupobject = user.getGroupByName(groupname);
+
+    overlaypanel_header("Gruppe: " + groupname);
+    if($("#groupdelete").length == 0){
+        $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>exit_to_app</i>")
+        $("#groupdelete").on("click", function(){
+            socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name' : groupobject.name }));
+        })
+
+    }
+
+
+
 
     $("#overlaypanel_insidebox").append("<div id='groupusercontroll'>User in Gruppe: <select id='groupusercontroll_usercombobox'></select> </div> <div id='loadtactic_canvas' ></div>");
 
@@ -22,7 +32,7 @@ function openGroupTactic(groupname){
 
     if(grouptacticsarray.length != 0){
         for(var grouptactic in grouptacticsarray){
-            $("#loadtactic_canvas").append("<h3>"+grouptacticsarray[grouptactic].name+"</h3> <div>AMK</div>");
+            $("#loadtactic_canvas").append("<h3>"+grouptacticsarray[grouptactic].name+"</h3> <div></div>");
         }
         $("#loadtactic_canvas").accordion({
             collapsible: true,
@@ -58,7 +68,7 @@ function openGroupTactic(groupname){
  }
 
  $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
- alert("test");
+    alert("test");
  });
  }
 
@@ -68,9 +78,9 @@ function openGroupTactic(groupname){
  */
 
 
-/*
+
 function leaveGroup(data){
     $("#" + data.group).hide(2000);
     user.deleteGroup(user.getGroups(), data.group);
+    closeOverlaypanel();
 }
-    */
