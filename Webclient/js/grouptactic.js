@@ -15,7 +15,7 @@ function openGroupTactic(groupname){
     }
 
     $("#overlaypanel_insidebox").append("<div id='grouptacticcanvas'></div> <div id='groupmembercanvas'></div>");
-    $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><table id='groupmember_table'></table>");
+    $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><div class='tablewrapper'><table id='groupmember_table'></table></div>");
     for(var groupmember in groupobject.member){
         var membername = groupobject.member[groupmember];
         $("#groupmember_table").append("<tr> <td id='grouptable_admin_"+membername+"'> </td> <td id='grouptable_name_"+membername+"'></td> <td id='grouptable_option_"+membername+"'></td>  </tr>");
@@ -30,7 +30,7 @@ function openGroupTactic(groupname){
     }
 
     if(grouptacticsarray.length != 0){
-        $("#grouptacticcanvas").append("<h3 class='tableheader'>Taktiken:</h3><table id='grouptactic_table'></table>");
+        $("#grouptacticcanvas").append("<h3 class='tableheader'>Taktiken:</h3><div class='tablewrapper'><table id='grouptactic_table'></table></div>");
         for(var grouptactic in grouptacticsarray){
 
             loadTacticImage(grouptacticsarray[grouptactic]);
