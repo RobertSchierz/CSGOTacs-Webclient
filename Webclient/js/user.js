@@ -113,6 +113,16 @@ function User() {
         }
     }
 
+    this.getGrouptacticsByName = function(groupname){
+        var grouptacticsarray = new Array();
+        for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
+            if(this.grouptactics[tactic].group == groupname){
+                grouptacticsarray.push(this.grouptactics[tactic]);
+            }
+        }
+        return grouptacticsarray;
+    }
+
 
 
 }

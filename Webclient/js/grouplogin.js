@@ -17,8 +17,6 @@ function grouplogin(data) {
     data.member.push(localStorage.getItem("benutzername"));
     var group = ({'name': $("#grouplogin_nameinput").val(), 'member': data.member});
     user.addGroup(group);
-    appendGroupMenu(group);
-    $("#groupcanvasmenu").menu("refresh");
     closeOverlaypanel();
 }
 

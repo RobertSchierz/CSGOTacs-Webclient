@@ -4,13 +4,38 @@
 function openGroupTactic(groupname){
     overlaypanel_header("Gruppe: " + groupname);
 
-    $("#overlaypanel_insidebox").append("<div id='loadtactic_canvas' >fghrtgfsh </div>");
+    var grouptacticsarray = user.getGrouptacticsByName(groupname);
+    var groupobject = user.getGroupByName(groupname);
 
-    $("#loadtactic_canvas").accordion({
-        collapsible: true,
-        heightStyle: "content"
+    $("#overlaypanel_insidebox").append("<div id='groupusercontroll'>User in Gruppe: <select id='groupusercontroll_usercombobox'></select> </div> <div id='loadtactic_canvas' ></div>");
 
-    });
+    for(var groupmember in groupobject.member){
+
+
+            if(groupobject.member[groupmember] == groupobject.admin){
+                console.log(groupobject.admin);
+                $("#groupusercontroll_usercombobox").append("<option> Admin: "+groupobject.member[groupmember]+"</option>");
+            }else{
+                $("#groupusercontroll_usercombobox").append("<option>"+groupobject.member[groupmember]+"</option>");
+            }
+    }
+
+    if(grouptacticsarray.length != 0){
+        for(var grouptactic in grouptacticsarray){
+            $("#loadtactic_canvas").append("<h3>"+grouptacticsarray[grouptactic].name+"</h3> <div>AMK</div>");
+        }
+        $("#loadtactic_canvas").accordion({
+            collapsible: true,
+            heightStyle: "content"
+
+        });
+    }else{
+        $("#loadtactic_canvas").append("<p>Keine Taktiken vorhanden</p> ");
+    }
+
+
+
+
 }
 
 
