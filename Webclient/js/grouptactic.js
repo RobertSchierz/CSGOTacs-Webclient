@@ -35,10 +35,10 @@ function openGroupTactic(groupname){
 
             loadTacticImage(grouptacticsarray[grouptactic]);
 
-            var tacticname = grouptacticsarray[grouptactic].name;
-            $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticname+"' ></td> <td id='grouptactic_"+tacticname+"'>  </td> <td id='grouptactictable_option_"+tacticname+"'></td>  </tr>");
-            $("#grouptactic_"+tacticname).append(""+tacticname+"");
-            $("#grouptactictable_option_"+tacticname).append("<i id='grouptactictable_option' class='material-icons group_option'>keyboard_arrow_down</i>");
+            var tacticid = grouptacticsarray[grouptactic].id;
+            $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticid+"' ></td> <td id='grouptactic_"+tacticid+"'>  </td> <td id='grouptactictable_option_"+tacticid+"'></td>  </tr>");
+            $("#grouptactic_"+tacticid).append(""+grouptacticsarray[grouptactic].name+"");
+            $("#grouptactictable_option_"+tacticid).append("<i id='grouptactictable_option' class='material-icons group_option'>keyboard_arrow_down</i>");
         }
         }else{
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Keine Taktiken vorhanden</h3>");
@@ -72,9 +72,8 @@ function loadTacticImage(currenttactic){
         success : function (data) {
             for (i = 0; i < data.images.length; i++) {
                 if(data.images[i].name == currenttactic.map){
-                  $("#grouptacticimage_"+currenttactic.name).append("<img class='grouptable_images' src='" + data.images[i].url + "' >");
+                  $("#grouptacticimage_"+currenttactic.id).append("<div class='grouptable_images' style='background-image:url(" + data.images[i].url + ")' ></div>");
                 }
-                    //$("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
             }
         },
         error : function () {
