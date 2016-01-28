@@ -14,26 +14,43 @@ function openGroupTactic(groupname){
 
     }
 
-
-
-
-    $("#overlaypanel_insidebox").append("<div id='groupusercontroll'>User in Gruppe: <select id='groupusercontroll_usercombobox'></select> </div> <div id='loadtactic_canvas' ></div>");
-
+    $("#overlaypanel_insidebox").append("<div id='grouptacticcanvas'></div> <div id='groupmembercanvas'></div>");
+    $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><table id='groupmember_table'></table>");
     for(var groupmember in groupobject.member){
+        var membername = groupobject.member[groupmember];
+        $("#groupmember_table").append("<tr> <td id='grouptable_admin_"+membername+"'> </td> <td id='grouptable_name_"+membername+"'></td> <td id='grouptable_option_"+membername+"'></td>  </tr>");
+
+        if(groupobject.member[groupmember] == groupobject.admin) {
+            $("#grouptable_admin_" + membername).append("<i class='material-icons'>star</i>");
+        }
+            $("#grouptable_name_" + membername).append(""+groupobject.member[groupmember]+"");
+            $("#grouptable_option_" + membername).append("<i id='grouptable_option' class='material-icons group_option'>keyboard_arrow_down</i>");
 
 
-            if(groupobject.member[groupmember] == groupobject.admin){
-
-                $("#groupusercontroll_usercombobox").append("<option> Admin: "+groupobject.member[groupmember]+"</option>");
-            }else{
-                $("#groupusercontroll_usercombobox").append("<option>"+groupobject.member[groupmember]+"</option>");
-            }
     }
 
     if(grouptacticsarray.length != 0){
+        $("#grouptacticcanvas").append("<h3 class='tableheader'>Taktiken:</h3><table id='grouptactic_table'></table>");
         for(var grouptactic in grouptacticsarray){
-            $("#loadtactic_canvas").append("<h3>"+grouptacticsarray[grouptactic].name+"</h3> <div></div>");
+
+            loadTacticImage(grouptacticsarray[grouptactic]);
+
+            var tacticname = grouptacticsarray[grouptactic].name;
+            $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticname+"' ></td> <td id='grouptactic_"+tacticname+"'>  </td> <td id='grouptactictable_option_"+tacticname+"'></td>  </tr>");
+            $("#grouptactic_"+tacticname).append(""+tacticname+"");
+            $("#grouptactictable_option_"+tacticname).append("<i id='grouptactictable_option' class='material-icons group_option'>keyboard_arrow_down</i>");
         }
+        }else{
+        $("#grouptacticcanvas").append("<h3 class='tableheader'>Keine Taktiken vorhanden</h3>");
+    }
+
+
+/*
+    $("#overlaypanel_insidebox").append("<div id='groupusercontroll'>User in Gruppe: <select id='groupusercontroll_usercombobox'></select> </div> <div id='loadtactic_canvas' ></div>");
+
+
+
+
         $("#loadtactic_canvas").accordion({
             collapsible: true,
             heightStyle: "content"
@@ -42,10 +59,29 @@ function openGroupTactic(groupname){
     }else{
         $("#loadtactic_canvas").append("<p>Keine Taktiken vorhanden</p> ");
     }
+*/
 
 
 
+}
 
+function loadTacticImage(currenttactic){
+    $.ajax({
+        url : "./jsons/mapselections.json",
+        dataType : 'json',
+        success : function (data) {
+            for (i = 0; i < data.images.length; i++) {
+                if(data.images[i].name == currenttactic.map){
+                  $("#grouptacticimage_"+currenttactic.name).append("<img class='grouptable_images' src='" + data.images[i].url + "' >");
+                }
+                    //$("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
+            }
+        },
+        error : function () {
+           alertMessage("Fehler beim Zugriff auf Taktikbilder", "red");
+        }
+
+    });
 }
 
 

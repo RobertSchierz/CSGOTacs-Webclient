@@ -81,4 +81,12 @@ socket.on('status', function (data) {
     if(data.status == "changeMapNameSuccess"){
         alertMessage("Taktikname erfolgreich geändert!", "green");
     }
+
+    if(data.status == "changeMapSuccess"){
+        alertMessage("Geladene Taktik erfolgreich geändert!", "green");
+    }
+
+    if(data.status == "changeMapFailed"){
+        alertMessage("Geladene Taktik nicht erfolgreich geändert!", "red");
+    }
 });

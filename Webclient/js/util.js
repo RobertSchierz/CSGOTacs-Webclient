@@ -84,6 +84,9 @@ function overlaypanel_header(headertext){
 }
 
 function ActualSaveTactic(option){
+    var canvas = document.getElementById("imgpanel");
+    var img    = canvas.toDataURL("./testimages");
+
 
     if(option == "group"){
         tactic.setX(clickX);
@@ -93,10 +96,9 @@ function ActualSaveTactic(option){
         tactic.setTacticname($("#grouptacticname_tacticnameinput").val());
         tactic.setDrag(clickDrag);
         tactic.setId((new Date()).getTime());
-        tactic.setGroup($("#grouptacticname_groups option:selected" ).text());
-        user.addGrouptactic(({'group' : tactic.getGroup(), 'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
+        user.addGrouptactic(({'group' : $("#grouptacticname_groups option:selected" ).text(), 'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
         console.log(tactic);
-        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), tactic.getGroup());
+        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), $("#grouptacticname_groups option:selected" ).text());
     }
 
     if(option == "new"){
