@@ -128,11 +128,17 @@ function User() {
         if(this.getGrouptacticsByName(tactic.name).length == 0){
             for(var tactics in this.tactics){
                 if(this.tactics[tactics].name == tactic.getTacticname()){
-
                     this.tactics[tactics].drag = tactic.getDrag();
                     this.tactics[tactics].x = tactic.getX();
                     this.tactics[tactics].y = tactic.getY();
-
+                }
+            }
+        }else{
+            for(var grouptactic in this.grouptactics){
+                if(this.grouptactics[grouptactic].name == tactic.getTacticname()){
+                    this.grouptactics[grouptactic].drag = tactic.getDrag();
+                    this.grouptactics[grouptactic].x = tactic.getX();
+                    this.grouptactics[grouptactic].y = tactic.getY();
                 }
             }
         }

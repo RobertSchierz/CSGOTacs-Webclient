@@ -23,7 +23,7 @@ function openGroupTactic(groupname){
 
 
             if(groupobject.member[groupmember] == groupobject.admin){
-                console.log(groupobject.admin);
+
                 $("#groupusercontroll_usercombobox").append("<option> Admin: "+groupobject.member[groupmember]+"</option>");
             }else{
                 $("#groupusercontroll_usercombobox").append("<option>"+groupobject.member[groupmember]+"</option>");
