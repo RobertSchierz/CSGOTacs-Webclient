@@ -75,7 +75,10 @@ function appendGroupMenu(data){
          admin = true;
     }
 
-    $("#groupcanvasmenu").append("<div id='" + data.name + "' class ='groupname'>" + data.name + " </div>");
+
+        $("#groupcanvasmenu").append("<div id='" + data.name + "' class ='groupname'>" + data.name + " </div>");
+
+
 
 
     $("#" + data.name + ".groupname").on("click", function(){
