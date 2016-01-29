@@ -18,14 +18,17 @@ function openGroupTactic(groupname){
     $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><div class='tablewrapper'><table id='groupmember_table'></table></div>");
     for(var groupmember in groupobject.member){
         var membername = groupobject.member[groupmember];
-        $("#groupmember_table").append("<tr> <td id='grouptable_admin_"+membername+"'> </td> <td id='grouptable_name_"+membername+"'></td> <td id='grouptable_option_"+membername+"'></td>  </tr>");
+        $("#groupmember_table").append("<tr> <td id='grouptable_admin_"+membername+"'> </td> <td id='grouptable_name_"+membername+"'></td> <td id='groupmembertableoptiontd_"+membername+"'></td>  </tr>");
 
         if(groupobject.member[groupmember] == groupobject.admin) {
             $("#grouptable_admin_" + membername).append("<i class='material-icons'>star</i>");
         }
             $("#grouptable_name_" + membername).append(""+groupobject.member[groupmember]+"");
-            $("#grouptable_option_" + membername).append("<i id='grouptable_option_"+membername+"' class='material-icons group_option'>keyboard_arrow_down</i>");
+            $("#groupmembertableoptiontd_" + membername).append("<i id='groupmembertableoption_"+membername+"' class='material-icons groupmember_option'>keyboard_arrow_down</i>");
 
+            $("#groupmembertableoption_" + membername).on("click", function(){
+                optionPanel(splittId($(this).attr("id")), "member");
+            });
 
     }
 
@@ -38,10 +41,10 @@ function openGroupTactic(groupname){
             var tacticid = grouptacticsarray[grouptactic].id;
             $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticid+"' ></td> <td id='grouptactic_"+tacticid+"'>  </td> <td id='grouptactictableoptiontd_"+tacticid+"'></td>  </tr>");
             $("#grouptactic_"+tacticid).append(""+grouptacticsarray[grouptactic].name+"");
-            $("#grouptactictableoptiontd_"+tacticid).append("<i id='grouptactictableoption_"+tacticid+"' class='material-icons group_option'>keyboard_arrow_down</i>");
+            $("#grouptactictableoptiontd_"+tacticid).append("<i id='grouptactictableoption_"+tacticid+"' class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
 
             $("#grouptactictableoption_" + tacticid).on("click", function(){
-                optionPanel(splittId($(this).attr("id")));
+                optionPanel(splittId($(this).attr("id")), "tactic");
             });
         }
         }else{
@@ -69,26 +72,42 @@ function openGroupTactic(groupname){
 
 }
 
-function optionPanel(id){
-
-   $('div').each(function(index){
-    if($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_"+id){
-        $(this).hide(500);
-        $(this).remove();
+$(document).click(function(e){
+    if( $(e.target).closest(".optionpanel").length == 0 && $(e.target).closest(".grouptactic_option").length == 0 && $(e.target).closest(".groupmember_option").length == 0 ) {
+       if($(".optionpanel").length != 0){
+           $(".optionpanel").hide(500);
+           $(".optionpanel").remove();
+       }
     }
-    });
+});
+
+function optionPanel(id, source){
+    var request;
+    optionPanelDelete(id);
+    if(source == "tactic"){
+        request = "grouptactictableoptiontd_";
+    }else if(source == "member"){
+        request = "groupmembertableoptiontd_";
+    }
+
 
     if($("#optionpanel_"+id).length == 0){
-        $("#grouptactictableoptiontd_"+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK</div>");
+        $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK</div>");
         $("#optionpanel_" + id).show(500);
     }else{
         $("#optionpanel_"+id).hide(500);
         $("#optionpanel_"+id).remove();
 
     }
+}
 
-
-
+function optionPanelDelete(id){
+    $('div').each(function(index){
+        if($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_"+id){
+            $(this).hide(500);
+            $(this).remove();
+        }
+    });
 }
 
 function loadTacticImage(currenttactic){
