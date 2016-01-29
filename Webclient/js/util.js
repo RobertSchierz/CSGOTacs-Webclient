@@ -133,5 +133,10 @@ function ActualDeleteTactic(id){
 
 }
 
+function splittId(id){
+    var splittedid = id.split("_");
+    return splittedid[1];
+}
+
 
 

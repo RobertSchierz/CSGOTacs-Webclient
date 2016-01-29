@@ -24,7 +24,7 @@ function openGroupTactic(groupname){
             $("#grouptable_admin_" + membername).append("<i class='material-icons'>star</i>");
         }
             $("#grouptable_name_" + membername).append(""+groupobject.member[groupmember]+"");
-            $("#grouptable_option_" + membername).append("<i id='grouptable_option' class='material-icons group_option'>keyboard_arrow_down</i>");
+            $("#grouptable_option_" + membername).append("<i id='grouptable_option_"+membername+"' class='material-icons group_option'>keyboard_arrow_down</i>");
 
 
     }
@@ -36,9 +36,13 @@ function openGroupTactic(groupname){
             loadTacticImage(grouptacticsarray[grouptactic]);
 
             var tacticid = grouptacticsarray[grouptactic].id;
-            $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticid+"' ></td> <td id='grouptactic_"+tacticid+"'>  </td> <td id='grouptactictable_option_"+tacticid+"'></td>  </tr>");
+            $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticid+"' ></td> <td id='grouptactic_"+tacticid+"'>  </td> <td id='grouptactictableoptiontd_"+tacticid+"'></td>  </tr>");
             $("#grouptactic_"+tacticid).append(""+grouptacticsarray[grouptactic].name+"");
-            $("#grouptactictable_option_"+tacticid).append("<i id='grouptactictable_option' class='material-icons group_option'>keyboard_arrow_down</i>");
+            $("#grouptactictableoptiontd_"+tacticid).append("<i id='grouptactictableoption_"+tacticid+"' class='material-icons group_option'>keyboard_arrow_down</i>");
+
+            $("#grouptactictableoption_" + tacticid).on("click", function(){
+                optionPanel(splittId($(this).attr("id")));
+            });
         }
         }else{
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Keine Taktiken vorhanden</h3>");
@@ -60,6 +64,28 @@ function openGroupTactic(groupname){
         $("#loadtactic_canvas").append("<p>Keine Taktiken vorhanden</p> ");
     }
 */
+
+
+
+}
+
+function optionPanel(id){
+
+   $('div').each(function(index){
+    if($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_"+id){
+        $(this).hide(500);
+        $(this).remove();
+    }
+    });
+
+    if($("#optionpanel_"+id).length == 0){
+        $("#grouptactictableoptiontd_"+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK</div>");
+        $("#optionpanel_" + id).show(500);
+    }else{
+        $("#optionpanel_"+id).hide(500);
+        $("#optionpanel_"+id).remove();
+
+    }
 
 
 
