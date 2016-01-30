@@ -28,18 +28,24 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "provideMaps"){
-        var grouptacticarray = [];
-        var tacticsarray = [];
+        if(requestgroup == null){
+            var tacticsarray = [];
 
-        for(var w = 0; w < data.maps.length; w++ ){
-            if(data.maps[w].group != null){
-                grouptacticarray.push(data.maps[w]);
-            }else{
-                tacticsarray.push(data.maps[w]);
+            for(var w = 0; w < data.maps.length; w++ ){
+                if(data.maps[w].group == null) {
+                    tacticsarray.push(data.maps[w]);
+                }
             }
+
+            user.setTactics(tacticsarray);
+        }else{
+            user.setGrouptactics(data.maps);
+            openGroupTactic(requestgroup);
+            requestgroup = null;
         }
-        user.setGrouptactics(grouptacticarray);
-        user.setTactics(tacticsarray);
+
+
+
 
 
 

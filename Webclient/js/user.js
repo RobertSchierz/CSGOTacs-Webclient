@@ -74,6 +74,7 @@ function User() {
         }
     }
 
+
     this.setGrouptactics = function(Grouptactics)
     {
         this.grouptactics = Grouptactics;
@@ -88,7 +89,8 @@ function User() {
         this.grouptactics.push(addedgrouptactic);
     }
 
-    this.setLocalToGroupTactic = function(id, group){
+    this.setLocalToGroupTactic = function(id){
+        /*
         for(var tactic = 0; tactic < this.tactics.length; tactic++){
             if(this.tactics[tactic].id == id){
                 this.addGrouptactic(this.tactics[tactic]);
@@ -99,7 +101,7 @@ function User() {
                 this.grouptactics[tactic].group = group;
             }
         }
-
+*/
         this.deleteTacticName(id);
     }
 
@@ -120,6 +122,7 @@ function User() {
                 grouptacticsarray.push(this.grouptactics[tactic]);
             }
         }
+
         return grouptacticsarray;
     }
 

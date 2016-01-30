@@ -2,6 +2,7 @@
  * Created by Robert on 06.01.2016.
  */
 var popup_zustand = false;
+var requestgroup = null;
 
 function openOverlaypanel(source, groupname) {
 
@@ -39,7 +40,9 @@ function openOverlaypanel(source, groupname) {
         }
 
         if(source == "grouptactic"){
-            openGroupTactic(groupname);
+            requestgroup = groupname;
+            socket.emit("getMaps", ({'group' : groupname}));
+
 
         }
 
@@ -56,6 +59,7 @@ function openOverlaypanel(source, groupname) {
 }
 
 function closeOverlaypanel(){
+    requerstsource = null;
     if(popup_zustand == true) {
 
 

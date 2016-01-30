@@ -53,7 +53,7 @@ function getMaps(data){
 
                                 $("#sharegroupadd_"+splittedid[1]).on("click", function () {
                                     var splittedid = $(this).attr("id").split("_");
-                                    user.setLocalToGroupTactic(splittedid[1], $("#sharegroup_" + splittedid[1] + " option:selected").text() );
+                                    user.setLocalToGroupTactic(splittedid[1]/*, $("#sharegroup_" + splittedid[1] + " option:selected").text() */);
                                     socket.emit("bindMap", ({'id' : splittedid[1], 'group' : $("#sharegroup_" + splittedid[1] + " option:selected").text()}));
                                     $("#tactic_" + splittedid[1]).hide(2000);
                                 })

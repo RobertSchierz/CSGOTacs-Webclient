@@ -2,7 +2,7 @@
 
 
 function openGroupTactic(groupname){
-    var grouptacticsarray = user.getGrouptacticsByName(groupname);
+
     var groupobject = user.getGroupByName(groupname);
 
     overlaypanel_header("Gruppe: " + groupname);
@@ -13,6 +13,8 @@ function openGroupTactic(groupname){
         })
 
     }
+
+        var grouptacticsarray = user.getGrouptacticsByName(groupname);
 
     $("#overlaypanel_insidebox").append("<div id='grouptacticcanvas'></div> <div id='groupmembercanvas'></div>");
     $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><div class='tablewrapper'><table id='groupmember_table'></table></div>");
@@ -92,7 +94,12 @@ function optionPanel(id, source){
 
 
     if($("#optionpanel_"+id).length == 0){
-        $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK</div>");
+        if(source == "tactic"){
+            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK</div>");
+        }else if(source == "member"){
+            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK2</div>");
+        }
+
         $("#optionpanel_" + id).show(500);
     }else{
         $("#optionpanel_"+id).hide(500);
