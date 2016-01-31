@@ -5,12 +5,15 @@ function openGroupTactic(groupname){
 
     var groupobject = user.getGroupByName(groupname);
 
+
+
     overlaypanel_header("Gruppe: " + groupname);
     if($("#groupdelete").length == 0){
         $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>exit_to_app</i>")
         $("#groupdelete").on("click", function(){
             socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name' : groupobject.name }));
         })
+        setTooltipToElement("#groupdelete","Aus der Gruppe austreten")
 
     }
 
@@ -41,7 +44,9 @@ function openGroupTactic(groupname){
             loadTacticImage(grouptacticsarray[grouptactic]);
 
             var tacticid = grouptacticsarray[grouptactic].id;
-            $("#grouptactic_table").append("<tr id='tactic_"+tacticid+"'> <td id='grouptacticimage_"+tacticid+"' class='canvastd' ></td> <td id='grouptactic_"+tacticid+"' class='canvastd'>  </td> <td id='grouptactictableoptiontd_"+tacticid+"' class='canvastd'></td>  </tr>");
+            $("#grouptactic_table").append("<tr id='tactic_"+tacticid+"'> <td id='grouptacticimage_"+tacticid+"' class='canvastd' ></td> " +
+                "<td id='grouptactic_"+tacticid+"' class='canvastd' >  </td> " +
+                "<td id='grouptactictableoptiontd_"+tacticid+"' class='canvastd' ></td>  </tr>");
             $("#grouptactic_"+tacticid).append(""+grouptacticsarray[grouptactic].name+"");
             $("#grouptactictableoptiontd_"+tacticid).append("<i id='grouptactictableoption_"+tacticid+"' class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
 
@@ -105,7 +110,8 @@ function optionPanel(id, source){
         if(source == "tactic"){
             //console.log(user.getGrouptacticByID(id));
             $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>" +
-                "<table><tr><td class='tdoptionpanel'><i id='tacticloadbutton_"+id+"' class='material-icons'>gesture</i></td>" +
+                "<table><tr><td class='tdoptionpanel'><i id='tacticloadbutton_"+id+"' class='material-icons'>gesture</i></td> " +
+                "<td class='tdoptionpanel' id='changenametd_"+id+"'><i id='tacticchangenamebutton_"+id+"' class='material-icons'>edit</i></td>" +
                 "<td class='tdoptionpanel'><i id='tacticdeletebutton_"+id+ "' class='material-icons'>delete</i></td></tr></table>" +
                 "</div>");
 
@@ -120,9 +126,18 @@ function optionPanel(id, source){
                 var tactic = setArrayData(user.getGrouptacticByID(splittId($(this).attr("id"))));
                 drawSavedMap(tactic);
                 handleMapselectorStates("#" + tactic.getMap(), true);
-            })
+            });
+
+            $("#tacticchangenamebutton_"+id).on("click", function(){
+                var splittedid = splittId($(this).attr("id"));
+               setChangeName("#tacticchangenamebutton_"+splittedid, "#changenametd_"+splittedid, splittedid, "#grouptactic_"+splittedid, "group" );
+
+
+
+            });
 
             setTooltipToElement("#tacticloadbutton_"+id, "Taktik Laden");
+            setTooltipToElement("#tacticchangenamebutton_"+id, "Taktiknamen bearbeiten");
             setTooltipToElement("#tacticdeletebutton_"+id, "Taktik Löschen");
 
 
@@ -139,9 +154,11 @@ function optionPanel(id, source){
     }
 }
 
+
+
 function optionPanelDelete(id){
     $('div').each(function(index){
-        if($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_"+id){
+        if($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_"+id ){
             $(this).hide(500);
             $(this).remove();
         }

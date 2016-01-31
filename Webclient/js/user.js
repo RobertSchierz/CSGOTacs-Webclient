@@ -58,12 +58,21 @@ function User() {
         this.tactics.push(addedtactic);
     }
 
-    this.changeTacticName = function(id, newname){
-        for(var tactic = 0; tactic < this.tactics.length; tactic++){
-            if(this.tactics[tactic].id == id){
-                this.tactics[tactic].name = newname;
+    this.changeTacticName = function(id, newname, option){
+        if(option == "group"){
+            for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
+                if(this.grouptactics[tactic].id == id){
+                    this.grouptactics[tactic].name = newname;
+                }
+            }
+        }else{
+            for(var tactic = 0; tactic < this.tactics.length; tactic++){
+                if(this.tactics[tactic].id == id){
+                    this.tactics[tactic].name = newname;
+                }
             }
         }
+
     }
 
     this.deleteTacticName = function(id){

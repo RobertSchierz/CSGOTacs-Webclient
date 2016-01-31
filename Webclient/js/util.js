@@ -166,3 +166,20 @@ function setTooltipToElement(element, text){
 
 }
 
+function setChangeName(target, dest, id, changevalueelement, option){
+
+    $(target).hide();
+    $(dest).append("<textarea class='changename_textfield'></textarea>");
+
+    $(".changename_textfield").on("focusout", function () {
+        var newvalue = $('.changename_textfield').val();
+
+        socket.emit("changeMapName", ({ 'id' : id, 'name' : newvalue }));
+        user.changeTacticName(id, newvalue, option);
+
+        $(".changename_textfield").remove();
+        $(target).show();
+        $(changevalueelement).html(newvalue);
+
+    });
+}
