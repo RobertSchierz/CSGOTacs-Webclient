@@ -7,9 +7,9 @@
 
 function User() {
 
-    this.groups;
-    this.tactics;
-    this.grouptactics;
+    this.groups = new Array();
+    this.tactics = new Array();;
+    this.grouptactics = new Array();;
 
     this.setGroups = function(Groups)
     {
@@ -58,12 +58,21 @@ function User() {
         this.tactics.push(addedtactic);
     }
 
-    this.changeTacticName = function(id, newname){
-        for(var tactic = 0; tactic < this.tactics.length; tactic++){
-            if(this.tactics[tactic].id == id){
-                this.tactics[tactic].name = newname;
+    this.changeTacticName = function(id, newname, option){
+        if(option == "group"){
+            for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
+                if(this.grouptactics[tactic].id == id){
+                    this.grouptactics[tactic].name = newname;
+                }
+            }
+        }else{
+            for(var tactic = 0; tactic < this.tactics.length; tactic++){
+                if(this.tactics[tactic].id == id){
+                    this.tactics[tactic].name = newname;
+                }
             }
         }
+
     }
 
     this.deleteTacticName = function(id){
@@ -73,6 +82,7 @@ function User() {
             }
         }
     }
+
 
     this.setGrouptactics = function(Grouptactics)
     {
@@ -88,7 +98,8 @@ function User() {
         this.grouptactics.push(addedgrouptactic);
     }
 
-    this.setLocalToGroupTactic = function(id, group){
+    this.setLocalToGroupTactic = function(id){
+        /*
         for(var tactic = 0; tactic < this.tactics.length; tactic++){
             if(this.tactics[tactic].id == id){
                 this.addGrouptactic(this.tactics[tactic]);
@@ -99,7 +110,7 @@ function User() {
                 this.grouptactics[tactic].group = group;
             }
         }
-
+*/
         this.deleteTacticName(id);
     }
 
@@ -120,7 +131,39 @@ function User() {
                 grouptacticsarray.push(this.grouptactics[tactic]);
             }
         }
+
         return grouptacticsarray;
+    }
+
+    this.getGrouptacticByID = function(id){
+        for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
+            if(this.grouptactics[tactic].id == id){
+                return this.grouptactics[tactic];
+            }
+        }
+
+        return grouptacticsarray;
+    }
+
+    this.changeTacticData = function(tactic){
+
+        if(this.getGrouptacticsByName(tactic.name).length == 0){
+            for(var tactics in this.tactics){
+                if(this.tactics[tactics].name == tactic.getTacticname()){
+                    this.tactics[tactics].drag = tactic.getDrag();
+                    this.tactics[tactics].x = tactic.getX();
+                    this.tactics[tactics].y = tactic.getY();
+                }
+            }
+        }else{
+            for(var grouptactic in this.grouptactics){
+                if(this.grouptactics[grouptactic].name == tactic.getTacticname()){
+                    this.grouptactics[grouptactic].drag = tactic.getDrag();
+                    this.grouptactics[grouptactic].x = tactic.getX();
+                    this.grouptactics[grouptactic].y = tactic.getY();
+                }
+            }
+        }
     }
 
 

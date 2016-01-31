@@ -23,23 +23,35 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "provideGroups"){
-        user.setGroups(data.groups);
-        getGroups(data.groups);
+        if(refreshmember){
+            user.setGroups(data.groups);
+
+        }else{
+            user.setGroups(data.groups);
+            getGroups(data.groups);
+        }
+
     }
 
     if(data.status == "provideMaps"){
-        var grouptacticarray = [];
-        var tacticsarray = [];
+        if(requestgroup == null){
+            var tacticsarray = [];
 
-        for(var w = 0; w < data.maps.length; w++ ){
-            if(data.maps[w].group != null){
-                grouptacticarray.push(data.maps[w]);
-            }else{
-                tacticsarray.push(data.maps[w]);
+            for(var w = 0; w < data.maps.length; w++ ){
+                if(data.maps[w].group == null) {
+                    tacticsarray.push(data.maps[w]);
+                }
             }
+
+            user.setTactics(tacticsarray);
+        }else{
+            user.setGrouptactics(data.maps);
+            openGroupTactic(requestgroup);
+            requestgroup = null;
         }
-        user.setGrouptactics(grouptacticarray);
-        user.setTactics(tacticsarray);
+
+
+
 
 
 
@@ -80,5 +92,13 @@ socket.on('status', function (data) {
 
     if(data.status == "changeMapNameSuccess"){
         alertMessage("Taktikname erfolgreich geändert!", "green");
+    }
+
+    if(data.status == "changeMapSuccess"){
+        alertMessage("Geladene Taktik erfolgreich geändert!", "green");
+    }
+
+    if(data.status == "changeMapFailed"){
+        alertMessage("Geladene Taktik nicht erfolgreich geändert!", "red");
     }
 });
