@@ -3,6 +3,7 @@
  */
 var popup_zustand = false;
 var requestgroup = null;
+var refreshmember = false;
 
 function openOverlaypanel(source, groupname) {
 
@@ -40,8 +41,11 @@ function openOverlaypanel(source, groupname) {
         }
 
         if(source == "grouptactic"){
+            refreshmember = true;
+            socket.emit('getGroups', ({'user': localStorage.getItem("benutzername")}));
             requestgroup = groupname;
             socket.emit("getMaps", ({'group' : groupname}));
+
 
 
         }
@@ -142,5 +146,10 @@ function splittId(id){
     return splittedid[1];
 }
 
+function setTooltipToElement(element, text){
+    $(element).attr('title', '').tooltip({
+        content: text
+    });
 
+}
 

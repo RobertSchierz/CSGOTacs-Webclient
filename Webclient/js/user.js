@@ -126,6 +126,16 @@ function User() {
         return grouptacticsarray;
     }
 
+    this.getGrouptacticByID = function(id){
+        for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
+            if(this.grouptactics[tactic].id == id){
+                return this.grouptactics[tactic];
+            }
+        }
+
+        return grouptacticsarray;
+    }
+
     this.changeTacticData = function(tactic){
 
         if(this.getGrouptacticsByName(tactic.name).length == 0){

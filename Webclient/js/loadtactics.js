@@ -100,6 +100,9 @@ function getMaps(data){
 
 
 function setArrayData(data){
+    if(data.group != null){
+        tactic.setGroup(data.group);
+    }
     tactic.setMaps(data.map);
     tactic.setX(data.x);
     tactic.setY(data.y);

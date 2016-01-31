@@ -41,7 +41,7 @@ function openGroupTactic(groupname){
             loadTacticImage(grouptacticsarray[grouptactic]);
 
             var tacticid = grouptacticsarray[grouptactic].id;
-            $("#grouptactic_table").append("<tr> <td id='grouptacticimage_"+tacticid+"' ></td> <td id='grouptactic_"+tacticid+"'>  </td> <td id='grouptactictableoptiontd_"+tacticid+"'></td>  </tr>");
+            $("#grouptactic_table").append("<tr id='tactic_"+tacticid+"'> <td id='grouptacticimage_"+tacticid+"' class='canvastd' ></td> <td id='grouptactic_"+tacticid+"' class='canvastd'>  </td> <td id='grouptactictableoptiontd_"+tacticid+"' class='canvastd'></td>  </tr>");
             $("#grouptactic_"+tacticid).append(""+grouptacticsarray[grouptactic].name+"");
             $("#grouptactictableoptiontd_"+tacticid).append("<i id='grouptactictableoption_"+tacticid+"' class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
 
@@ -52,6 +52,8 @@ function openGroupTactic(groupname){
         }else{
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Keine Taktiken vorhanden</h3>");
     }
+
+
 
 
 /*
@@ -68,6 +70,12 @@ function openGroupTactic(groupname){
     }else{
         $("#loadtactic_canvas").append("<p>Keine Taktiken vorhanden</p> ");
     }
+
+ var admin = false;
+
+ if(data.admin == localStorage.getItem("benutzername")){
+ admin = true;
+ }
 */
 
 
@@ -95,7 +103,29 @@ function optionPanel(id, source){
 
     if($("#optionpanel_"+id).length == 0){
         if(source == "tactic"){
-            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK</div>");
+            //console.log(user.getGrouptacticByID(id));
+            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>" +
+                "<table><tr><td class='tdoptionpanel'><i id='tacticloadbutton_"+id+"' class='material-icons'>gesture</i></td>" +
+                "<td class='tdoptionpanel'><i id='tacticdeletebutton_"+id+ "' class='material-icons'>delete</i></td></tr></table>" +
+                "</div>");
+
+            $("#tacticdeletebutton_"+id).on("click", function(){
+                socket.emit('deleteMap', ({'id' : id}));
+                $("#tactic_" + id).hide(2000);
+            });
+
+            $("#tacticloadbutton_"+id).on("click", function(){
+                closeOverlaypanel();
+                deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
+                var tactic = setArrayData(user.getGrouptacticByID(splittId($(this).attr("id"))));
+                drawSavedMap(tactic);
+                handleMapselectorStates("#" + tactic.getMap(), true);
+            })
+
+            setTooltipToElement("#tacticloadbutton_"+id, "AMK");
+
+
+
         }else if(source == "member"){
             $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK2</div>");
         }
@@ -151,7 +181,7 @@ function loadTacticImage(currenttactic){
  $(".member" + "." + memberclass).append(""+data.member[l]+"");
 
  if(admin){
- $(".delete" + "." + memberclass).append(" <i id='memberdeletebutton_"+data.name + "' class='"+data.member[l]+" material-icons'>delete</i>");
+ $(".delete" + "." + memberclass).append(" ");
  }
 
  $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
@@ -167,7 +197,10 @@ function loadTacticImage(currenttactic){
 
 
 function leaveGroup(data){
-    $("#" + data.group).hide(2000);
-    user.deleteGroup(user.getGroups(), data.group);
-    closeOverlaypanel();
+    $("#" + data.group).hide(2000, function(){
+        user.deleteGroup(user.getGroups(), data.group);
+        $("#" + data.group).remove();
+        closeOverlaypanel();
+    });
+
 }

@@ -69,11 +69,7 @@ function getGroups(data){
 }
 
 function appendGroupMenu(data){
-    var admin = false;
 
-    if(data.admin == localStorage.getItem("benutzername")){
-         admin = true;
-    }
 
 
         $("#groupcanvasmenu").append("<div id='" + data.name + "' class ='groupname'>" + data.name + " </div>");

@@ -23,8 +23,14 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "provideGroups"){
-        user.setGroups(data.groups);
-        getGroups(data.groups);
+        if(refreshmember){
+            user.setGroups(data.groups);
+
+        }else{
+            user.setGroups(data.groups);
+            getGroups(data.groups);
+        }
+
     }
 
     if(data.status == "provideMaps"){
