@@ -147,8 +147,21 @@ function splittId(id){
 }
 
 function setTooltipToElement(element, text){
-    $(element).attr('title', '').tooltip({
-        content: text
+
+
+
+    $(element).attr('title', text).tooltip({
+        tooltipClass: "tooltip",
+        position: {
+            my: "center bottom-20",
+            at: "center top",
+            using: function( position, feedback ) {
+                $( this ).css( position );
+                $( "<div>" )
+                    .addClass( "arrow" )
+                    .appendTo( this );
+            }
+        }
     });
 
 }

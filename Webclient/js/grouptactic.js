@@ -122,7 +122,8 @@ function optionPanel(id, source){
                 handleMapselectorStates("#" + tactic.getMap(), true);
             })
 
-            setTooltipToElement("#tacticloadbutton_"+id, "AMK");
+            setTooltipToElement("#tacticloadbutton_"+id, "Taktik Laden");
+            setTooltipToElement("#tacticdeletebutton_"+id, "Taktik Löschen");
 
 
 
