@@ -23,19 +23,26 @@ function openGroupTactic(groupname){
     $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><div class='tablewrapper'><table id='groupmember_table'></table></div>");
     for(var groupmember in groupobject.member){
         var membername = groupobject.member[groupmember];
-        $("#groupmember_table").append("<tr> <td id='grouptable_admin_"+membername+"'> </td> <td id='grouptable_name_"+membername+"'></td> <td id='groupmembertableoptiontd_"+membername+"'></td>  </tr>");
+        $("#groupmember_table").append("<tr id='member_"+membername+"'> <td id='grouptable_admin_"+membername+"' class='canvastd'> </td> " +
+            "<td id='grouptable_name_"+membername+"' class='canvastd'></td> " +
+            "<td id='groupmembertableoptiontd_"+membername+"' class='canvastd'></td>  </tr>");
 
         if(groupobject.member[groupmember] == groupobject.admin) {
-            $("#grouptable_admin_" + membername).append("<i class='material-icons'>star</i>");
+            $("#grouptable_admin_" + membername).append("<i id='adminbutton_"+membername+"' class='material-icons'>star</i>");
+            setTooltipToElement("#adminbutton_"+membername, "Gruppenadministrator");
         }
             $("#grouptable_name_" + membername).append(""+groupobject.member[groupmember]+"");
+        if(localStorage.getItem("benutzername") == groupobject.admin){
             $("#groupmembertableoptiontd_" + membername).append("<i id='groupmembertableoption_"+membername+"' class='material-icons groupmember_option'>keyboard_arrow_down</i>");
 
+        }
+
             $("#groupmembertableoption_" + membername).on("click", function(){
-                optionPanel(splittId($(this).attr("id")), "member");
+                optionPanel(splittId($(this).attr("id")), "member", groupobject);
             });
 
     }
+
 
     if(grouptacticsarray.length != 0){
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Taktiken:</h3><div class='tablewrapper'><table id='grouptactic_table'></table></div>");
@@ -96,7 +103,7 @@ $(document).click(function(e){
     }
 });
 
-function optionPanel(id, source){
+function optionPanel(id, source, group){
     var request;
     optionPanelDelete(id);
     if(source == "tactic"){
@@ -108,7 +115,6 @@ function optionPanel(id, source){
 
     if($("#optionpanel_"+id).length == 0){
         if(source == "tactic"){
-            //console.log(user.getGrouptacticByID(id));
             $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>" +
                 "<table><tr><td class='tdoptionpanel'><i id='tacticloadbutton_"+id+"' class='material-icons'>gesture</i></td> " +
                 "<td class='tdoptionpanel' id='changenametd_"+id+"'><i id='tacticchangenamebutton_"+id+"' class='material-icons'>edit</i></td>" +
@@ -143,7 +149,17 @@ function optionPanel(id, source){
 
 
         }else if(source == "member"){
-            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>AMK2</div>");
+
+            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'><table><tr>" +
+                "<td  class='tdoptionpanel'><i id='memberdeletebutton_"+id+ "' class='material-icons'>delete</i> </td></tr></table></div>");
+
+
+
+            $("#memberdeletebutton_"+id).on("click", function(){
+                socket.emit('kickUser', ({'user' : group.admin, 'name' : group.name, 'kick' : id}));
+                $("#member_" + id).hide(2000);
+            });
+            setTooltipToElement("#memberdeletebutton_"+id, "Member Kicken");
         }
 
         $("#optionpanel_" + id).show(500);

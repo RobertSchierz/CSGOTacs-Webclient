@@ -101,4 +101,13 @@ socket.on('status', function (data) {
     if(data.status == "changeMapFailed"){
         alertMessage("Geladene Taktik nicht erfolgreich geändert!", "red");
     }
+
+    if(data.status == "kickUserSuccess"){
+        alertMessage("User aus der Gruppe entfernt", "green");
+    }
+
+    if(data.status == "kickUserFailed"){
+        alertMessage("User nicht aus der Gruppe entfernt", "red");
+    }
+
 });
