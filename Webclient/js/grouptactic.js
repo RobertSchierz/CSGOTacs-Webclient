@@ -1,132 +1,101 @@
-
-
-
-function openGroupTactic(groupname){
+function openGroupTactic(groupname) {
 
     var groupobject = user.getGroupByName(groupname);
 
 
-
     overlaypanel_header("Gruppe: " + groupname);
-    if($("#groupdelete").length == 0){
+    if ($("#groupdelete").length == 0) {
         $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>exit_to_app</i>")
-        $("#groupdelete").on("click", function(){
-            socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name' : groupobject.name }));
+        $("#groupdelete").on("click", function () {
+            socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
         })
-        setTooltipToElement("#groupdelete","Aus der Gruppe austreten")
+        setTooltipToElement("#groupdelete", "Aus der Gruppe austreten")
 
     }
 
-        var grouptacticsarray = user.getGrouptacticsByName(groupname);
+    var grouptacticsarray = user.getGrouptacticsByName(groupname);
 
     $("#overlaypanel_insidebox").append("<div id='grouptacticcanvas'></div> <div id='groupmembercanvas'></div>");
     $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><div class='tablewrapper'><table id='groupmember_table'></table></div>");
-    for(var groupmember in groupobject.member){
+    for (var groupmember in groupobject.member) {
         var membername = groupobject.member[groupmember];
-        $("#groupmember_table").append("<tr id='member_"+membername+"'> <td id='grouptable_admin_"+membername+"' class='canvastd'> </td> " +
-            "<td id='grouptable_name_"+membername+"' class='canvastd'></td> " +
-            "<td id='groupmembertableoptiontd_"+membername+"' class='canvastd'></td>  </tr>");
+        $("#groupmember_table").append("<tr id='member_" + membername + "'> <td id='grouptable_admin_" + membername + "' class='canvastd'> </td> " +
+            "<td id='grouptable_name_" + membername + "' class='canvastd'></td> " +
+            "<td id='groupmembertableoptiontd_" + membername + "' class='canvastd'></td>  </tr>");
 
-        if(groupobject.member[groupmember] == groupobject.admin) {
-            $("#grouptable_admin_" + membername).append("<i id='adminbutton_"+membername+"' class='material-icons'>star</i>");
-            setTooltipToElement("#adminbutton_"+membername, "Gruppenadministrator");
+        if (groupobject.member[groupmember] == groupobject.admin) {
+            $("#grouptable_admin_" + membername).append("<i id='adminbutton_" + membername + "' class='material-icons'>star</i>");
+            setTooltipToElement("#adminbutton_" + membername, "Gruppenadministrator");
         }
-            $("#grouptable_name_" + membername).append(""+groupobject.member[groupmember]+"");
-        if(localStorage.getItem("benutzername") == groupobject.admin){
-            $("#groupmembertableoptiontd_" + membername).append("<i id='groupmembertableoption_"+membername+"' class='material-icons groupmember_option'>keyboard_arrow_down</i>");
+        $("#grouptable_name_" + membername).append("" + groupobject.member[groupmember] + "");
+        if (membername != localStorage.getItem("benutzername") && (localStorage.getItem("benutzername") == groupobject.admin || isInArray(groupobject.mods, localStorage.getItem("benutzername")).length != 0)) {
+            $("#groupmembertableoptiontd_" + membername).append("<i id='groupmembertableoption_" + membername + "' class='material-icons groupmember_option'>keyboard_arrow_down</i>");
 
         }
 
-            $("#groupmembertableoption_" + membername).on("click", function(){
-                optionPanel(splittId($(this).attr("id")), "member", groupobject);
-            });
+        $("#groupmembertableoption_" + membername).on("click", function () {
+            optionPanel(splittId($(this).attr("id")), "member", groupobject);
+        });
 
     }
 
 
-    if(grouptacticsarray.length != 0){
+    if (grouptacticsarray.length != 0) {
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Taktiken:</h3><div class='tablewrapper'><table id='grouptactic_table'></table></div>");
-        for(var grouptactic in grouptacticsarray){
+        for (var grouptactic in grouptacticsarray) {
 
             loadTacticImage(grouptacticsarray[grouptactic]);
 
             var tacticid = grouptacticsarray[grouptactic].id;
-            $("#grouptactic_table").append("<tr id='tactic_"+tacticid+"'> <td id='grouptacticimage_"+tacticid+"' class='canvastd' ></td> " +
-                "<td id='grouptactic_"+tacticid+"' class='canvastd' >  </td> " +
-                "<td id='grouptactictableoptiontd_"+tacticid+"' class='canvastd' ></td>  </tr>");
-            $("#grouptactic_"+tacticid).append(""+grouptacticsarray[grouptactic].name+"");
-            $("#grouptactictableoptiontd_"+tacticid).append("<i id='grouptactictableoption_"+tacticid+"' class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
+            $("#grouptactic_table").append("<tr id='tactic_" + tacticid + "'> <td id='grouptacticimage_" + tacticid + "' class='canvastd' ></td> " +
+                "<td id='grouptactic_" + tacticid + "' class='canvastd' >  </td> " +
+                "<td id='grouptactictableoptiontd_" + tacticid + "' class='canvastd' ></td>  </tr>");
+            $("#grouptactic_" + tacticid).append("" + grouptacticsarray[grouptactic].name + "");
+            $("#grouptactictableoptiontd_" + tacticid).append("<i id='grouptactictableoption_" + tacticid + "' class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
 
-            $("#grouptactictableoption_" + tacticid).on("click", function(){
+            $("#grouptactictableoption_" + tacticid).on("click", function () {
                 optionPanel(splittId($(this).attr("id")), "tactic");
             });
         }
-        }else{
+    } else {
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Keine Taktiken vorhanden</h3>");
     }
 
-
-
-
-/*
-    $("#overlaypanel_insidebox").append("<div id='groupusercontroll'>User in Gruppe: <select id='groupusercontroll_usercombobox'></select> </div> <div id='loadtactic_canvas' ></div>");
-
-
-
-
-        $("#loadtactic_canvas").accordion({
-            collapsible: true,
-            heightStyle: "content"
-
-        });
-    }else{
-        $("#loadtactic_canvas").append("<p>Keine Taktiken vorhanden</p> ");
-    }
-
- var admin = false;
-
- if(data.admin == localStorage.getItem("benutzername")){
- admin = true;
- }
-*/
-
-
-
 }
 
-$(document).click(function(e){
-    if( $(e.target).closest(".optionpanel").length == 0 && $(e.target).closest(".grouptactic_option").length == 0 && $(e.target).closest(".groupmember_option").length == 0 ) {
-       if($(".optionpanel").length != 0){
-           $(".optionpanel").hide(500);
-           $(".optionpanel").remove();
-       }
+$(document).click(function (e) {
+    if ($(e.target).closest(".optionpanel").length == 0 && $(e.target).closest(".grouptactic_option").length == 0 && $(e.target).closest(".groupmember_option").length == 0) {
+        if ($(".optionpanel").length != 0) {
+            $(".optionpanel").hide(500);
+            $(".optionpanel").remove();
+        }
     }
 });
 
-function optionPanel(id, source, group){
+function optionPanel(id, source, group) {
     var request;
     optionPanelDelete(id);
-    if(source == "tactic"){
+    if (source == "tactic") {
         request = "grouptactictableoptiontd_";
-    }else if(source == "member"){
+    } else if (source == "member") {
         request = "groupmembertableoptiontd_";
     }
 
 
-    if($("#optionpanel_"+id).length == 0){
-        if(source == "tactic"){
-            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'>" +
-                "<table><tr><td class='tdoptionpanel'><i id='tacticloadbutton_"+id+"' class='material-icons'>gesture</i></td> " +
-                "<td class='tdoptionpanel' id='changenametd_"+id+"'><i id='tacticchangenamebutton_"+id+"' class='material-icons'>edit</i></td>" +
-                "<td class='tdoptionpanel'><i id='tacticdeletebutton_"+id+ "' class='material-icons'>delete</i></td></tr></table>" +
+    if ($("#optionpanel_" + id).length == 0) {
+        if (source == "tactic") {
+            $("#" + request + id).append("<div class='optionpanel' id='optionpanel_" + id + "'>" +
+                "<table><tr><td class='tdoptionpanel'><i id='tacticloadbutton_" + id + "' class='material-icons'>gesture</i></td> " +
+                "<td class='tdoptionpanel' id='changenametd_" + id + "'><i id='tacticchangenamebutton_" + id + "' class='material-icons'>edit</i></td>" +
+                "<td class='tdoptionpanel'><i id='tacticdeletebutton_" + id + "' class='material-icons'>delete</i></td></tr></table>" +
                 "</div>");
 
-            $("#tacticdeletebutton_"+id).on("click", function(){
-                socket.emit('deleteMap', ({'id' : id}));
+            $("#tacticdeletebutton_" + id).on("click", function () {
+                socket.emit('deleteMap', ({'id': id}));
                 $("#tactic_" + id).hide(2000);
             });
 
-            $("#tacticloadbutton_"+id).on("click", function(){
+            $("#tacticloadbutton_" + id).on("click", function () {
                 closeOverlaypanel();
                 deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
                 var tactic = setArrayData(user.getGrouptacticByID(splittId($(this).attr("id"))));
@@ -134,66 +103,62 @@ function optionPanel(id, source, group){
                 handleMapselectorStates("#" + tactic.getMap(), true);
             });
 
-            $("#tacticchangenamebutton_"+id).on("click", function(){
+            $("#tacticchangenamebutton_" + id).on("click", function () {
                 var splittedid = splittId($(this).attr("id"));
-               setChangeName("#tacticchangenamebutton_"+splittedid, "#changenametd_"+splittedid, splittedid, "#grouptactic_"+splittedid, "group" );
-
+                setChangeName("#tacticchangenamebutton_" + splittedid, "#changenametd_" + splittedid, splittedid, "#grouptactic_" + splittedid, "group");
 
 
             });
 
-            setTooltipToElement("#tacticloadbutton_"+id, "Taktik Laden");
-            setTooltipToElement("#tacticchangenamebutton_"+id, "Taktiknamen bearbeiten");
-            setTooltipToElement("#tacticdeletebutton_"+id, "Taktik Löschen");
+            setTooltipToElement("#tacticloadbutton_" + id, "Taktik Laden");
+            setTooltipToElement("#tacticchangenamebutton_" + id, "Taktiknamen bearbeiten");
+            setTooltipToElement("#tacticdeletebutton_" + id, "Taktik Löschen");
 
 
+        } else if (source == "member") {
 
-        }else if(source == "member"){
-
-            $("#" + request+ id).append("<div class='optionpanel' id='optionpanel_"+id+"'><table><tr>" +
-                "<td  class='tdoptionpanel'><i id='memberdeletebutton_"+id+ "' class='material-icons'>delete</i> </td></tr></table></div>");
-
+            $("#" + request + id).append("<div class='optionpanel' id='optionpanel_" + id + "'><table><tr>" +
+                "<td  class='tdoptionpanel'><i id='memberdeletebutton_" + id + "' class='material-icons'>delete</i> </td></tr></table></div>");
 
 
-            $("#memberdeletebutton_"+id).on("click", function(){
-                socket.emit('kickUser', ({'user' : group.admin, 'name' : group.name, 'kick' : id}));
+            $("#memberdeletebutton_" + id).on("click", function () {
+                socket.emit('kickUser', ({'user': group.admin, 'name': group.name, 'kick': id}));
                 $("#member_" + id).hide(2000);
             });
-            setTooltipToElement("#memberdeletebutton_"+id, "Member Kicken");
+            setTooltipToElement("#memberdeletebutton_" + id, "Member Kicken");
         }
 
         $("#optionpanel_" + id).show(500);
-    }else{
-        $("#optionpanel_"+id).hide(500);
-        $("#optionpanel_"+id).remove();
+    } else {
+        $("#optionpanel_" + id).hide(500);
+        $("#optionpanel_" + id).remove();
 
     }
 }
 
 
-
-function optionPanelDelete(id){
-    $('div').each(function(index){
-        if($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_"+id ){
+function optionPanelDelete(id) {
+    $('div').each(function (index) {
+        if ($(this).attr('class') == "optionpanel" && $(this).attr('id') != "optionpanel_" + id) {
             $(this).hide(500);
             $(this).remove();
         }
     });
 }
 
-function loadTacticImage(currenttactic){
+function loadTacticImage(currenttactic) {
     $.ajax({
-        url : "./jsons/mapselections.json",
-        dataType : 'json',
-        success : function (data) {
+        url: "./jsons/mapselections.json",
+        dataType: 'json',
+        success: function (data) {
             for (i = 0; i < data.images.length; i++) {
-                if(data.images[i].name == currenttactic.map){
-                  $("#grouptacticimage_"+currenttactic.id).append("<div class='grouptable_images' style='background-image:url(" + data.images[i].url + ")' ></div>");
+                if (data.images[i].name == currenttactic.map) {
+                    $("#grouptacticimage_" + currenttactic.id).append("<div class='grouptable_images' style='background-image:url(" + data.images[i].url + ")' ></div>");
                 }
             }
         },
-        error : function () {
-           alertMessage("Fehler beim Zugriff auf Taktikbilder", "red");
+        error: function () {
+            alertMessage("Fehler beim Zugriff auf Taktikbilder", "red");
         }
 
     });
@@ -219,7 +184,7 @@ function loadTacticImage(currenttactic){
  }
 
  $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
-    alert("test");
+ alert("test");
  });
  }
 
@@ -229,9 +194,8 @@ function loadTacticImage(currenttactic){
  */
 
 
-
-function leaveGroup(data){
-    $("#" + data.group).hide(2000, function(){
+function leaveGroup(data) {
+    $("#" + data.group).hide(2000, function () {
         user.deleteGroup(user.getGroups(), data.group);
         $("#" + data.group).remove();
         closeOverlaypanel();

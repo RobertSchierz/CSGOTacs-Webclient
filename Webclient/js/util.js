@@ -183,3 +183,20 @@ function setChangeName(target, dest, id, changevalueelement, option){
 
     });
 }
+
+function isInArray(array, value){
+    if(array.length != 0){
+
+
+    var tempindexarray = new Array();
+    for(var element in array){
+        if(array[element] == value){
+            tempindexarray.push(element);
+        }
+    }
+
+    return tempindexarray;
+    }else{
+        return new Array();
+    }
+}
