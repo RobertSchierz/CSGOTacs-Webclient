@@ -4,13 +4,26 @@ function openGroupTactic(groupname) {
 
 
     overlaypanel_header("Gruppe: " + groupname);
-    if ($("#groupdelete").length == 0) {
-        $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>exit_to_app</i>")
-        $("#groupdelete").on("click", function () {
-            socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
-        })
-        setTooltipToElement("#groupdelete", "Aus der Gruppe austreten")
+    if ($("#groupleave").length == 0) {
+        $("#overlaypanel_header").append("<i class='material-icons' id='groupleave'>exit_to_app</i>");
 
+
+        $("#groupleave").on("click", function () {
+            socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
+
+        })
+        setTooltipToElement("#groupleave", "Aus der Gruppe austreten");
+
+    }
+
+    if(localStorage.getItem("benutzername") == groupobject.admin){
+        $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>delete</i>");
+        setTooltipToElement("#groupdelete", "Gruppe entfernen");
+        $("#groupdelete").on("click", function(){
+            socket.emit("deleteGroup", ({'user' : localStorage.getItem("benutzername"), 'name' : groupobject.name}));
+            console.log(groupobject);
+            leaveGroup(groupobject);
+        })
     }
 
     var grouptacticsarray = user.getGrouptacticsByName(groupname);
@@ -19,16 +32,23 @@ function openGroupTactic(groupname) {
     $("#groupmembercanvas").append("<h3 class='tableheader'>Benutzer:</h3><div class='tablewrapper'><table id='groupmember_table'></table></div>");
     for (var groupmember in groupobject.member) {
         var membername = groupobject.member[groupmember];
-        $("#groupmember_table").append("<tr id='member_" + membername + "'> <td id='grouptable_admin_" + membername + "' class='canvastd'> </td> " +
+        var ismod = isInArray(groupobject.mods, membername);
+
+        $("#groupmember_table").append("<tr id='member_" + membername + "'> <td id='grouptableadmin_" + membername + "' class='canvastd'> </td> " +
             "<td id='grouptable_name_" + membername + "' class='canvastd'></td> " +
             "<td id='groupmembertableoptiontd_" + membername + "' class='canvastd'></td>  </tr>");
 
-        if (groupobject.member[groupmember] == groupobject.admin) {
-            $("#grouptable_admin_" + membername).append("<i id='adminbutton_" + membername + "' class='material-icons'>star</i>");
+        if (membername == groupobject.admin) {
+            $("#grouptableadmin_" + membername).append("<i id='adminbutton_" + membername + "' class='material-icons'>star</i>");
             setTooltipToElement("#adminbutton_" + membername, "Gruppenadministrator");
         }
+        var useroption = "admin";
+        if (ismod.length != 0) {
+            $("#grouptableadmin_" + membername).append("<i id='modbutton_" + membername + "' class='material-icons'>star_half</i>");
+            setTooltipToElement("#modbutton_" + membername, "Gruppenmoderator")
+        }
         $("#grouptable_name_" + membername).append("" + groupobject.member[groupmember] + "");
-        if (membername != localStorage.getItem("benutzername") && (localStorage.getItem("benutzername") == groupobject.admin || isInArray(groupobject.mods, localStorage.getItem("benutzername")).length != 0)) {
+        if (membername != groupobject.admin && membername != localStorage.getItem("benutzername") && (localStorage.getItem("benutzername") == groupobject.admin || isInArray(groupobject.mods, localStorage.getItem("benutzername")).length != 0)) {
             $("#groupmembertableoptiontd_" + membername).append("<i id='groupmembertableoption_" + membername + "' class='material-icons groupmember_option'>keyboard_arrow_down</i>");
 
         }
@@ -118,7 +138,34 @@ function optionPanel(id, source, group) {
         } else if (source == "member") {
 
             $("#" + request + id).append("<div class='optionpanel' id='optionpanel_" + id + "'><table><tr>" +
-                "<td  class='tdoptionpanel'><i id='memberdeletebutton_" + id + "' class='material-icons'>delete</i> </td></tr></table></div>");
+                "<td  class='tdoptionpanel'><i id='memberdeletebutton_" + id + "' class='material-icons'>delete</i> </td>" +
+                "<td class='tdoptionpanel' id='membermod_" + id + "'></td>" +
+                "</tr></table></div>");
+
+
+            var modArraylength = isInArray(group.mods, id).length;
+            if (modArraylength != 0) {
+                $("#membermod_" + id).html("<i id='membermodoption_" + id + "' class='material-icons' data-type='remove'>remove</i>");
+            } else if (modArraylength == 0) {
+                $("#membermod_" + id).html("<i id='membermodoption_" + id + "' class='material-icons' data-type='add'>add</i>");
+            }
+
+
+            switch ($("#membermodoption_" + id).attr("data-type")) {
+                case "remove":
+                    setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator entfernen");
+                    break;
+                case "add":
+                    $("#membermodoption_" + id).on("click", function () {
+                        var id = splittId($(this).attr("id"));
+                        socket.emit("setGroupMod", ({'user': id, 'name': group.name}));
+                        $("#grouptableadmin_" + id).append("<i id='modbutton_" + id + "' class='material-icons'>star_half</i>");
+
+
+                    });
+                    setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator hinzufügen");
+                    break;
+            }
 
 
             $("#memberdeletebutton_" + id).on("click", function () {
@@ -126,6 +173,7 @@ function optionPanel(id, source, group) {
                 $("#member_" + id).hide(2000);
             });
             setTooltipToElement("#memberdeletebutton_" + id, "Member Kicken");
+
         }
 
         $("#optionpanel_" + id).show(500);
@@ -195,10 +243,18 @@ function loadTacticImage(currenttactic) {
 
 
 function leaveGroup(data) {
-    $("#" + data.group).hide(2000, function () {
-        user.deleteGroup(user.getGroups(), data.group);
-        $("#" + data.group).remove();
+    var group;
+    if(data.group  == undefined){
+        group = data.name
+    }else{
+        group = data.group;
+    }
+    $("#" + group).hide(2000, function () {
+        user.deleteGroup(user.getGroups(), group);
+        $("#" + group).remove();
         closeOverlaypanel();
     });
 
 }
+
+

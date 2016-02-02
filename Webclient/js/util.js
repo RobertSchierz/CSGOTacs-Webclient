@@ -125,7 +125,6 @@ function ActualSaveTactic(option){
         tactic.setX(tactic.getX().concat(clickX));
         tactic.setY(tactic.getY().concat(clickY));
         user.changeTacticData(tactic);
-        //console.log(tactic.getId() + " " + tactic.getDrag() + " " + tactic.getX().length +" " + tactic.getY().length);
         socket.emit('changeMap', ({'id' : tactic.getId(), 'drag' : tactic.getDrag(),  'x' : tactic.getX(), 'y' : tactic.getY()}));
     }
 
