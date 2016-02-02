@@ -103,6 +103,8 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "kickUserSuccess") {
+        console.log(data.kick);
+        $("#member_" + data.kick).hide(2000);
         alertMessage("User aus der Gruppe entfernt", "green");
     }
 
@@ -111,11 +113,26 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "setGroupModSuccess"){
-        alertMessage("User als Mod hinzugefügt", "green");
+        $("#grouptableadmin_" + data.user).append("<i id='modbutton_" + data.user + "' class='material-icons'>star_half</i>");
+        $("#membermodoption_" + data.user).attr("data-type", "remove");
+        user.setModToGroup(data.group, data.user);
+        $("#membermodoption_" + data.user).html("remove");
+        setListenerToModButton(data.user, data.group);
     }
 
     if(data.status == "setGroupModFailed"){
         alertMessage("User nicht als Mod hinzugefügt", "red");
+    }
+
+    if(data.status == "unsetGroupModSuccess") {
+        $("#grouptableadmin_" + data.user).empty();
+        $("#membermodoption_" + data.user).attr("data-type", "add");
+        //user.deleteModofGroup(data.group, data.user);
+        setListenerToModButton(data.user, data.group);
+    }
+
+    if(data.status == "unsetGroupModFailed"){
+        alertMessage("User nicht als Mod entfernt", "red")
     }
 
     if(data.status == "deleteGroupSuccess"){

@@ -32,7 +32,7 @@ function User() {
 
     this.addGroup = function(addedgroup){
         this.groups.push(addedgroup);
-    }
+    };
 
     this.groupNamesArray = function(){
         var namesarray = new Array();
@@ -42,7 +42,38 @@ function User() {
         }
         return namesarray;
 
-    }
+    };
+
+    this.getIndexofGroupByName = function(groupname){
+        for(var group in this.groups){
+            if(this.groups[group].name == groupname){
+                return group;
+            }
+        }
+    };
+
+    this.setModToGroup = function(group, mod){
+        this.groups[this.getIndexofGroupByName(group)].mods.push(mod);
+    };
+
+    this.deleteModofGroup = function(group, mod){
+          this.groups[this.getIndexofGroupByName(group)].mods.splice(isInArray(this.groups[this.getIndexofGroupByName(group)].mods, mod),1);
+    };
+
+
+
+   /* this.getUserByName = function(name, groupname){
+        for(var group in this.groups){
+            if(this.groups[group].name == groupname){
+                for(var member in this.groups[group].member){
+                    if(this.groups[group].member[member] == name){
+                        return this.groups[group].member[member];
+                    }
+                }
+            }
+        }
+    };*/
+
 
     this.setTactics = function(Tactics)
     {

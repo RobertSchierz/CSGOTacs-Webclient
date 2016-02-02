@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b63bd385-267d-4bf0-9d65-3a37a9eefd5f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/loadtactics.js" afterPath="$PROJECT_DIR$/Webclient/js/loadtactics.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/grouptactic.js" afterPath="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" afterPath="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/util.js" afterPath="$PROJECT_DIR$/Webclient/js/util.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/user.js" afterPath="$PROJECT_DIR$/Webclient/js/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Bachelorarbeit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +27,21 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="true">
+            <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
                 <provider selected="true" editor-type-id="text-editor">
                   <state vertical-scroll-proportion="0.0" vertical-offset="9215" max-vertical-offset="14307">
                     <caret line="485" column="25" selection-start-line="485" selection-start-column="25" selection-end-line="485" selection-end-column="25" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="onsocketlistener.js" pinned="false" current="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.7645236" vertical-offset="1483" max-vertical-offset="2869">
+                    <caret line="130" column="23" selection-start-line="130" selection-start-column="23" selection-end-line="130" selection-end-column="23" />
                     <folding />
                   </state>
                 </provider>
@@ -47,21 +58,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="onsocketlistener.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
+      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="627" max-vertical-offset="2546">
-              <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4085">
+              <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
+      <file leaf-file-name="grouptactic.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Webclient/js/grouptactic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4085">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.686217" vertical-offset="2908" max-vertical-offset="5187">
+              <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -80,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loadtactics.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="loadtactics.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/loadtactics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3330162" vertical-offset="220" max-vertical-offset="2394">
-              <caret line="30" column="64" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
+            <state vertical-scroll-proportion="-14.607142" vertical-offset="313" max-vertical-offset="2394">
+              <caret line="38" column="32" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -113,8 +124,8 @@
       <file leaf-file-name="user.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3401">
-              <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="3990">
+              <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -143,8 +154,8 @@
       <file leaf-file-name="util.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.857142" vertical-offset="2794" max-vertical-offset="3895">
-              <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="166" selection-end-column="20" />
+            <state vertical-scroll-proportion="-30.178572" vertical-offset="2632" max-vertical-offset="3895">
+              <caret line="183" column="32" selection-start-line="183" selection-start-column="9" selection-end-line="183" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -184,15 +195,15 @@
         <option value="$PROJECT_DIR$/Webclient/index.html" />
         <option value="$PROJECT_DIR$/Webclient/js/tactic.js" />
         <option value="$PROJECT_DIR$/Webclient/test.html" />
-        <option value="$PROJECT_DIR$/Webclient/js/user.js" />
         <option value="$PROJECT_DIR$/Webclient/js/drawonmap.js" />
         <option value="$PROJECT_DIR$/Webclient/css/style.css" />
         <option value="$PROJECT_DIR$/Webclient/js/login.js" />
         <option value="$PROJECT_DIR$/Webclient/js/grouplogin.js" />
-        <option value="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
-        <option value="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
         <option value="$PROJECT_DIR$/Webclient/js/util.js" />
         <option value="$PROJECT_DIR$/Webclient/js/loadtactics.js" />
+        <option value="$PROJECT_DIR$/Webclient/js/user.js" />
+        <option value="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
+        <option value="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
       </list>
     </option>
   </component>
@@ -732,14 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/grouptactic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5054">
-          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/register.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589">
@@ -759,14 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4085">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/iosocket/connection.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="494">
@@ -779,22 +774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.535715" vertical-offset="145" max-vertical-offset="1615">
           <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/grouplogin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3401">
-          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -815,26 +794,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
+    <entry file="file://$PROJECT_DIR$/Webclient/js/loadtactics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="627" max-vertical-offset="2546">
-          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+        <state vertical-scroll-proportion="-14.607142" vertical-offset="313" max-vertical-offset="2394">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/grouplogin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.857142" vertical-offset="2794" max-vertical-offset="3895">
-          <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="166" selection-end-column="20" />
+        <state vertical-scroll-proportion="-30.178572" vertical-offset="2632" max-vertical-offset="3895">
+          <caret line="183" column="32" selection-start-line="183" selection-start-column="9" selection-end-line="183" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/loadtactics.js">
+    <entry file="file://$PROJECT_DIR$/Webclient/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3330162" vertical-offset="220" max-vertical-offset="2394">
-          <caret line="30" column="64" selection-start-line="30" selection-start-column="64" selection-end-line="30" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="3990">
+          <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4085">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7645236" vertical-offset="1483" max-vertical-offset="2869">
+          <caret line="130" column="23" selection-start-line="130" selection-start-column="23" selection-end-line="130" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/grouptactic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.686217" vertical-offset="2908" max-vertical-offset="5187">
+          <caret line="190" column="5" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
           <folding />
         </state>
       </provider>

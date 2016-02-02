@@ -20,7 +20,7 @@ function openGroupTactic(groupname) {
         $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>delete</i>");
         setTooltipToElement("#groupdelete", "Gruppe entfernen");
         $("#groupdelete").on("click", function(){
-            socket.emit("deleteGroup", ({'user' : localStorage.getItem("benutzername"), 'name' : groupobject.name}));
+            // socket.emit("deleteGroup", ({'user' : localStorage.getItem("benutzername"), 'name' : groupobject.name}));
             console.log(groupobject);
             leaveGroup(groupobject);
         })
@@ -150,27 +150,12 @@ function optionPanel(id, source, group) {
                 $("#membermod_" + id).html("<i id='membermodoption_" + id + "' class='material-icons' data-type='add'>add</i>");
             }
 
+            setListenerToModButton(id, group.name);
 
-            switch ($("#membermodoption_" + id).attr("data-type")) {
-                case "remove":
-                    setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator entfernen");
-                    break;
-                case "add":
-                    $("#membermodoption_" + id).on("click", function () {
-                        var id = splittId($(this).attr("id"));
-                        socket.emit("setGroupMod", ({'user': id, 'name': group.name}));
-                        $("#grouptableadmin_" + id).append("<i id='modbutton_" + id + "' class='material-icons'>star_half</i>");
-
-
-                    });
-                    setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator hinzufügen");
-                    break;
-            }
 
 
             $("#memberdeletebutton_" + id).on("click", function () {
                 socket.emit('kickUser', ({'user': group.admin, 'name': group.name, 'kick': id}));
-                $("#member_" + id).hide(2000);
             });
             setTooltipToElement("#memberdeletebutton_" + id, "Member Kicken");
 
@@ -181,6 +166,28 @@ function optionPanel(id, source, group) {
         $("#optionpanel_" + id).hide(500);
         $("#optionpanel_" + id).remove();
 
+    }
+}
+
+function setListenerToModButton(id, group){
+    switch ($("#membermodoption_" + id).attr("data-type")) {
+        case "remove":
+            console.log("remove");
+            $("#membermodoption_" + id).on("click", function () {
+                var id = splittId($(this).attr("id"));
+                socket.emit("unsetGroupMod", ({'user': id, 'name': group}));
+            });
+            break;
+            setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator entfernen");
+        case "add":
+            console.log("add");
+            $("#membermodoption_" + id).on("click", function () {
+                var id = splittId($(this).attr("id"));
+                socket.emit("setGroupMod", ({'user': id, 'name': group}));
+
+            });
+            setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator hinzufügen");
+            break;
     }
 }
 
@@ -244,7 +251,7 @@ function loadTacticImage(currenttactic) {
 
 function leaveGroup(data) {
     var group;
-    if(data.group  == undefined){
+    if(data.group.length == 0){
         group = data.name
     }else{
         group = data.group;
