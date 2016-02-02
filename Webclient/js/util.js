@@ -94,7 +94,7 @@ function overlaypanel_header(headertext){
 function ActualSaveTactic(option){
     var canvas = document.getElementById("imgpanel");
     var img    = canvas.toDataURL("./testimages");
-
+    var generatedid = (new Date()).getTime();
 
     if(option == "group"){
         tactic.setX(clickX);
@@ -103,9 +103,8 @@ function ActualSaveTactic(option){
         tactic.setMaps($("#mapselector").find(".active").attr("id"));
         tactic.setTacticname($("#grouptacticname_tacticnameinput").val());
         tactic.setDrag(clickDrag);
-        tactic.setId((new Date()).getTime());
+        tactic.setId(generatedid);
         user.addGrouptactic(({'group' : $("#grouptacticname_groups option:selected" ).text(), 'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
-        console.log(tactic);
         sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), $("#grouptacticname_groups option:selected" ).text());
     }
 
@@ -116,9 +115,8 @@ function ActualSaveTactic(option){
         tactic.setMaps($("#mapselector").find(".active").attr("id"));
         tactic.setTacticname($("#tacticname_tacticnameinput").val());
         tactic.setDrag(clickDrag);
-        tactic.setId((new Date()).getTime());
+        tactic.setId(generatedid);
         user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
-
         sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), null);
     }else if(option == "loaded"){
         tactic.setDrag(tactic.getDrag().concat(clickDrag));
@@ -166,7 +164,7 @@ function setTooltipToElement(element, text){
 }
 
 function setChangeName(target, dest, id, changevalueelement, option){
-
+    console.log(dest);
     $(target).hide();
     $(dest).append("<textarea class='changename_textfield'></textarea>");
 

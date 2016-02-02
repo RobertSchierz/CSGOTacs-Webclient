@@ -80,6 +80,9 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "createMapSuccess") {
+
+
+
         alertMessage("Taktik erstellt!", "green");
     }
 

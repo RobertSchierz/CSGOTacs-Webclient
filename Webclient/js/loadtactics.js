@@ -22,13 +22,13 @@ function getMaps(data){
                     $("#loadtactic_section" + j).append("<div id='tactic_" + data[o].id + "'><table><tr>" +
                         "<td id=" + data[o].id + " class='" + o + "' style='cursor:pointer'>" + data[o].name + "</td>" +
                         "<td> <i class='tactic_elements material-icons' id='delete_" + data[o].id + "'>delete</i></td> " +
-                        "<td class='edittd'><i class='tactic_elements material-icons' id='edit_" + data[o].id + "'>edit </i></td>" +
+                        "<td class='edittd_"+data[o].id+"'><i class='tactic_elements material-icons' id='edit_" + data[o].id + "'>edit </i></td>" +
                         "<td><il class = 'tactic_elements material-icons' id='share_"+data[o].id+"'>share</il></td></tr></table></div></br>");
 
 
                     $("#edit_" + data[o].id).on("click", function () {
                         var id = splittId($(this).attr("id"));
-                        setChangeName("#edit_"+id, ".edittd",id,"#" + id);
+                        setChangeName("#edit_"+id, ".edittd_"+id,id,"#" + id);
                         /*
                         var splittedid = $(this).attr("id").split("_");
                         var savedclass = $('#' + splittedid[1]).attr("class");
