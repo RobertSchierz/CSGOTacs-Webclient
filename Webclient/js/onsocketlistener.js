@@ -83,11 +83,15 @@ socket.on('status', function (data) {
 
 
 
-        alertMessage("Taktik erstellt!", "green");
+
     }
 
     if (data.status == "bindMapSuccess") {
         alertMessage("Taktik an Gruppe geteilt!", "green");
+    }
+
+    if (data.status == "bindMapFailed") {
+        alertMessage("Taktik teilen fehlgeschlagen!", "red");
     }
 
     if (data.status == "changeMapNameSuccess") {
@@ -103,7 +107,6 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "kickUserSuccess") {
-        console.log(data.kick);
         $("#member_" + data.kick).hide(2000);
         alertMessage("User aus der Gruppe entfernt", "green");
     }
@@ -137,11 +140,26 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "deleteGroupSuccess"){
+        leaveGroup(data);
         alertMessage("Gruppe gelöscht", "green");
     }
 
     if(data.status == "deleteGroupFailed"){
         alertMessage("Gruppe nicht gelöscht", "red");
+    }
+
+    if(data.status == "deleteMapSuccess"){
+        if(requestgroup == "group"){
+            $("#tactic_" + data.id).hide(2000);
+        }else{
+            user.deleteTacticName(data.id);
+            $("#tactic_" + data.id).hide(2000);
+        }
+        requestgroup = null;
+    }
+
+    if(data.status == "deleteMapFailed"){
+        alertMessage("Fehler beim Löschen der Taktik aufgetreten", "red")
     }
 
 });

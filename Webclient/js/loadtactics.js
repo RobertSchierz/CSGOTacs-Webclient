@@ -73,11 +73,14 @@ function getMaps(data){
 
 
                     $("#delete_" + data[o].id).on("click", function () {
-                        var splittedid = $(this).attr("id").split("_");
-                        ActualDeleteTactic(splittedid[1]);
+                        var splittedid = splittId($(this).attr("id"));
+                        socket.emit('deleteMap', ({'id' : splittedid}));
                     });
                     setTacticListener(data, o)
                 }
+                setTooltipToElement("#delete_" + data[o].id, "Taktik löschen");
+                setTooltipToElement("#edit_" + data[o].id, "Taktik bearbeiten");
+                setTooltipToElement("#share_" + data[o].id, "Taktik mit Gruppe teilen");
             }
         }
     }

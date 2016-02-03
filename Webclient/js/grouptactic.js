@@ -20,9 +20,8 @@ function openGroupTactic(groupname) {
         $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>delete</i>");
         setTooltipToElement("#groupdelete", "Gruppe entfernen");
         $("#groupdelete").on("click", function(){
-            // socket.emit("deleteGroup", ({'user' : localStorage.getItem("benutzername"), 'name' : groupobject.name}));
-            console.log(groupobject);
-            leaveGroup(groupobject);
+             socket.emit("deleteGroup", ({'user' : localStorage.getItem("benutzername"), 'name' : groupobject.name}));
+
         })
     }
 
@@ -112,7 +111,7 @@ function optionPanel(id, source, group) {
 
             $("#tacticdeletebutton_" + id).on("click", function () {
                 socket.emit('deleteMap', ({'id': id}));
-                $("#tactic_" + id).hide(2000);
+                requestgroup = "group";
             });
 
             $("#tacticloadbutton_" + id).on("click", function () {
@@ -251,7 +250,7 @@ function loadTacticImage(currenttactic) {
 
 function leaveGroup(data) {
     var group;
-    if(data.group.length == 0){
+    if(data.group == undefined){
         group = data.name
     }else{
         group = data.group;

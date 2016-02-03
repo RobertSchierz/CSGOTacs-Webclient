@@ -79,6 +79,9 @@ function closeOverlaypanel(){
             if($("#groupdelete").length){
                 $("#groupdelete").remove();
             }
+            if($("#groupleave").length){
+                $("#groupleave").remove();
+            }
 
         });
 
@@ -92,8 +95,8 @@ function overlaypanel_header(headertext){
 }
 
 function ActualSaveTactic(option){
-    var canvas = document.getElementById("imgpanel");
-    var img    = canvas.toDataURL("./testimages");
+   /* var canvas = document.getElementById("imgpanel");
+    var img    = canvas.toDataURL("./testimages");*/
     var generatedid = (new Date()).getTime();
 
     if(option == "group"){
@@ -129,15 +132,6 @@ function ActualSaveTactic(option){
 }
 
 
-function ActualDeleteTactic(id){
-    socket.emit('deleteMap', ({'id' : id}));
-    user.deleteTacticName(id);
-    $("#tactic_" + id).hide(2000, function(){
-
-    });
-
-}
-
 function splittId(id){
     var splittedid = id.split("_");
     return splittedid[1];
@@ -164,19 +158,21 @@ function setTooltipToElement(element, text){
 }
 
 function setChangeName(target, dest, id, changevalueelement, option){
-    console.log(dest);
+
     $(target).hide();
     $(dest).append("<textarea class='changename_textfield'></textarea>");
 
     $(".changename_textfield").on("focusout", function () {
         var newvalue = $('.changename_textfield').val();
+        if(newvalue != ""){
+            socket.emit("changeMapName", ({ 'id' : id, 'name' : newvalue }));
+            user.changeTacticName(id, newvalue, option);
 
-        socket.emit("changeMapName", ({ 'id' : id, 'name' : newvalue }));
-        user.changeTacticName(id, newvalue, option);
+            $(".changename_textfield").remove();
+            $(target).show();
+            $(changevalueelement).html(newvalue);
+        }
 
-        $(".changename_textfield").remove();
-        $(target).show();
-        $(changevalueelement).html(newvalue);
 
     });
 }
