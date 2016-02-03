@@ -172,15 +172,15 @@ function optionPanel(id, source, group) {
 function setListenerToModButton(id, group){
     switch ($("#membermodoption_" + id).attr("data-type")) {
         case "remove":
-            console.log("remove");
+            $("#membermodoption_" + id).unbind("click");
             $("#membermodoption_" + id).on("click", function () {
                 var id = splittId($(this).attr("id"));
                 socket.emit("unsetGroupMod", ({'user': id, 'name': group}));
             });
-            break;
             setTooltipToElement("#membermodoption_" + id, "Gruppenmoderator entfernen");
+            break;
         case "add":
-            console.log("add");
+            $("#membermodoption_" + id).unbind("click");
             $("#membermodoption_" + id).on("click", function () {
                 var id = splittId($(this).attr("id"));
                 socket.emit("setGroupMod", ({'user': id, 'name': group}));

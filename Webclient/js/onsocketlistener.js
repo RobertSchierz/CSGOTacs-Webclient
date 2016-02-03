@@ -127,7 +127,8 @@ socket.on('status', function (data) {
     if(data.status == "unsetGroupModSuccess") {
         $("#grouptableadmin_" + data.user).empty();
         $("#membermodoption_" + data.user).attr("data-type", "add");
-        //user.deleteModofGroup(data.group, data.user);
+        user.deleteModofGroup(data.group, data.user);
+        $("#membermodoption_" + data.user).html("add");
         setListenerToModButton(data.user, data.group);
     }
 
