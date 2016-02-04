@@ -25,11 +25,12 @@ socket.on('status', function (data) {
 
     if (data.status == "provideGroups") {
         if (refreshmember) {
+   
             user.setGroups(data.groups);
 
         } else {
             user.setGroups(data.groups);
-            getGroups(data.groups);
+            getGroups(user.getGroups());
         }
 
     }
@@ -80,14 +81,38 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "createMapSuccess") {
-
-
-
+        if(data.maps[0].group != null){
+            console.log(data.maps[0].user);
+            tactic.setX(data.maps[0].x);
+            tactic.setY(data.maps[0].y);
+            tactic.setUser(data.maps[0].user);
+            tactic.setMaps(data.maps[0].map);
+            tactic.setTacticname(data.maps[0].name);
+            tactic.setDrag(data.maps[0].drag);
+            tactic.setId(data.maps[0].id);
+            user.addGrouptactic(({'group' : tactic.getGroup(), 'x' : tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' :tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
+        }else if (data.maps[0].group == null){
+            tactic.setX(data.maps[0].x);
+            tactic.setY(data.maps[0].y);
+            tactic.setUser(data.maps[0].user);
+            tactic.setMaps(data.maps[0].map);
+            tactic.setTacticname(data.maps[0].name);
+            tactic.setDrag(data.maps[0].drag);
+            tactic.setId(data.maps[0].id);
+            user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
+        }
+        alertMessage("Taktik <u>"+tactic.getTacticname()+"</u> erfolgreich erstellt", "green")
 
     }
 
+    if (data.status == "createMapFailed") {
+        alertMessage("Taktik konnte nicht gespeichert werden", "red")
+    }
+
     if (data.status == "bindMapSuccess") {
-        alertMessage("Taktik an Gruppe geteilt!", "green");
+        user.setLocalToGroupTactic(data.id);
+        $("#tactic_" + data.id).hide(2000);
+        alertMessage("Taktik an Gruppe <u>"+data.group+"</u> geteilt!", "green");
     }
 
     if (data.status == "bindMapFailed") {
@@ -99,6 +124,11 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "changeMapSuccess") {
+
+        tactic.setDrag(data.maps[0]/*.drag.concat(clickDrag)*/);
+        tactic.setX(data.maps[0].x/*.concat(clickX)*/);
+        tactic.setY(data.maps[0].y/*.concat(clickY)*/);
+        user.changeTacticData(tactic);
         alertMessage("Geladene Taktik erfolgreich geändert!", "green");
     }
 

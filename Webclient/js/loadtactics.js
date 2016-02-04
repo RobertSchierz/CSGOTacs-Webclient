@@ -58,10 +58,8 @@ function getMaps(data){
                                 $("#tactic_" + splittedid[1]).append("<i id='sharegroupadd_"+splittedid[1]+"' class='material-icons tactic_elements'>add</i>");
 
                                 $("#sharegroupadd_"+splittedid[1]).on("click", function () {
-                                    var splittedid = $(this).attr("id").split("_");
-                                    user.setLocalToGroupTactic(splittedid[1]/*, $("#sharegroup_" + splittedid[1] + " option:selected").text() */);
-                                    socket.emit("bindMap", ({'id' : splittedid[1], 'group' : $("#sharegroup_" + splittedid[1] + " option:selected").text()}));
-                                    $("#tactic_" + splittedid[1]).hide(2000);
+                                    var splittedid = splittId($(this).attr("id"));
+                                    socket.emit("bindMap", ({'id' : splittedid, 'group' : $("#sharegroup_" + splittedid + " option:selected").text()}));
                                 })
 
                             }else{
@@ -79,7 +77,7 @@ function getMaps(data){
                     setTacticListener(data, o)
                 }
                 setTooltipToElement("#delete_" + data[o].id, "Taktik löschen");
-                setTooltipToElement("#edit_" + data[o].id, "Taktik bearbeiten");
+                setTooltipToElement("#edit_" + data[o].id, "Taktiknamen bearbeiten");
                 setTooltipToElement("#share_" + data[o].id, "Taktik mit Gruppe teilen");
             }
         }

@@ -37,11 +37,12 @@ function checkLoggedIn(logout) {
         $('#usercanvas').html("Eingeloggt als <span style='color:blue; font-size: 25px;'> " + storagevar + " </span> <br/><input style='margin-top:20px;' value='Logout' type='button' id='login_logout'>");
         $("#login_logout").on("click", function () {
             checkLoggedIn(true);
+
         });
         $("#tacticcanvas").show();
         $("#groupcanvas").load("./html/groupcanvas.html", function () {
 
-            socket.emit('getGroups', ({'user': storagevar}));
+
 
             $("#group_create").on("click", function () {
                 openOverlaypanel("groupcreate");
@@ -52,12 +53,14 @@ function checkLoggedIn(logout) {
             });
         });
         $("#groupcanvas").show();
+        socket.emit('getGroups', ({'user': storagevar}));
         socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
 
     }
 }
 
 function getGroups(data) {
+    $("#groupcanvasmenu").empty();
     for (var i = 0; i < data.length; i++) {
         appendGroupMenu(data[i]);
     }

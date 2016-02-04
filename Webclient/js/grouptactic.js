@@ -129,7 +129,7 @@ function optionPanel(id, source, group) {
 
             });
 
-            setTooltipToElement("#tacticloadbutton_" + id, "Taktik Laden");
+            setTooltipToElement("#tacticloadbutton_" + id, "Taktik weiterzeichnen");
             setTooltipToElement("#tacticchangenamebutton_" + id, "Taktiknamen bearbeiten");
             setTooltipToElement("#tacticdeletebutton_" + id, "Taktik Löschen");
 
