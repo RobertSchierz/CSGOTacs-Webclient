@@ -25,7 +25,7 @@ socket.on('status', function (data) {
 
     if (data.status == "provideGroups") {
         if (refreshmember) {
-   
+
             user.setGroups(data.groups);
 
         } else {

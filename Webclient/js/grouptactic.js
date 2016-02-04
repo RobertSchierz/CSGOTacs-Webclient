@@ -16,11 +16,11 @@ function openGroupTactic(groupname) {
 
     }
 
-    if(localStorage.getItem("benutzername") == groupobject.admin){
+    if (localStorage.getItem("benutzername") == groupobject.admin) {
         $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>delete</i>");
         setTooltipToElement("#groupdelete", "Gruppe entfernen");
-        $("#groupdelete").on("click", function(){
-             socket.emit("deleteGroup", ({'user' : localStorage.getItem("benutzername"), 'name' : groupobject.name}));
+        $("#groupdelete").on("click", function () {
+            socket.emit("deleteGroup", ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name}));
 
         })
     }
@@ -33,7 +33,7 @@ function openGroupTactic(groupname) {
         var membername = groupobject.member[groupmember];
         var ismod = isInArray(groupobject.mods, membername);
 
-        $("#groupmember_table").append("<tr id='member_" + membername + "'> <td id='grouptableadmin_" + membername + "' class='canvastd'> </td> " +
+        $("#groupmember_table").append("<tr> <td id='grouptableadmin_" + membername + "' class='canvastd'> </td> " +
             "<td id='grouptable_name_" + membername + "' class='canvastd'></td> " +
             "<td id='groupmembertableoptiontd_" + membername + "' class='canvastd'></td>  </tr>");
 
@@ -152,7 +152,6 @@ function optionPanel(id, source, group) {
             setListenerToModButton(id, group.name);
 
 
-
             $("#memberdeletebutton_" + id).on("click", function () {
                 socket.emit('kickUser', ({'user': group.admin, 'name': group.name, 'kick': id}));
             });
@@ -168,7 +167,7 @@ function optionPanel(id, source, group) {
     }
 }
 
-function setListenerToModButton(id, group){
+function setListenerToModButton(id, group) {
     switch ($("#membermodoption_" + id).attr("data-type")) {
         case "remove":
             $("#membermodoption_" + id).unbind("click");
@@ -218,41 +217,11 @@ function loadTacticImage(currenttactic) {
     });
 }
 
-
-/*
- for(var l = 0 ; l < data.member.length; l++){
- var memberclass = data.member[l] + "_"+ data.name;
- $("#member_" +data.name).append("<li><table><tr> <td class='admin "+data.name+"'></td><td class='mod "+memberclass+" '></td><td class='member "+memberclass+"'></td><td class='delete "+memberclass+"'></td> </tr></table></li>");
-
- if(data.member[l] == data.admin){
-
- $(".admin" + "." + data.name).append("<i class='material-icons'>star</i>");
- }
- $(".mod" + "." + memberclass).append("<i class='material-icons'>group</i>");
-
-
- $(".member" + "." + memberclass).append(""+data.member[l]+"");
-
- if(admin){
- $(".delete" + "." + memberclass).append(" ");
- }
-
- $("#memberdeletebutton_" + data.name + "." + data.member[l]).on( "click", function() {
- alert("test");
- });
- }
-
- $("#groupdeletebutton_"+data.name).on("click", function(){
- socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name' : $(this).attr("class") }));
- });
- */
-
-
 function leaveGroup(data) {
     var group;
-    if(data.group == undefined){
+    if (data.group == undefined) {
         group = data.name
-    }else{
+    } else {
         group = data.group;
     }
     $("#" + group).hide(2000, function () {
