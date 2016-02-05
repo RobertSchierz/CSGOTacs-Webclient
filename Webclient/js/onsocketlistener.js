@@ -98,6 +98,7 @@ socket.on('status', function (data) {
             tactic.setMaps(data.maps[0].map);
             tactic.setTacticname(data.maps[0].name);
             tactic.setDrag(data.maps[0].drag);
+            console.log(tactic.getDrag());
             tactic.setId(data.maps[0].id);
             user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
         }
@@ -125,7 +126,7 @@ socket.on('status', function (data) {
 
     if (data.status == "changeMapSuccess") {
 
-        tactic.setDrag(data.maps[0]/*.drag.concat(clickDrag)*/);
+        tactic.setDrag(data.maps[0].drag/*(.concat(clickDrag)*/);
         tactic.setX(data.maps[0].x/*.concat(clickX)*/);
         tactic.setY(data.maps[0].y/*.concat(clickY)*/);
         user.changeTacticData(tactic);
@@ -137,7 +138,7 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "kickUserSuccess") {
-        $("#member_" + data.kick).hide(2000);
+        $("[data-member =" + data.kick + "]").hide(2000);
         alertMessage("User aus der Gruppe entfernt", "green");
     }
 
@@ -146,10 +147,10 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "setGroupModSuccess"){
-        $("#grouptableadmin_" + data.user).append("<i id='modbutton_" + data.user + "' class='material-icons'>star_half</i>");
-        $("#membermodoption_" + data.user).attr("data-type", "remove");
+        $("[data-grouptableadmin = "+data.user+"]" ).append("<i id='modbutton_" + data.user + "' class='material-icons'>star_half</i>");
+        $("[data-membermodoption =" + data.user + "]").attr("data-type", "remove");
         user.setModToGroup(data.group, data.user);
-        $("#membermodoption_" + data.user).html("remove");
+        $("[data-membermodoption =" + data.user + "]").html("remove");
         setListenerToModButton(data.user, data.group);
     }
 
@@ -158,10 +159,10 @@ socket.on('status', function (data) {
     }
 
     if(data.status == "unsetGroupModSuccess") {
-        $("#grouptableadmin_" + data.user).empty();
-        $("#membermodoption_" + data.user).attr("data-type", "add");
+        $("[data-grouptableadmin = "+data.user+"]" ).empty();
+        $("[data-membermodoption =" + data.user + "]").attr("data-type", "add");
         user.deleteModofGroup(data.group, data.user);
-        $("#membermodoption_" + data.user).html("add");
+        $("[data-membermodoption =" + data.user + "]").html("add");
         setListenerToModButton(data.user, data.group);
     }
 
@@ -180,10 +181,10 @@ socket.on('status', function (data) {
 
     if(data.status == "deleteMapSuccess"){
         if(requestgroup == "group"){
-            $("#tactic_" + data.id).hide(2000);
+            $("[data-tactic =" + data.id + "]").hide(2000);
         }else{
             user.deleteTacticName(data.id);
-            $("#tactic_" + data.id).hide(2000);
+            $("[data-tactic =" + data.id + "]").hide(2000);
         }
         requestgroup = null;
     }
