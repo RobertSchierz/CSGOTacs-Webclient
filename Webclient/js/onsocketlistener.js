@@ -98,7 +98,6 @@ socket.on('status', function (data) {
             tactic.setMaps(data.maps[0].map);
             tactic.setTacticname(data.maps[0].name);
             tactic.setDrag(data.maps[0].drag);
-            console.log(tactic.getDrag());
             tactic.setId(data.maps[0].id);
             user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
         }
@@ -112,7 +111,7 @@ socket.on('status', function (data) {
 
     if (data.status == "bindMapSuccess") {
         user.setLocalToGroupTactic(data.id);
-        $("#tactic_" + data.id).hide(2000);
+        $("[data-tactic =" + data.id + "]").hide(2000);
         alertMessage("Taktik an Gruppe <u>"+data.group+"</u> geteilt!", "green");
     }
 

@@ -109,12 +109,6 @@ function ActualSaveTactic(option) {
 
 }
 
-
-function splittId(id) {
-    var splittedid = id.split("_");
-    return splittedid[1];
-}
-
 function setTooltipToElement(element, text) {
 
 

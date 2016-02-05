@@ -19,52 +19,52 @@ function getMaps(data) {
             obj[mapnames[j]] = true;
             for (var o = 0; o < data.length; o++) {
                 if (data[o].map == mapnames[j]) {
-                    $("#loadtactic_section" + j).append("<div id='tactic_" + data[o].id + "'><table><tr>" +
-                        "<td id=" + data[o].id + " class='" + o + "' style='cursor:pointer'>" + data[o].name + "</td>" +
-                        "<td> <i class='tactic_elements material-icons' id='delete_" + data[o].id + "'>delete</i></td> " +
-                        "<td class='edittd_" + data[o].id + "'><i class='tactic_elements material-icons' id='edit_" + data[o].id + "'>edit </i></td>" +
-                        "<td><il class = 'tactic_elements material-icons' id='share_" + data[o].id + "'>share</il></td></tr></table></div></br>");
+                    $("#loadtactic_section" + j).append("<div data-tactic = " + data[o].id + "><table><tr>" +
+                        "<td data-name=" + data[o].id + " class='" + o + "' style='cursor:pointer'>" + data[o].name + "</td>" +
+                        "<td> <i class='tactic_elements material-icons' data-delete =" + data[o].id + ">delete</i></td> " +
+                        "<td data-edittd =" + data[o].id + "><i class='tactic_elements material-icons' data-edit =" + data[o].id + ">edit </i></td>" +
+                        "<td><il class = 'tactic_elements material-icons' data-share =" + data[o].id + ">share</il></td></tr></table></div></br>");
 
 
-                    $("#edit_" + data[o].id).on("click", function () {
-                        var id = splittId($(this).attr("id"));
-                        setChangeName("#edit_" + id, ".edittd_" + id, id, "#" + id);
+                    $("[data-edit =" + data[o].id + "]").on("click", function () {
+                        var id = $(this).attr("data-edit");
+                        setChangeName("[data-edit =" + id + "]", "[data-edittd =" + id + "]", id, "[data-name =" + id + "]");
                     });
 
 
-                    $("#share_" + data[o].id).on("click", function () {
+                    $("[data-share =" + data[o].id + "]").on("click", function () {
 
-                        var splittedid = $(this).attr("id").split("_");
-                        if ($("#sharegroup_" + splittedid[1]).length == 0) {
-                            $("#tactic_" + splittedid[1]).append("<select id='sharegroup_" + splittedid[1] + "' class='tactic_elements' ></select>");
+                        var id = $(this).attr("data-share");
+                        if ($("[data-sharegroup =" + id + "]").length == 0) {
+                            $("[data-tactic =" + id +"]").append("<select data-sharegroup =" + id + " class='tactic_elements' ></select>");
                             for (var names = 0; names < user.groupNamesArray().length; names++) {
-                                $("#sharegroup_" + splittedid[1]).append("<option>" + user.groupNamesArray()[names] + "</option> ");
+                                $("[data-sharegroup =" + id + "]").append("<option>" + user.groupNamesArray()[names] + "</option> ");
 
                             }
-                            $("#tactic_" + splittedid[1]).append("<i id='sharegroupadd_" + splittedid[1] + "' class='material-icons tactic_elements'>add</i>");
+                            $("[data-tactic =" + id + "]").append("<i data-sharegroupadd =" + id + " class='material-icons tactic_elements'>add</i>");
 
-                            $("#sharegroupadd_" + splittedid[1]).on("click", function () {
-                                var splittedid = splittId($(this).attr("id"));
-                                socket.emit("bindMap", ({'id': splittedid, 'group': $("#sharegroup_" + splittedid + " option:selected").text()}));
+                            $("[data-sharegroupadd =" + id + "]").on("click", function () {
+                                var id = $(this).attr("data-sharegroupadd");
+                                socket.emit("bindMap", ({'id': id, 'group': $("[data-sharegroup =" + id +  "] option:selected").text()}));
                             })
 
                         } else {
-                            $("#sharegroup_" + splittedid[1]).remove();
-                            $("#sharegroupadd_" + splittedid[1]).remove();
+                            $("[data-sharegroup =" + id + "]").remove();
+                            $("[data-sharegroupadd =" + id + "]").remove();
                         }
 
                     });
 
 
-                    $("#delete_" + data[o].id).on("click", function () {
-                        var splittedid = splittId($(this).attr("id"));
-                        socket.emit('deleteMap', ({'id': splittedid}));
+                    $("[data-delete =" + data[o].id + "]").on("click", function () {
+                        var id = $(this).attr("data-delete");
+                        socket.emit('deleteMap', ({'id': id}));
                     });
                     setTacticListener(data, o)
                 }
-                setTooltipToElement("#delete_" + data[o].id, "Taktik löschen");
-                setTooltipToElement("#edit_" + data[o].id, "Taktiknamen bearbeiten");
-                setTooltipToElement("#share_" + data[o].id, "Taktik mit Gruppe teilen");
+                setTooltipToElement("[data-delete =" + data[o].id + "]", "Taktik löschen");
+                setTooltipToElement("[data-edit =" + data[o].id + "]", "Taktiknamen bearbeiten");
+                setTooltipToElement("[data-share =" + data[o].id + "]", "Taktik mit Gruppe teilen");
             }
         }
     }
@@ -81,7 +81,7 @@ function getMaps(data) {
 
 
     function setTacticListener(data, index) {
-        $("#" + data[index].id).on("click", function () {
+        $("[data-name =" + data[index].id + "]").on("click", function () {
             closeOverlaypanel();
             deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
             var tactic = setArrayData(data[$(this).attr("class")]);
