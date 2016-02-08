@@ -16,15 +16,12 @@ function openOverlaypanel(source, groupname) {
         }
 
         if (source == "tacticname") {
-            // $(".overlaypanel").css({"height": "300px"});
-            // $(".overlaypanel_close").css({"left" : "525px"});
+
             openTacticname();
             overlaypanel_header("Taktik Speichern");
         }
 
         if (source == "loadtactics") {
-            /* $(".overlaypanel").css({"width": "550px", "height": "550px", "margin-left" : "-250px"});
-             $(".overlaypanel_close").css({"left" : "525px"});*/
             getMaps(user.getTactics());
             console.log(user.getTactics());
             overlaypanel_header("Taktik Laden");
@@ -55,8 +52,6 @@ function openOverlaypanel(source, groupname) {
 
 
         popup_zustand = true;
-
-
         return false;
     }
 }
@@ -70,18 +65,7 @@ function closeOverlaypanel() {
 
         $(".opacitybox").fadeOut("normal", function () {
             $("#overlaypanel_insidebox").empty();
-
-            if ($("#overlaypanel_headertext").length) {
-                $("#overlaypanel_headertext").remove();
-            }
-
-            if ($("#groupdelete").length) {
-                $("#groupdelete").remove();
-            }
-            if ($("#groupleave").length) {
-                $("#groupleave").remove();
-            }
-
+            $("#overlaypanel_header").contents(':not(#overlaypanel_close)').remove();
         });
 
         popup_zustand = false;

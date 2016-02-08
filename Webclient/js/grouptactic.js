@@ -5,25 +5,32 @@ function openGroupTactic(groupname) {
 
     overlaypanel_header("Gruppe: " + groupname);
     if ($("#groupleave").length == 0) {
-        $("#overlaypanel_header").append("<i class='material-icons' id='groupleave'>exit_to_app</i>");
+        $("#overlaypanel_header").append("<i class='material-icons groupelements' id='groupleave'>exit_to_app</i>");
 
 
         $("#groupleave").on("click", function () {
             socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
 
-        })
+        });
         setTooltipToElement("#groupleave", "Aus der Gruppe austreten");
 
     }
 
     if (localStorage.getItem("benutzername") == groupobject.admin) {
-        $("#overlaypanel_header").append("<i class='material-icons' id='groupdelete'>delete</i>");
+        $("#overlaypanel_header").append("<i class='material-icons groupelements' id='groupdelete'>delete</i>");
         setTooltipToElement("#groupdelete", "Gruppe entfernen");
         $("#groupdelete").on("click", function () {
             socket.emit("deleteGroup", ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name}));
 
-        })
+        });
     }
+
+    $("#overlaypanel_header").append("<i class='material-icons groupelements' id='grouplive'>fiber_manual_record</i>");
+    $("#grouplive").on("click", function () {
+        socket.emit('joinGroupLive', ({'group': groupname,'map': $("#mapselector").find(".active").attr("id")}));
+    });
+    setTooltipToElement("#grouplive", "Live Modus");
+
 
     var grouptacticsarray = user.getGrouptacticsByName(groupname);
 
@@ -106,7 +113,9 @@ function optionPanel(id, source, group) {
             $("[data-" + request + "=" + id + "]").append("<div class='optionpanel' data-optionpanel =" + id + ">" +
                 "<table><tr><td class='tdoptionpanel'><i data-tacticloadbutton =" + id + " class='material-icons'>gesture</i></td> " +
                 "<td class='tdoptionpanel' data-changenametd =" + id + "><i data-tacticchangenamebutton =" + id + " class='material-icons'>edit</i></td>" +
-                "<td class='tdoptionpanel'><i data-tacticdeletebutton =" + id + " class='material-icons'>delete</i></td></tr></table>" +
+                "<td class='tdoptionpanel'><i data-tacticdeletebutton =" + id + " class='material-icons'>delete</i></td>" +
+               // "<td class='tdoptionpanel'><i data-tacticlivebutton ="+id+" class='material-icons'>fiber_manual_record</i></td>" +
+                "</tr></table>" +
                 "</div>");
 
             $("[data-tacticdeletebutton = " + id + "]").on("click", function () {
@@ -130,6 +139,7 @@ function optionPanel(id, source, group) {
             setTooltipToElement("[data-tacticloadbutton =" + id + "]", "Taktik weiterzeichnen");
             setTooltipToElement("[data-tacticchangenamebutton =" + id + "]", "Taktiknamen bearbeiten");
             setTooltipToElement("[data-tacticdeletebutton =" + id + "]", "Taktik Löschen");
+           // setTooltipToElement("[data-tacticlivebutton =" + id + "]", "Live Modus");
 
 
         } else if (source == "member") {

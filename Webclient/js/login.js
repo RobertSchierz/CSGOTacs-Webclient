@@ -34,14 +34,14 @@ function checkLoggedIn(logout) {
         $("#tacticcanvas").hide();
         $("#groupcanvas").hide();
     } else {
-        $('#usercanvas').html("Eingeloggt als <span style='color:blue; font-size: 25px;'> " + storagevar + " </span> <br/><input style='margin-top:20px;' value='Logout' type='button' id='login_logout'>");
+
+        $('#usercanvas').html("Eingeloggt als <span id='login_usernametext'> " + storagevar + " </span><input  value='Logout' type='button' id='login_logout'>");
         $("#login_logout").on("click", function () {
             checkLoggedIn(true);
 
         });
         $("#tacticcanvas").show();
         $("#groupcanvas").load("./html/groupcanvas.html", function () {
-
 
 
             $("#group_create").on("click", function () {
@@ -51,30 +51,31 @@ function checkLoggedIn(logout) {
             $("#group_login").on("click", function () {
                 openOverlaypanel("grouplogin");
             });
+
+            socket.emit('getGroups', ({'user': storagevar}));
+            socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
         });
         $("#groupcanvas").show();
-        socket.emit('getGroups', ({'user': storagevar}));
-        socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
+
 
     }
 }
 
 function getGroups(data) {
-    $("#groupcanvasmenu").empty();
-    for (var i = 0; i < data.length; i++) {
-        appendGroupMenu(data[i]);
-    }
+    $(document).ready(function () {
+        $("#groupcanvasmenu").empty();
+        for (var i = 0; i < data.length; i++) {
+            appendGroupMenu(data[i]);
+        }
 
-    //socket.emit('getMaps', ({'group' : data}));
-    // $("#groupcanvasmenu").menu();
 
+    });
 
 }
 
 function appendGroupMenu(data) {
 
-
-    $("#groupcanvasmenu").append("<div id='" + data.name + "' class ='groupname'>" + data.name + " </div>");
+    $("#groupcanvasmenu").append("<span id='" + data.name + "' class ='groupname'>" + data.name + " </span>");
 
 
     $("#" + data.name + ".groupname").on("click", function () {

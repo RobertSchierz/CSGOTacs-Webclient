@@ -42,7 +42,23 @@ function handleMapselectorStates(map, loadmap){
 }
 
 
+function closeHeader() {
+    $("#header").animate({
+        top: "-170"
+    }, 1000, function () {
+        openheader = false;
+        $("#header_arrow").attr('src', "images/icons/header/arrowdown.png");
+    });
+}
+function openHeader() {
+    $("#header").animate({
+        top: "0"
+    }, 1000, function () {
+        openheader = true;
+        $("#header_arrow").attr('src', "images/icons/header/arrowup.png");
 
+    });
+}
 function setListenerToElements(){
 
     $( "#tacticcanvas" ).on( "click", function() {
@@ -71,21 +87,9 @@ function setListenerToElements(){
 
     $( "#header" ).on( "click", function() {
         if(openheader == false){
-            $( "#header" ).animate({
-                top: "0"
-            }, 1000, function() {
-                openheader = true;
-                $( "#header_arrow").attr('src',"images/icons/header/arrowup.png");
-
-            });
-
+            openHeader();
         }else if(openheader == true){
-            $( "#header" ).animate({
-                top: "-170"
-            }, 1000, function() {
-                openheader = false;
-                $( "#header_arrow").attr('src',"images/icons/header/arrowdown.png");
-            });
+            closeHeader();
         }
     });
 

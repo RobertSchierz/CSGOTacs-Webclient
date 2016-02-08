@@ -10,7 +10,7 @@ function getMaps(data) {
         mapnames.push(data[i].map);
     }
 
-
+if(mapnames.length != 0){
     $("#overlaypanel_insidebox").append("<div id='loadtactic_canvas' > </div>");
     for (var j = 0; j < mapnames.length; j++) {
         if (!(mapnames[j] in obj)) {
@@ -80,15 +80,23 @@ function getMaps(data) {
     });
 
 
-    function setTacticListener(data, index) {
-        $("[data-name =" + data[index].id + "]").on("click", function () {
-            closeOverlaypanel();
-            deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
-            var tactic = setArrayData(data[$(this).attr("class")]);
-            drawSavedMap(tactic);
-            handleMapselectorStates("#" + tactic.getMap(), true);
-        });
-    }
+
+}else{
+    $("#overlaypanel_insidebox").append("<h3>Keine gespeicherten Taktiken vorhanden</h3>");
+}
+
+}
+
+
+
+function setTacticListener(data, index) {
+    $("[data-name =" + data[index].id + "]").on("click", function () {
+        closeOverlaypanel();
+        deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
+        var tactic = setArrayData(data[$(this).attr("class")]);
+        drawSavedMap(tactic);
+        handleMapselectorStates("#" + tactic.getMap(), true);
+    });
 }
 
 

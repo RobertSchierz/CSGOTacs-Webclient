@@ -25,7 +25,6 @@ socket.on('status', function (data) {
 
     if (data.status == "provideGroups") {
         if (refreshmember) {
-
             user.setGroups(data.groups);
 
         } else {
@@ -81,7 +80,7 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "createMapSuccess") {
-        if(data.maps[0].group != null){
+        if (data.maps[0].group != null) {
             console.log(data.maps[0].user);
             tactic.setX(data.maps[0].x);
             tactic.setY(data.maps[0].y);
@@ -90,8 +89,8 @@ socket.on('status', function (data) {
             tactic.setTacticname(data.maps[0].name);
             tactic.setDrag(data.maps[0].drag);
             tactic.setId(data.maps[0].id);
-            user.addGrouptactic(({'group' : tactic.getGroup(), 'x' : tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' :tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
-        }else if (data.maps[0].group == null){
+            user.addGrouptactic(({'group': tactic.getGroup(), 'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name': tactic.getTacticname(), 'map': tactic.getMap(), 'id': tactic.getId(), 'drag': tactic.getDrag() }));
+        } else if (data.maps[0].group == null) {
             tactic.setX(data.maps[0].x);
             tactic.setY(data.maps[0].y);
             tactic.setUser(data.maps[0].user);
@@ -99,9 +98,9 @@ socket.on('status', function (data) {
             tactic.setTacticname(data.maps[0].name);
             tactic.setDrag(data.maps[0].drag);
             tactic.setId(data.maps[0].id);
-            user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
+            user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name': tactic.getTacticname(), 'map': tactic.getMap(), 'id': tactic.getId(), 'drag': tactic.getDrag() }));
         }
-        alertMessage("Taktik <u>"+tactic.getTacticname()+"</u> erfolgreich erstellt", "green")
+        alertMessage("Taktik <u>" + tactic.getTacticname() + "</u> erfolgreich erstellt", "green")
 
     }
 
@@ -112,7 +111,7 @@ socket.on('status', function (data) {
     if (data.status == "bindMapSuccess") {
         user.setLocalToGroupTactic(data.id);
         $("[data-tactic =" + data.id + "]").hide(2000);
-        alertMessage("Taktik an Gruppe <u>"+data.group+"</u> geteilt!", "green");
+        alertMessage("Taktik an Gruppe <u>" + data.group + "</u> geteilt!", "green");
     }
 
     if (data.status == "bindMapFailed") {
@@ -125,9 +124,9 @@ socket.on('status', function (data) {
 
     if (data.status == "changeMapSuccess") {
 
-        tactic.setDrag(data.maps[0].drag/*(.concat(clickDrag)*/);
-        tactic.setX(data.maps[0].x/*.concat(clickX)*/);
-        tactic.setY(data.maps[0].y/*.concat(clickY)*/);
+        tactic.setDrag(data.maps[0].drag);
+        tactic.setX(data.maps[0].x);
+        tactic.setY(data.maps[0].y);
         user.changeTacticData(tactic);
         alertMessage("Geladene Taktik erfolgreich geändert!", "green");
     }
@@ -145,51 +144,97 @@ socket.on('status', function (data) {
         alertMessage("User nicht aus der Gruppe entfernt", "red");
     }
 
-    if(data.status == "setGroupModSuccess"){
-        $("[data-grouptableadmin = "+data.user+"]" ).append("<i id='modbutton_" + data.user + "' class='material-icons'>star_half</i>");
+    if (data.status == "setGroupModSuccess") {
+        $("[data-grouptableadmin = " + data.user + "]").append("<i data-modbutton =" + data.user + " class='material-icons'>star_half</i>");
         $("[data-membermodoption =" + data.user + "]").attr("data-type", "remove");
         user.setModToGroup(data.group, data.user);
         $("[data-membermodoption =" + data.user + "]").html("remove");
         setListenerToModButton(data.user, data.group);
+        setTooltipToElement("[data-modbutton =" + data.user + "]", "Gruppenmoderator")
     }
 
-    if(data.status == "setGroupModFailed"){
+    if (data.status == "setGroupModFailed") {
         alertMessage("User nicht als Mod hinzugefügt", "red");
     }
 
-    if(data.status == "unsetGroupModSuccess") {
-        $("[data-grouptableadmin = "+data.user+"]" ).empty();
+    if (data.status == "unsetGroupModSuccess") {
+        $("[data-grouptableadmin = " + data.user + "]").empty();
         $("[data-membermodoption =" + data.user + "]").attr("data-type", "add");
         user.deleteModofGroup(data.group, data.user);
         $("[data-membermodoption =" + data.user + "]").html("add");
         setListenerToModButton(data.user, data.group);
+
     }
 
-    if(data.status == "unsetGroupModFailed"){
+    if (data.status == "unsetGroupModFailed") {
         alertMessage("User nicht als Mod entfernt", "red")
     }
 
-    if(data.status == "deleteGroupSuccess"){
+    if (data.status == "deleteGroupSuccess") {
         leaveGroup(data);
         alertMessage("Gruppe gelöscht", "green");
     }
 
-    if(data.status == "deleteGroupFailed"){
+    if (data.status == "deleteGroupFailed") {
         alertMessage("Gruppe nicht gelöscht", "red");
     }
 
-    if(data.status == "deleteMapSuccess"){
-        if(requestgroup == "group"){
+    if (data.status == "deleteMapSuccess") {
+        if (requestgroup == "group") {
             $("[data-tactic =" + data.id + "]").hide(2000);
-        }else{
+        } else {
             user.deleteTacticName(data.id);
             $("[data-tactic =" + data.id + "]").hide(2000);
         }
         requestgroup = null;
     }
 
-    if(data.status == "deleteMapFailed"){
+    if (data.status == "deleteMapFailed") {
         alertMessage("Fehler beim Löschen der Taktik aufgetreten", "red")
     }
 
+    if (data.status == "provideRoomName") {
+        setLiveModus(true, data);
+    }
+
+    if(data.status == "connectedClients"){
+
+        setTimeout(function(){
+            $("#liveuser").empty();
+
+            for(var liveuser in data.live){
+                $("#liveuser").append(""+data.live[liveuser]+"</br>");
+            }
+        }, 2000);
+
+    }
+
 });
+
+function setLiveModus(on, data) {
+    if (on) {
+        closeOverlaypanel();
+        $(".liveelement").toggle("slow");
+        $("#livemodus").toggle("slow", function () {
+            $("#livemodus").load("./html/livemoduscanvas.html", function(){
+                afterLivemodusLoaded(data);
+            });
+
+        });
+        draw(true);
+
+    }
+};
+
+function afterLivemodusLoaded(data){
+
+    setTooltipToElement("#leavelivemodus", "Livemodus beenden");
+
+    $("#leavelivemodus").on("click",function(){
+        socket.emit("leaveGroupLive", ({'room' : data.room}));
+        $(".liveelement").toggle("slow");
+        $("#livemodus").toggle("slow");
+        draw(false);
+
+    })
+};
