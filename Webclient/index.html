@@ -3,11 +3,12 @@
 <head lang="de">
     <meta charset="UTF-8">
     <title></title>
+    <!--<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>-->
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
     <script type="text/javascript" src="iosocket/connection.js"></script>
     <script type="text/javascript" src="js/alert.js"></script>
     <script type="text/javascript" src="js/onsocketlistener.js"></script>
-    <script type="text/javascript" src="jquery/jquery 2.1.4.js"></script>
+    <script type="text/javascript" src="jquery/jquery2.1.4.js"></script>
     <script type="text/javascript" src="jquery/jqueryui/jquery-ui.js"></script>
     <script type="text/javascript" src="js/tactic.js"></script>
     <script type="text/javascript" src="js/user.js"></script>
@@ -24,38 +25,45 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+
+    <link href="bootstrap/bootstrap.css" type="text/css" rel="stylesheet">
     <link href="jquery/jqueryui/jquery-ui.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
 <div class="overlaypanel">
-    <div id="overlaypanel_header"> <i id="overlaypanel_close" class="material-icons">close</i></div>
+    <div id="overlaypanel_header"><i id="overlaypanel_close" class="material-icons">close</i></div>
 
     <div id="overlaypanel_insidebox"></div>
 </div>
 <div class="opacitybox"></div>
+<div id="absolute_header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-l-3 col-xs-3"></div>
+            <div id="header" class="liveelement col-xl-6 col-l-6 col-xs-6">
+                <div class="row">
+                    <div id="tacticcanvas" class="col-xl-9  col-xs-6">
+                        <img id="maketacticthumb" class="tacticelement img-fluid">
+                        <input type="button" id="maketacticbutton" value="Taktik Erstellen" class="active tacticelement btn-block">
+                        <input type="button" id="savetacticbutton" value="Taktik Speichern" class="disabled tacticelement  btn-block" disabled>
+                        <input type="button" id="loadtacticbutton" value="Taktik Laden" class="active tacticelement btn-block">
 
-    <div id="header" class="liveelement">
-        <div id="tacticcanvas">
-            <img id="maketacticthumb">
-            <input type="button" id="maketacticbutton" value="Taktik Erstellen" class="active">
-            <input type="button" id="savetacticbutton" value="Taktik Speichern" class="disabled" disabled>
-            <input type="button" id="loadtacticbutton" value="Taktik Laden" class="active">
+                    </div>
 
+                    <div id="usercanvas" class="col-xl-3  col-xs-6">
+
+                    </div>
+
+
+                </div>
+                <img src="images/icons/header/arrowdown.png" id="header_arrow">
+            </div>
+            <div class="col-xl-3 col-l-3 col-xs-3"></div>
         </div>
-
-
-
-        <div id="usercanvas">
-
-        </div>
-
-
-
-        <img src="images/icons/header/arrowdown.png" id="header_arrow">
-
     </div>
+</div>
 <div id="groupcanvas" class="liveelement">
 
 </div>
@@ -64,19 +72,18 @@
 
 </div>
 
-        <div id="canvasmap">
-           <img id="map" >
-           <canvas id="imgpanel" width="1024px" height="1024px"></canvas>
+<div id="canvasmap">
+    <img id="map">
+    <canvas id="imgpanel" width="1024px" height="1024px"></canvas>
 
-        </div>
+</div>
 
 
+<div id="mapselectorcanvas" class="liveelement">
+    <div id="mapselector">
 
-    <div id="mapselectorcanvas" class="liveelement">
-        <div id="mapselector">
-
-        </div>
     </div>
+</div>
 
 
 </body>

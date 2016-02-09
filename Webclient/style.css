@@ -1,0 +1,24 @@
+body{
+    background-color: black !important;
+}
+
+#header{
+    background-color:orange;
+    height: 90px;
+
+}
+
+.container{
+    max-width: 100% !important;
+}
+
+.absolute{
+    width: 100%;
+    position:absolute;
+    top: -45px;
+
+}
+
+#canvas2{
+    text-align: right;
+}

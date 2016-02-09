@@ -23,7 +23,13 @@ function checkLoggedIn(logout) {
     $('#usercanvas').empty();
     var storagevar = localStorage.getItem("benutzername");
     if (storagevar == null) {
-        $('#usercanvas').html("<span>Benutzername:</span> <input type='input' id='login_username'> <span>Passwort:</span> <input type='input' id='login_password'> <input type='button' id='login_submit' value='Login'> <span id='login_register'>Registrieren</span>");
+        $('#usercanvas').html("<span  class='userloginelement'>Benutzername:</span> " +
+            "<input type='input' id='login_username' class='form-control userloginelement'> " +
+            "<span  style = 'margin-top:10px;' class='userloginelement' >Passwort:</span> " +
+            "<input type='password' id='login_password' class='form-control userloginelement'> " +
+            "<input type='button' id='login_submit' value='Login' class='userloginelement'> " +
+            "<span id='login_register' class='userloginelement'>Registrieren</span>");
+
         $("#login_submit").on("click", function () {
             authentification($("#login_username").val(), $("#login_password").val());
         });
@@ -31,16 +37,16 @@ function checkLoggedIn(logout) {
             openOverlaypanel("register");
 
         });
-        $("#tacticcanvas").hide();
+        $(".tacticelement").hide();
         $("#groupcanvas").hide();
     } else {
 
-        $('#usercanvas').html("Eingeloggt als <span id='login_usernametext'> " + storagevar + " </span><input  value='Logout' type='button' id='login_logout'>");
+        $('#usercanvas').html("<span id='loggedintext'>Eingeloggt als</span> <span id='login_usernametext'> " + storagevar + " </span><input  value='Logout' type='button' id='login_logout'>");
         $("#login_logout").on("click", function () {
             checkLoggedIn(true);
 
         });
-        $("#tacticcanvas").show();
+        $(".tacticelement").show();
         $("#groupcanvas").load("./html/groupcanvas.html", function () {
 
 

@@ -59,7 +59,10 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "authGroupSuccess") {
-        grouplogin(data);
+
+        user.setGroups(data.groups);
+        getGroups(user.getGroups());
+        closeOverlaypanel();
     }
 
     if (data.status == "createGroupSuccess") {

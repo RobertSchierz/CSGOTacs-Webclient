@@ -43,7 +43,7 @@ function handleMapselectorStates(map, loadmap){
 
 
 function closeHeader() {
-    $("#header").animate({
+    $("#absolute_header").animate({
         top: "-170"
     }, 1000, function () {
         openheader = false;
@@ -51,7 +51,7 @@ function closeHeader() {
     });
 }
 function openHeader() {
-    $("#header").animate({
+    $("#absolute_header").animate({
         top: "0"
     }, 1000, function () {
         openheader = true;
