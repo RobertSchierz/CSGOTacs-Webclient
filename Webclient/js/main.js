@@ -101,6 +101,29 @@ function setListenerToElements() {
         loadTactics();
     });
 
+    $("#mapselector_arrowleft").on("click", function(){
+        handleMapselectorScroll($(this).attr("id"));
+
+
+    })
+
+    $("#mapselector_arrowright").on("click", function(){
+        handleMapselectorScroll($(this).attr("id"));
+    })
+
+
+}
+
+function handleMapselectorScroll(source){
+
+    var leftPos = $('#mapselector').scrollLeft();
+
+    if(source == "mapselector_arrowleft"){
+        $("#mapselector").animate({scrollLeft: leftPos - $("#mapselector").width()}, 500);
+    }
+    else if(source == "mapselector_arrowright"){
+        $("#mapselector").animate({scrollLeft: leftPos + $("#mapselector").width()}, 500);
+    }
 }
 
 function setAllChildsClass(setclass, removeclass) {
@@ -191,7 +214,7 @@ function loadAllImagesMapselector() {
                     handleTacticEvents(false);
                 } else {
                     $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
-             }
+                }
 
             }
         },

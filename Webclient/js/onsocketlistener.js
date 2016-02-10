@@ -26,12 +26,10 @@ socket.on('status', function (data) {
     if (data.status == "provideGroups") {
         if (refreshmember) {
             user.setGroups(data.groups);
-
         } else {
             user.setGroups(data.groups);
             getGroups(user.getGroups());
         }
-
     }
 
     if (data.status == "provideMaps") {
@@ -43,15 +41,12 @@ socket.on('status', function (data) {
                     tacticsarray.push(data.maps[w]);
                 }
             }
-
             user.setTactics(tacticsarray);
         } else {
             user.setGrouptactics(data.maps);
             openGroupTactic(requestgroup);
             requestgroup = null;
         }
-
-
     }
 
     if (data.status == "authGroupFailed") {
@@ -200,13 +195,13 @@ socket.on('status', function (data) {
         setLiveModus(true, data);
     }
 
-    if(data.status == "connectedClients"){
+    if (data.status == "connectedClients") {
 
-        setTimeout(function(){
+        setTimeout(function () {
             $("#liveuser").empty();
 
-            for(var liveuser in data.live){
-                $("#liveuser").append(""+data.live[liveuser]+"</br>");
+            for (var liveuser in data.live) {
+                $("#liveuser").append("" + data.live[liveuser] + "</br>");
             }
         }, 2000);
 
@@ -219,7 +214,7 @@ function setLiveModus(on, data) {
         closeOverlaypanel();
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow", function () {
-            $("#livemodus").load("./html/livemoduscanvas.html", function(){
+            $("#livemodus").load("./html/livemoduscanvas.html", function () {
                 afterLivemodusLoaded(data);
             });
 
@@ -229,12 +224,12 @@ function setLiveModus(on, data) {
     }
 };
 
-function afterLivemodusLoaded(data){
+function afterLivemodusLoaded(data) {
 
     setTooltipToElement("#leavelivemodus", "Livemodus beenden");
 
-    $("#leavelivemodus").on("click",function(){
-        socket.emit("leaveGroupLive", ({'room' : data.room}));
+    $("#leavelivemodus").on("click", function () {
+        socket.emit("leaveGroupLive", ({'room': data.room}));
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow");
         draw(false);
