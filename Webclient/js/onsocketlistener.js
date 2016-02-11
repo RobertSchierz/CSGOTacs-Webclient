@@ -1,6 +1,9 @@
 /**
  * Created by Robert on 21.01.2016.
  */
+
+
+
 socket.on('status', function (data) {
 
     console.log(data);
@@ -193,17 +196,60 @@ socket.on('status', function (data) {
 
     if (data.status == "provideRoomName") {
         setLiveModus(true, data);
+
+
     }
 
     if (data.status == "connectedClients") {
+        /*$("#livememberlist").empty();
+         setTimeout(function(){
+
+
+         for(var liveuser in data.live){
+         console.log("AMK");
+         $("#livememberlist").append("<li>" + data.live[liveuser] + "</li>");
+         console.log(data.live[liveuser]);
+
+         }
+         }, 1000);
+         */
+
+        /*Test*/
+
+
 
         setTimeout(function () {
-            $("#liveuser").empty();
+            var livemember = new Array();
 
-            for (var liveuser in data.live) {
-                $("#liveuser").append("" + data.live[liveuser] + "</br>");
+
+            $('#livememberlist').children().each(function () {
+                livemember.push($(this).text());
+            });
+
+            if (livemember.length == 0) {
+                for (var liveuser in data.live) {
+                    $("#livememberlist").append("<div data-name='" + data.live[liveuser] + "'>" + data.live[liveuser] + "</div>");
+                }
+            } else {
+                if (data.live.length > livemember.length) {
+                    for (var liveuser in data.live) {
+                        if (isInArray(livemember, data.live[liveuser]).length == 0) {
+                            $("#livememberlist").append("<div data-name='" + data.live[liveuser] + "'>" + data.live[liveuser] + "</div>");
+                        }
+                    }
+                } else if (data.live.length < livemember.length) {
+                    for (var liveuser in livemember) {
+                        if (isInArray(data.live, livemember[liveuser]).length == 0) {
+                            $("[data-name = " + livemember[liveuser] + "]").remove();
+
+                        }
+                    }
+                }
             }
-        }, 2000);
+
+
+        }, 1000);
+
 
     }
 
@@ -230,6 +276,7 @@ function afterLivemodusLoaded(data) {
 
     $("#leavelivemodus").on("click", function () {
         socket.emit("leaveGroupLive", ({'room': data.room}));
+        $("#livememberlist").empty();
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow");
         draw(false);

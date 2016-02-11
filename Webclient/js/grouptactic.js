@@ -27,7 +27,10 @@ function openGroupTactic(groupname) {
 
     $("#overlaypanel_header").append("<i class='material-icons groupelements' id='grouplive'>fiber_manual_record</i>");
     $("#grouplive").on("click", function () {
-        socket.emit('joinGroupLive', ({'group': groupname,'map': $("#mapselector").find(".active").attr("id")}));
+        socket.emit('joinGroupLive', ({'group': groupname,'map': $("#mapselector").find(".active").attr("id"), 'user' : localStorage.getItem("benutzername")}));
+
+
+
     });
     setTooltipToElement("#grouplive", "Live Modus");
 
