@@ -12,7 +12,6 @@ var maketactic = false;
 
 $(document).ready(function () {
 
-
     checkLoggedIn(false);
     loadAllImagesMapselector();
     setListenerToElements();
@@ -90,6 +89,10 @@ function setListenerToElements() {
     });
 
     $("#savetacticbutton").on("click", function () {
+        if ($(this).hasClass("disabled")) {
+            return false;
+        }
+
         if (tactic.getId() != undefined) {
             ActualSaveTactic("loaded");
         } else {
@@ -101,27 +104,27 @@ function setListenerToElements() {
         loadTactics();
     });
 
-    $("#mapselector_arrowleft").on("click", function(){
+    $("#mapselector_arrowleft").on("click", function () {
         handleMapselectorScroll($(this).attr("id"));
 
 
     })
 
-    $("#mapselector_arrowright").on("click", function(){
+    $("#mapselector_arrowright").on("click", function () {
         handleMapselectorScroll($(this).attr("id"));
     })
 
 
 }
 
-function handleMapselectorScroll(source){
+function handleMapselectorScroll(source) {
 
     var leftPos = $('#mapselector').scrollLeft();
 
-    if(source == "mapselector_arrowleft"){
+    if (source == "mapselector_arrowleft") {
         $("#mapselector").animate({scrollLeft: leftPos - $("#mapselector").width()}, 500);
     }
-    else if(source == "mapselector_arrowright"){
+    else if (source == "mapselector_arrowright") {
         $("#mapselector").animate({scrollLeft: leftPos + $("#mapselector").width()}, 500);
     }
 }
@@ -143,17 +146,16 @@ function handleTacticEvents(loadtactics) {
     if (!maketactic) {
         maketactic = true;
         draw(maketactic);
-        $("#maketacticbutton").attr('value', 'Taktik Verwerfen');
+        $("#maketacticbutton").html("Taktik Verwerfen <i class='material-icons headericons'>delete</i>");
         $("#savetacticbutton").removeClass("disabled");
-        $("#savetacticbutton").removeAttr("disabled");
+
         $("#savetacticbutton").addClass("active");
 
     } else if (maketactic) {
         maketactic = false;
         draw(maketactic);
-        $("#maketacticbutton").attr('value', 'Taktik Erstellen');
+        $("#maketacticbutton").html("Taktik Erstellen <i class='material-icons headericons'>gesture</i>");
         $("#savetacticbutton").removeClass("active");
-        $("#savetacticbutton").attr("disabled", "true");
         $("#savetacticbutton").addClass("disabled");
 
     }

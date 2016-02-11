@@ -16,8 +16,10 @@ function authSuccess(data) {
 function checkLoggedIn(logout) {
 
     if (logout) {
-        localStorage.removeItem("benutzername")
+        localStorage.removeItem("benutzername");
         socket.emit('disconnect');
+        deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
+        //handleTacticEvents(false);
     }
 
     $('#usercanvas').empty();
@@ -41,11 +43,15 @@ function checkLoggedIn(logout) {
         $("#groupcanvas").hide();
     } else {
 
-        $('#usercanvas').html("<span id='loggedintext'>Eingeloggt als</span> <span id='login_usernametext'> " + storagevar + " </span><input  value='Logout' type='button' id='login_logout'>");
+        $('#usercanvas').html("" +
+            "<div id='userinnercanvas' class='col-xl-12 col-l-12 col-xs-12'>" +
+            "<span id='login_usernametext'> " + storagevar + " </span>" +
+            "<i class='material-icons headericons'  id='login_logout'>exit_to_app</i></div>");
+
         $("#login_logout").on("click", function () {
             checkLoggedIn(true);
-
         });
+
         $(".tacticelement").show();
         $("#groupcanvas").load("./html/groupcanvas.html", function () {
 
@@ -73,10 +79,7 @@ function getGroups(data) {
         for (var i = 0; i < data.length; i++) {
             appendGroupMenu(data[i]);
         }
-
-
     });
-
 }
 
 function appendGroupMenu(data) {

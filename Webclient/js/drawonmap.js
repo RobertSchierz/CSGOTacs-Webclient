@@ -7,6 +7,8 @@ var clickY = new Array();
 var clickDrag = new Array();
 var paint;
 
+
+
 $(document).ready(function () {
 //getData(document.getElementById('imgpanel').getContext("2d"));
 
@@ -15,6 +17,7 @@ $(document).ready(function () {
 function draw(on) {
 
     var context = document.getElementById('imgpanel').getContext("2d");
+
     var contextid = '#' + context.canvas.id;
 
     if (on) {

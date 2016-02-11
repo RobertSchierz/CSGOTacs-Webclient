@@ -27,8 +27,7 @@ function openGroupTactic(groupname) {
 
     $("#overlaypanel_header").append("<i class='material-icons groupelements' id='grouplive'>fiber_manual_record</i>");
     $("#grouplive").on("click", function () {
-        socket.emit('joinGroupLive', ({'group': groupname,'map': $("#mapselector").find(".active").attr("id"), 'user' : localStorage.getItem("benutzername")}));
-
+        socket.emit('joinGroupLive', ({'group': groupname, 'map': $("#mapselector").find(".active").attr("id"), 'user': localStorage.getItem("benutzername")}));
 
 
     });
@@ -43,7 +42,7 @@ function openGroupTactic(groupname) {
         var membername = groupobject.member[groupmember];
         var ismod = isInArray(groupobject.mods, membername);
 
-        $("#groupmember_table").append("<tr data-member="+ membername +" > <td data-grouptableadmin='" + membername + "' class='canvastd'> </td> " +
+        $("#groupmember_table").append("<tr data-member=" + membername + " > <td data-grouptableadmin='" + membername + "' class='canvastd'> </td> " +
             "<td data-grouptable_name ='" + membername + "' class='canvastd'></td> " +
             "<td data-groupmembertableoptiontd=" + membername + " class='canvastd'></td>  </tr>");
 
@@ -117,7 +116,7 @@ function optionPanel(id, source, group) {
                 "<table><tr><td class='tdoptionpanel'><i data-tacticloadbutton =" + id + " class='material-icons'>gesture</i></td> " +
                 "<td class='tdoptionpanel' data-changenametd =" + id + "><i data-tacticchangenamebutton =" + id + " class='material-icons'>edit</i></td>" +
                 "<td class='tdoptionpanel'><i data-tacticdeletebutton =" + id + " class='material-icons'>delete</i></td>" +
-               // "<td class='tdoptionpanel'><i data-tacticlivebutton ="+id+" class='material-icons'>fiber_manual_record</i></td>" +
+                // "<td class='tdoptionpanel'><i data-tacticlivebutton ="+id+" class='material-icons'>fiber_manual_record</i></td>" +
                 "</tr></table>" +
                 "</div>");
 
@@ -142,7 +141,7 @@ function optionPanel(id, source, group) {
             setTooltipToElement("[data-tacticloadbutton =" + id + "]", "Taktik weiterzeichnen");
             setTooltipToElement("[data-tacticchangenamebutton =" + id + "]", "Taktiknamen bearbeiten");
             setTooltipToElement("[data-tacticdeletebutton =" + id + "]", "Taktik Löschen");
-           // setTooltipToElement("[data-tacticlivebutton =" + id + "]", "Live Modus");
+            // setTooltipToElement("[data-tacticlivebutton =" + id + "]", "Live Modus");
 
 
         } else if (source == "member") {
