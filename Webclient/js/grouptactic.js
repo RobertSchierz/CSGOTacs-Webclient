@@ -131,7 +131,7 @@ function optionPanel(id, source, group) {
                 "</div>");
 
             $("[data-tacticdeletebutton = " + id + "]").on("click", function () {
-                socket.emit('deleteMap', JSON.stringify({'id': id}));
+                socket.emit('deleteTac', JSON.stringify({'id': id}));
                 requestgroup = "group";
             });
 

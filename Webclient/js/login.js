@@ -65,7 +65,7 @@ function checkLoggedIn(logout) {
             });
 
             socket.emit('getGroups',  JSON.stringify({'user': storagevar}));
-            socket.emit('getMaps',  JSON.stringify({'user': localStorage.getItem("benutzername") }));
+            socket.emit('getTacs',  JSON.stringify({'user': localStorage.getItem("benutzername") }));
         });
         $("#groupcanvas").show();
 

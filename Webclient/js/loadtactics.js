@@ -45,7 +45,7 @@ if(mapnames.length != 0){
 
                             $("[data-sharegroupadd =" + id + "]").on("click", function () {
                                 var id = $(this).attr("data-sharegroupadd");
-                                socket.emit("bindMap",  JSON.stringify({'id': id, 'group': $("[data-sharegroup =" + id +  "] option:selected").text()}));
+                                socket.emit("bindTac",  JSON.stringify({'id': id, 'group': $("[data-sharegroup =" + id +  "] option:selected").text()}));
                             })
 
                         } else {
@@ -58,7 +58,7 @@ if(mapnames.length != 0){
 
                     $("[data-delete =" + data[o].id + "]").on("click", function () {
                         var id = $(this).attr("data-delete");
-                        socket.emit('deleteMap',  JSON.stringify({'id': id}));
+                        socket.emit('deleteTac',  JSON.stringify({'id': id}));
                     });
                     setTacticListener(data, o)
                 }
