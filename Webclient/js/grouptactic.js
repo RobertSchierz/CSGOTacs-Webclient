@@ -9,7 +9,7 @@ function openGroupTactic(groupname) {
 
 
         $("#groupleave").on("click", function () {
-            socket.emit('leaveGroup',  JSON.stringify({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
+            socket.emit('leaveGroup', JSON.stringify({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
 
         });
         setTooltipToElement("#groupleave", "Aus der Gruppe austreten");
@@ -20,14 +20,14 @@ function openGroupTactic(groupname) {
         $("#overlaypanel_header").append("<i class='material-icons groupelements' id='groupdelete'>delete</i>");
         setTooltipToElement("#groupdelete", "Gruppe entfernen");
         $("#groupdelete").on("click", function () {
-            socket.emit("deleteGroup",  JSON.stringify({'user': localStorage.getItem("benutzername"), 'name': groupobject.name}));
+            socket.emit("deleteGroup", JSON.stringify({'user': localStorage.getItem("benutzername"), 'name': groupobject.name}));
 
         });
     }
 
     $("#overlaypanel_header").append("<i class='material-icons groupelements' id='grouplive'>fiber_manual_record</i>");
     $("#grouplive").on("click", function () {
-        socket.emit('joinGroupLive',  JSON.stringify({'group': groupname, 'map': $("#mapselector").find(".active").attr("id"), 'user': localStorage.getItem("benutzername")}));
+        socket.emit('joinGroupLive', JSON.stringify({'group': groupname, 'map': $("#mapselector").find(".active").attr("id"), 'user': localStorage.getItem("benutzername")}));
 
 
     });
@@ -42,7 +42,7 @@ function openGroupTactic(groupname) {
         var membername = groupobject.member[groupmember];
         var ismod = isInArray(groupobject.mods, membername);
 
-        $("#groupmember_table").append("<tr data-member=" + membername + " > <td data-grouptableadmin='" + membername + "' class='canvastd'> </td> " +
+        $("#groupmember_table").append("<tr data-member=" + membername + " class='memberrow' > <td data-grouptableadmin='" + membername + "' class='canvastd'> </td> " +
             "<td data-grouptable_name ='" + membername + "' class='canvastd'></td> " +
             "<td data-groupmembertableoptiontd=" + membername + " class='canvastd'></td>  </tr>");
 
@@ -61,9 +61,16 @@ function openGroupTactic(groupname) {
 
         }
 
-        $("[data-groupmembertableoption=" + membername + "]").on("click", function () {
+       /* $("[data-groupmembertableoption=" + membername + "]").on("click", function () {
             optionPanel($(this).attr("data-groupmembertableoption"), "member", groupobject);
-        });
+        });*/
+
+        if($("[data-groupmembertableoption=" + membername + "]").length != 0){
+            $("[data-member = " + membername + "]").on("click", function () {
+                optionPanel($(this).attr("data-member"), "member", groupobject);
+            })
+        }
+
 
     }
 
@@ -75,15 +82,19 @@ function openGroupTactic(groupname) {
             loadTacticImage(grouptacticsarray[grouptactic]);
 
             var tacticid = grouptacticsarray[grouptactic].id;
-            $("#grouptactic_table").append("<tr data-tactic = " + tacticid + "> <td data-grouptacticimage =" + tacticid + " class='canvastd' ></td> " +
+            $("#grouptactic_table").append("<tr data-tactic = " + tacticid + " class='tacticrow'> <td data-grouptacticimage =" + tacticid + " class='canvastd' ></td> " +
                 "<td data-grouptactic =" + tacticid + " class='canvastd' >  </td> " +
                 "<td data-grouptactictableoptiontd = " + tacticid + " class='canvastd' ></td>  </tr>");
             $("[data-grouptactic = " + tacticid + "]").append("" + grouptacticsarray[grouptactic].name + "");
             $("[data-grouptactictableoptiontd = " + tacticid + "]").append("<i data-grouptactictableoption =" + tacticid + " class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
 
-            $("[data-grouptactictableoption = " + tacticid + "]").on("click", function () {
+            /*$("[data-grouptactictableoption = " + tacticid + "]").on("click", function () {
                 optionPanel($(this).attr("data-grouptactictableoption"), "tactic");
-            });
+            });*/
+
+            $("[data-tactic = " + tacticid + "]").on("click", function () {
+                optionPanel($(this).attr("data-tactic"), "tactic");
+            })
         }
     } else {
         $("#grouptacticcanvas").append("<h3 class='tableheader'>Keine Taktiken vorhanden</h3>");
@@ -92,7 +103,7 @@ function openGroupTactic(groupname) {
 }
 
 $(document).click(function (e) {
-    if ($(e.target).closest(".optionpanel").length == 0 && $(e.target).closest(".grouptactic_option").length == 0 && $(e.target).closest(".groupmember_option").length == 0) {
+    if ($(e.target).closest(".optionpanel").length == 0 && $(e.target).closest(".tacticrow").length == 0 && $(e.target).closest(".memberrow").length == 0) {
         if ($(".optionpanel").length != 0) {
             $(".optionpanel").hide(500);
             $(".optionpanel").remove();
@@ -116,12 +127,11 @@ function optionPanel(id, source, group) {
                 "<table><tr><td class='tdoptionpanel'><i data-tacticloadbutton =" + id + " class='material-icons'>gesture</i></td> " +
                 "<td class='tdoptionpanel' data-changenametd =" + id + "><i data-tacticchangenamebutton =" + id + " class='material-icons'>edit</i></td>" +
                 "<td class='tdoptionpanel'><i data-tacticdeletebutton =" + id + " class='material-icons'>delete</i></td>" +
-                // "<td class='tdoptionpanel'><i data-tacticlivebutton ="+id+" class='material-icons'>fiber_manual_record</i></td>" +
                 "</tr></table>" +
                 "</div>");
 
             $("[data-tacticdeletebutton = " + id + "]").on("click", function () {
-                socket.emit('deleteMap',  JSON.stringify({'id': id}));
+                socket.emit('deleteMap', JSON.stringify({'id': id}));
                 requestgroup = "group";
             });
 
@@ -144,6 +154,7 @@ function optionPanel(id, source, group) {
             // setTooltipToElement("[data-tacticlivebutton =" + id + "]", "Live Modus");
 
 
+
         } else if (source == "member") {
 
             $("[data-" + request + "=" + id + "]").append("<div class='optionpanel' data-optionpanel = " + id + "><table><tr>" +
@@ -163,11 +174,15 @@ function optionPanel(id, source, group) {
 
 
             $("[data-memberdeletebutton =" + id + "]").on("click", function () {
-                socket.emit('kickUser',  JSON.stringify({'user': group.admin, 'name': group.name, 'kick': id}));
+                socket.emit('kickUser', JSON.stringify({'user': group.admin, 'name': group.name, 'kick': id}));
             });
             setTooltipToElement("[data-memberdeletebutton = " + id + "]", "Member Kicken");
 
         }
+
+        $(".optionpanel").on("click", function(){
+            return false;
+        })
 
         $("[data-optionpanel =" + id + "]").show(500);
     } else {
@@ -183,14 +198,14 @@ function setListenerToModButton(id, group) {
         case "remove":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("unsetGroupMod",  JSON.stringify({'user': id, 'name': group}));
+                socket.emit("unsetGroupMod", JSON.stringify({'user': id, 'name': group}));
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator entfernen");
             break;
         case "add":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("setGroupMod",  JSON.stringify({'user': id, 'name': group}));
+                socket.emit("setGroupMod", JSON.stringify({'user': id, 'name': group}));
 
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator hinzufügen");
@@ -200,7 +215,7 @@ function setListenerToModButton(id, group) {
 
 
 function optionPanelDelete(id) {
-    $('div').each(function (index) {
+    $('div').each(function () {
         if ($(this).attr('class') == "optionpanel" && $(this).attr('data-optionpanel') != id) {
             $(this).hide(500);
             $(this).remove();
@@ -233,10 +248,11 @@ function leaveGroup(data) {
     } else {
         group = data.group;
     }
+    closeOverlaypanel();
     $("#" + group).hide(2000, function () {
         user.deleteGroup(user.getGroups(), group);
         $("#" + group).remove();
-        closeOverlaypanel();
+
     });
 
 }

@@ -137,7 +137,7 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "kickUserSuccess") {
-        $("[data-member =" + data.kick + "]").hide(2000);
+        $("[data-member =" + data.kick + "]").hide(1000);
         alertMessage("User aus der Gruppe entfernt", "green");
     }
 
@@ -182,10 +182,10 @@ socket.on('status', function (data) {
 
     if (data.status == "deleteMapSuccess") {
         if (requestgroup == "group") {
-            $("[data-tactic =" + data.id + "]").hide(2000);
+            $("[data-tactic =" + data.id + "]").hide(1000);
         } else {
             user.deleteTacticName(data.id);
-            $("[data-tactic =" + data.id + "]").hide(2000);
+            $("[data-tactic =" + data.id + "]").hide(1000);
         }
         requestgroup = null;
     }
@@ -201,21 +201,6 @@ socket.on('status', function (data) {
     }
 
     if (data.status == "connectedClients") {
-        /*$("#livememberlist").empty();
-         setTimeout(function(){
-
-
-         for(var liveuser in data.live){
-         console.log("AMK");
-         $("#livememberlist").append("<li>" + data.live[liveuser] + "</li>");
-         console.log(data.live[liveuser]);
-
-         }
-         }, 1000);
-         */
-
-        /*Test*/
-
 
 
         setTimeout(function () {
@@ -275,7 +260,7 @@ function afterLivemodusLoaded(data) {
     setTooltipToElement("#leavelivemodus", "Livemodus beenden");
 
     $("#leavelivemodus").on("click", function () {
-        socket.emit("leaveGroupLive",  JSON.stringify({'room': data.room}));
+        socket.emit("leaveGroupLive", JSON.stringify({'room': data.room}));
         $("#livememberlist").empty();
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow");

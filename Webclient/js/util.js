@@ -7,6 +7,7 @@ var refreshmember = false;
 
 function openOverlaypanel(source, groupname) {
 
+    closeHeader();
 
     if (popup_zustand == false) {
 
@@ -46,9 +47,10 @@ function openOverlaypanel(source, groupname) {
 
         }
 
-        $(".overlaypanel").fadeIn("normal");
+
         $(".opacitybox").css("opacity", "0.4");
-        $(".opacitybox").fadeIn("normal");
+        $(".opacitybox").fadeIn("5000");
+        $(".overlaypanel").fadeIn("1000");
 
 
         popup_zustand = true;
@@ -61,9 +63,9 @@ function closeOverlaypanel() {
     if (popup_zustand == true) {
         refreshmember = null;
 
-        $(".overlaypanel").fadeOut("normal");
+        $(".overlaypanel").fadeOut("2000");
 
-        $(".opacitybox").fadeOut("normal", function () {
+        $(".opacitybox").fadeOut("2000", function () {
             $("#overlaypanel_insidebox").empty();
             $("#overlaypanel_header").contents(':not(#overlaypanel_close)').remove();
         });
