@@ -12,6 +12,23 @@ var maketactic = false;
 
 $(document).ready(function () {
 
+    $("#callout_visibility").on("click", function(){
+       if($(this).attr("data-option") == "on"){
+            $("#callout").fadeOut(700, function(){
+                $("#callout_visibility").html("visibility_off");
+                $("#callout_visibility").attr("data-option", "off")
+            });
+
+       }else if($(this).attr("data-option") == "off"){
+           $("#callout").fadeIn(700, function(){
+               $("#callout_visibility").html("visibility");
+               $("#callout_visibility").attr("data-option", "on")
+           });
+
+       }
+
+    });
+
     checkLoggedIn(false);
     loadAllImagesMapselector();
     setListenerToElements();
@@ -176,6 +193,7 @@ function loadMap(id, loadtactic) {
                 if (data.images[i].mapname == id) {
 
                     //Erstellt neue HTML Elemente
+                    $("#callout").attr('src', data.images[i].callout);
                     $("#map").attr('src', data.images[i].map);
                     $("#maketacticthumb").attr('src', data.images[i].url);
                     maketactic = true;
