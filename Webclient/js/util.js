@@ -39,9 +39,9 @@ function openOverlaypanel(source, groupname) {
 
         if (source == "grouptactic") {
             refreshmember = true;
-            socket.emit('getGroups', ({'user': localStorage.getItem("benutzername")}));
+            socket.emit('getGroups',  JSON.stringify({'user': localStorage.getItem("benutzername")}));
             requestgroup = groupname;
-            socket.emit("getMaps", ({'group': groupname}));
+            socket.emit("getMaps",  JSON.stringify({'group': groupname}));
 
 
         }
@@ -88,7 +88,7 @@ function ActualSaveTactic(option) {
     if (option == "new") {
         sendLocaltactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag, clickX, clickY, $("#tacticname_tacticnameinput").val(), null);
     } else if (option == "loaded") {
-        socket.emit('changeMap', ({'id': tactic.getId(), 'drag': tactic.getDrag().concat(clickDrag), 'x': tactic.getX().concat(clickX), 'y': tactic.getY().concat(clickY)}));
+        socket.emit('changeMap',  JSON.stringify({'id': tactic.getId(), 'drag': tactic.getDrag().concat(clickDrag), 'x': tactic.getX().concat(clickX), 'y': tactic.getY().concat(clickY)}));
     }
 
 }
@@ -120,7 +120,7 @@ function setChangeName(target, dest, id, changevalueelement, option) {
     $(".changename_textfield").on("focusout", function () {
         var newvalue = $('.changename_textfield').val();
         if (newvalue != "") {
-            socket.emit("changeMapName", ({ 'id': id, 'name': newvalue }));
+            socket.emit("changeMapName",  JSON.stringify({ 'id': id, 'name': newvalue }));
             user.changeTacticName(id, newvalue, option);
 
             $(".changename_textfield").remove();

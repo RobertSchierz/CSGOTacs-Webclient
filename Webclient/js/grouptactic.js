@@ -9,7 +9,7 @@ function openGroupTactic(groupname) {
 
 
         $("#groupleave").on("click", function () {
-            socket.emit('leaveGroup', ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
+            socket.emit('leaveGroup',  JSON.stringify({'user': localStorage.getItem("benutzername"), 'name': groupobject.name }));
 
         });
         setTooltipToElement("#groupleave", "Aus der Gruppe austreten");
@@ -20,14 +20,14 @@ function openGroupTactic(groupname) {
         $("#overlaypanel_header").append("<i class='material-icons groupelements' id='groupdelete'>delete</i>");
         setTooltipToElement("#groupdelete", "Gruppe entfernen");
         $("#groupdelete").on("click", function () {
-            socket.emit("deleteGroup", ({'user': localStorage.getItem("benutzername"), 'name': groupobject.name}));
+            socket.emit("deleteGroup",  JSON.stringify({'user': localStorage.getItem("benutzername"), 'name': groupobject.name}));
 
         });
     }
 
     $("#overlaypanel_header").append("<i class='material-icons groupelements' id='grouplive'>fiber_manual_record</i>");
     $("#grouplive").on("click", function () {
-        socket.emit('joinGroupLive', ({'group': groupname, 'map': $("#mapselector").find(".active").attr("id"), 'user': localStorage.getItem("benutzername")}));
+        socket.emit('joinGroupLive',  JSON.stringify({'group': groupname, 'map': $("#mapselector").find(".active").attr("id"), 'user': localStorage.getItem("benutzername")}));
 
 
     });
@@ -121,7 +121,7 @@ function optionPanel(id, source, group) {
                 "</div>");
 
             $("[data-tacticdeletebutton = " + id + "]").on("click", function () {
-                socket.emit('deleteMap', ({'id': id}));
+                socket.emit('deleteMap',  JSON.stringify({'id': id}));
                 requestgroup = "group";
             });
 
@@ -163,7 +163,7 @@ function optionPanel(id, source, group) {
 
 
             $("[data-memberdeletebutton =" + id + "]").on("click", function () {
-                socket.emit('kickUser', ({'user': group.admin, 'name': group.name, 'kick': id}));
+                socket.emit('kickUser',  JSON.stringify({'user': group.admin, 'name': group.name, 'kick': id}));
             });
             setTooltipToElement("[data-memberdeletebutton = " + id + "]", "Member Kicken");
 
@@ -183,14 +183,14 @@ function setListenerToModButton(id, group) {
         case "remove":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("unsetGroupMod", ({'user': id, 'name': group}));
+                socket.emit("unsetGroupMod",  JSON.stringify({'user': id, 'name': group}));
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator entfernen");
             break;
         case "add":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("setGroupMod", ({'user': id, 'name': group}));
+                socket.emit("setGroupMod",  JSON.stringify({'user': id, 'name': group}));
 
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator hinzufügen");

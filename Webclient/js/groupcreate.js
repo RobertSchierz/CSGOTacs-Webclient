@@ -10,7 +10,7 @@ function creategroup(){
 }
 
 function sendGroupCreate(groupname, grouppassword){
-    socket.emit('createGroup', ({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
+    socket.emit('createGroup',  JSON.stringify({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
 }
 
 function createGroup(data) {

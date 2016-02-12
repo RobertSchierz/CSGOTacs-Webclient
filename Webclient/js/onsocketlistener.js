@@ -275,7 +275,7 @@ function afterLivemodusLoaded(data) {
     setTooltipToElement("#leavelivemodus", "Livemodus beenden");
 
     $("#leavelivemodus").on("click", function () {
-        socket.emit("leaveGroupLive", ({'room': data.room}));
+        socket.emit("leaveGroupLive",  JSON.stringify({'room': data.room}));
         $("#livememberlist").empty();
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow");

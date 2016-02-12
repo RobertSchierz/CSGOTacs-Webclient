@@ -10,7 +10,7 @@ function logingroup(){
 }
 
 function sendGroupLogin(groupname, grouppassword){
-    socket.emit('authGroup', ({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
+    socket.emit('authGroup',  JSON.stringify({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
 }
 
 function grouplogin(data) {

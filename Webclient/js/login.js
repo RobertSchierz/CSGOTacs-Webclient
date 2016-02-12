@@ -2,7 +2,7 @@
  * Created by Robert on 03.01.2016.
  */
 function authentification(username, password) {
-    socket.emit('auth', ({'user': username, 'pw': password }));
+    socket.emit('auth',  JSON.stringify({'user': username, 'pw': password }));
 
 }
 
@@ -64,8 +64,8 @@ function checkLoggedIn(logout) {
                 openOverlaypanel("grouplogin");
             });
 
-            socket.emit('getGroups', ({'user': storagevar}));
-            socket.emit('getMaps', ({'user': localStorage.getItem("benutzername") }));
+            socket.emit('getGroups',  JSON.stringify({'user': storagevar}));
+            socket.emit('getMaps',  JSON.stringify({'user': localStorage.getItem("benutzername") }));
         });
         $("#groupcanvas").show();
 
