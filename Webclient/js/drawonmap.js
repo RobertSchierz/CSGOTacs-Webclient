@@ -16,6 +16,7 @@ $(document).ready(function () {
 
 function draw(on) {
 
+
     var context = document.getElementById('imgpanel').getContext("2d");
 
     var contextid = '#' + context.canvas.id;
@@ -33,6 +34,7 @@ function draw(on) {
 
 function setListenerToCanvas(context, contextid) {
     $(contextid).mousedown(function (e) {
+        closeHeader();
         paint = true;
 
         addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
