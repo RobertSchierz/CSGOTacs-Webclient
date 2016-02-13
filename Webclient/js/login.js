@@ -19,7 +19,7 @@ function checkLoggedIn(logout) {
         localStorage.removeItem("benutzername");
         socket.emit('disconnect');
         deleteCanvas();
-        //handleTacticEvents(false);
+
     }
 
     $('#usercanvas').empty();
@@ -42,6 +42,7 @@ function checkLoggedIn(logout) {
         $(".tacticelement").hide();
         $("#groupcanvas").hide();
     } else {
+
 
         $('#usercanvas').html("" +
             "<div id='userinnercanvas' class='col-xl-12 col-l-12 col-xs-12'>" +
@@ -68,6 +69,8 @@ function checkLoggedIn(logout) {
             socket.emit('getTacs',  JSON.stringify({'user': localStorage.getItem("benutzername") }));
         });
         $("#groupcanvas").show();
+        handleTacticButtons(false);
+        draw(false);
 
 
     }

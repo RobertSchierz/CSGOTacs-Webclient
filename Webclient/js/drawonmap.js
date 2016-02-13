@@ -76,7 +76,7 @@ function addClick(x, y, dragging, context, optionlive) {
 function redraw(context, optionlive, x, y, dragging) {
 
     if(optionlive != null){
-       // socket.emit("broadcastGroupLive",({'room' : optionlive, 'user' : localStorage.getItem("benutzername"), 'x' : clickX)})  );
+        socket.emit("broadcastGroupLive",({'room' : optionlive, 'user' : localStorage.getItem("benutzername"), 'x' : clickX, 'y' : clickY, 'drag' : clickDrag})  );
     }
 
 

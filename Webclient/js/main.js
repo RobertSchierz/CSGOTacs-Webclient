@@ -9,6 +9,7 @@ var socket = io('https://p4dme.shaula.uberspace.de/');
 
 var openheader = false;
 var maketactic = false;
+var imagearray = new Array();
 
 $(document).ready(function () {
 
@@ -36,12 +37,13 @@ $(document).ready(function () {
     loadAllImagesMapselector();
     setListenerToElements();
 
-
+/*
     $(document).ajaxComplete(function () {
+        console.log("AMK");
         $('#mapselector img').on("click", function () {
             handleMapselectorStates(this, false);
         });
-    });
+    });*/
 
 
 });
@@ -52,7 +54,7 @@ function handleMapselectorStates(map, loadmap) {
         setAllChildsClass("passive", "active");
         $(map).removeClass("passive").addClass("active");
     }
-    loadMap($(map).attr('id'), loadmap);
+    setCanvasImage($(map).attr('id'), loadmap);
 
 
 }
@@ -160,10 +162,12 @@ function setAllChildsClass(setclass, removeclass) {
 
 function handleTacticButtons(option) {
    if(option){
+       maketactic=true;
        $("#maketacticbutton").html("Taktik Verwerfen <i class='material-icons headericons'>delete</i>");
        $("#savetacticbutton").removeClass("disabled");
        $("#savetacticbutton").addClass("active");
    }else if(!option){
+       maketactic=false;
        $("#maketacticbutton").html("Taktik Erstellen <i class='material-icons headericons'>gesture</i>");
        $("#savetacticbutton").removeClass("active");
        $("#savetacticbutton").addClass("disabled");
@@ -191,42 +195,27 @@ function handleTacticEvents(loadtactics) {
 }
 
 
-function loadMap(id, loadtactic) {
-    $.ajax({
+function setCanvasImage(id, loadtactic) {
 
-        url: "./jsons/mapselections.json",
-        dataType: 'json',
+    for(var mapobject in imagearray){
+        if(imagearray[mapobject].mapname == id){
 
-        success: function (data) {
-            for (i = 0; i < data.images.length; i++) {
-
-                if (data.images[i].mapname == id) {
-
-                    //Erstellt neue HTML Elemente
-                    $("#callout").attr('src', data.images[i].callout);
-                    $("#map").attr('src', data.images[i].map);
-                    $("#maketacticthumb").attr('src', data.images[i].url);
-                    maketactic = true;
-                    handleTacticEvents(loadtactic);
-
-
-                }
-            }
-        },
-
-        error: function () {
-
-            alert("Fehler beim Zugriff auf das Image JSON aufgetreten");
-
+            $("#callout").attr('src', imagearray[mapobject].callout);
+            $("#map").attr('src', imagearray[mapobject].map);
+            $("#maketacticthumb").attr('src', imagearray[mapobject].url);
+            maketactic = true;
+            handleTacticEvents(loadtactic);
         }
+    }
 
-    });
 }
+
 
 
 function loadAllImagesMapselector() {
     $.ajax({
 
+
         url: "./jsons/mapselections.json",
 
         dataType: 'json',
@@ -234,17 +223,23 @@ function loadAllImagesMapselector() {
         success: function (data) {
 
             for (i = 0; i < data.images.length; i++) {
-
+                imagearray.push(data.images[i]);
 
                 // Mache das erste Objekt aktiv
                 if (i == 0) {
                     $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection active'>");
-                    loadMap(data.images[i].name, false);
+                    setCanvasImage(data.images[i].mapname, false);
                     maketactic = false;
                     handleTacticEvents(false);
                 } else {
                     $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
                 }
+
+                $('#'+data.images[i].name).on("click", function () {
+                    handleMapselectorStates(this, false);
+                });
+
+
 
             }
         },
