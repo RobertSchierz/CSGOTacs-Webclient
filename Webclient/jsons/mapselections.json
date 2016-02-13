@@ -1,32 +1,32 @@
 {"images": [
     {
-        "name": "dust2",
+        "name": "Dust2",
         "url": "images/mapselections/de_dust2.jpg",
-        "mapname" : "dust2",
+        "mapname" : "Dust2",
         "map": "images/map_dust2.jpg",
         "callout" : "images/callouts/de_dust2_callout.png"
     },
     {
 
-        "name": "cobblestone",
+        "name": "Cobblestone",
         "url": "images/mapselections/de_cobblestone.jpg",
-        "mapname" : "cobblestone",
+        "mapname" : "Cobblestone",
         "map": "images/map_cobblestone.jpg",
         "callout" : "images/callouts/de_cobblestone_callout.png"
     },
     {
 
-        "name": "inferno",
+        "name": "Inferno",
         "url": "images/mapselections/de_inferno.jpg",
-        "mapname" : "inferno",
+        "mapname" : "Inferno",
         "map": "images/map_inferno.jpg",
         "callout" : "images/callouts/de_inferno_callout.png"
     },
     {
 
-        "name": "mirage",
+        "name": "Mirage",
         "url": "images/mapselections/de_mirage.jpg",
-        "mapname" : "mirage",
+        "mapname" : "Mirage",
         "map": "images/map_mirage.jpg",
         "callout" : "images/callouts/de_mirage_callout.png"
     }

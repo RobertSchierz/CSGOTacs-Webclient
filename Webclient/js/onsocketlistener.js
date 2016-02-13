@@ -241,6 +241,7 @@ socket.on('status', function (data) {
 
 function setLiveModus(on, data) {
     if (on) {
+        deleteCanvas();
         closeOverlaypanel();
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow", function () {
@@ -263,6 +264,8 @@ function afterLivemodusLoaded(data) {
         $("#livememberlist").empty();
         $(".liveelement").toggle("slow");
         $("#livemodus").toggle("slow");
+        maketactic = false;
+        handleTacticButtons(false);
         draw(false);
 
     })

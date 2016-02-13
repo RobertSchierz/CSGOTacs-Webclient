@@ -12,6 +12,9 @@ var maketactic = false;
 
 $(document).ready(function () {
 
+
+
+
     $("#callout_visibility").on("click", function(){
        if($(this).attr("data-option") == "on"){
             $("#callout").fadeOut(700, function(){
@@ -155,6 +158,19 @@ function setAllChildsClass(setclass, removeclass) {
     })
 }
 
+function handleTacticButtons(option) {
+   if(option){
+       $("#maketacticbutton").html("Taktik Verwerfen <i class='material-icons headericons'>delete</i>");
+       $("#savetacticbutton").removeClass("disabled");
+       $("#savetacticbutton").addClass("active");
+   }else if(!option){
+       $("#maketacticbutton").html("Taktik Erstellen <i class='material-icons headericons'>gesture</i>");
+       $("#savetacticbutton").removeClass("active");
+       $("#savetacticbutton").addClass("disabled");
+   }
+
+}
+
 function handleTacticEvents(loadtactics) {
     if (loadtactics) {
         maketactic = false;
@@ -163,17 +179,11 @@ function handleTacticEvents(loadtactics) {
     if (!maketactic) {
         maketactic = true;
         draw(maketactic);
-        $("#maketacticbutton").html("Taktik Verwerfen <i class='material-icons headericons'>delete</i>");
-        $("#savetacticbutton").removeClass("disabled");
-
-        $("#savetacticbutton").addClass("active");
-
+        handleTacticButtons(true);
     } else if (maketactic) {
         maketactic = false;
         draw(maketactic);
-        $("#maketacticbutton").html("Taktik Erstellen <i class='material-icons headericons'>gesture</i>");
-        $("#savetacticbutton").removeClass("active");
-        $("#savetacticbutton").addClass("disabled");
+        handleTacticButtons(false);
 
     }
 

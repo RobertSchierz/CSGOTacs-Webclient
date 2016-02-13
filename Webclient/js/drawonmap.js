@@ -9,8 +9,11 @@ var paint;
 
 
 
+
 $(document).ready(function () {
 //getData(document.getElementById('imgpanel').getContext("2d"));
+
+
 
 });
 
@@ -25,7 +28,7 @@ function draw(on) {
         setListenerToCanvas(context, contextid);
     } else if (!on) {
 
-        deleteCanvas(context);
+        deleteCanvas();
     }
 
 
@@ -90,6 +93,7 @@ function redraw(context) {
 }
 
 function deleteCanvas(context) {
+    var context = document.getElementById('imgpanel').getContext("2d");
     $("#imgpanel").off();
     clickX = new Array();
     clickY = new Array();
@@ -121,6 +125,11 @@ function getData(context) {
 }
 
 function actualDraw(x, y, drag) {
+    var canvaswidth = $("#imgpanel").width();
+    var canvasheight = $("#imgpanel").height();
+
+    var x =  tactic.unnormalizeKoordinates(x,canvaswidth);
+    var y = tactic.unnormalizeKoordinates(y, canvasheight);
 
     var context = document.getElementById('imgpanel').getContext("2d");
     context.strokeStyle = "#df4b26";

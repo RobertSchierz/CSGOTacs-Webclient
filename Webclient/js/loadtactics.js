@@ -92,7 +92,7 @@ if(mapnames.length != 0){
 function setTacticListener(data, index) {
     $("[data-name =" + data[index].id + "]").on("click", function () {
         closeOverlaypanel();
-        deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
+        deleteCanvas();
         var tactic = setArrayData(data[$(this).attr("class")]);
         drawSavedMap(tactic);
         handleMapselectorStates("#" + tactic.getMap(), true);
@@ -101,6 +101,7 @@ function setTacticListener(data, index) {
 
 
 function setArrayData(data) {
+
     if (data.group != null) {
         tactic.setGroup(data.group);
     }

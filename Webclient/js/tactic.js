@@ -13,6 +13,7 @@ function Tactic() {
     this.id;
     this.drag;
     this.group;
+    this.canvasmapwidth;
 
 
     this.setMaps = function(Maps)
@@ -102,10 +103,35 @@ function Tactic() {
     }
 
 
+    this.getCanvasmapwidth = function(){
+        return this.canvasmapwidth;
+    }
 
+    this.setCanvasmapwidth = function(canvas){
+        this.canvasmapwidth = canvas;
+    }
+
+    this.normalizeKoordinates = function(array ,canvaswidth){
+        var normalizedarray = new Array();
+        for(var value in array){
+            normalizedarray.push(array[value] / canvaswidth);
+        }
+        console.log(normalizedarray);
+        return normalizedarray;
+    }
+
+    this.unnormalizeKoordinates = function(array ,canvaswidth){
+        var normalizedarray = new Array();
+        for(var value in array){
+            normalizedarray.push(array[value] * canvaswidth);
+        }
+        console.log(normalizedarray);
+        return normalizedarray;
+    }
 }
 
 var tactic = new Tactic();
+
 
 
 

@@ -137,7 +137,7 @@ function optionPanel(id, source, group) {
 
             $("[data-tacticloadbutton =" + id + "]").on("click", function () {
                 closeOverlaypanel();
-                deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
+                deleteCanvas();
                 var tactic = setArrayData(user.getGrouptacticByID($(this).attr("data-tacticloadbutton")));
                 drawSavedMap(tactic);
                 handleMapselectorStates("#" + tactic.getMap(), true);

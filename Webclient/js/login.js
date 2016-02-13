@@ -18,7 +18,7 @@ function checkLoggedIn(logout) {
     if (logout) {
         localStorage.removeItem("benutzername");
         socket.emit('disconnect');
-        deleteCanvas(document.getElementById('imgpanel').getContext("2d"));
+        deleteCanvas();
         //handleTacticEvents(false);
     }
 
