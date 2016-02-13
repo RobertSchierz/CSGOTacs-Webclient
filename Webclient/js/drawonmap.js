@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 });
 
-function draw(on) {
+function draw(on, optionlive) {
 
 
     var context = document.getElementById('imgpanel').getContext("2d");
@@ -25,7 +25,7 @@ function draw(on) {
     var contextid = '#' + context.canvas.id;
 
     if (on) {
-        setListenerToCanvas(context, contextid);
+        setListenerToCanvas(context, contextid, optionlive);
     } else if (!on) {
 
         deleteCanvas();
@@ -35,19 +35,22 @@ function draw(on) {
 }
 
 
-function setListenerToCanvas(context, contextid) {
+function setListenerToCanvas(context, contextid, optionlive) {
+    context.strokeStyle = "#df4b26";
+    context.lineJoin = "round";
+    context.lineWidth = 8;
+
     $(contextid).mousedown(function (e) {
         closeHeader();
         paint = true;
+        context.beginPath();
 
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
-        redraw(context);
+        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false, context, optionlive);
     });
 
     $(contextid).mousemove(function (e) {
         if (paint) {
-            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-            redraw(context);
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true, context, optionlive);
         }
     });
 
@@ -61,35 +64,54 @@ function setListenerToCanvas(context, contextid) {
 }
 
 
-function addClick(x, y, dragging) {
+function addClick(x, y, dragging, context, optionlive) {
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(dragging);
+    redraw(context, optionlive, x, y, dragging);
 
 
 }
 
-function redraw(context) {
+function redraw(context, optionlive, x, y, dragging) {
 
-    context.strokeStyle = "#df4b26";
-    context.lineJoin = "round";
-    context.lineWidth = 8;
+    if(optionlive != null){
+       // socket.emit("broadcastGroupLive",({'room' : optionlive, 'user' : localStorage.getItem("benutzername"), 'x' : clickX)})  );
+    }
 
+
+    context.beginPath();
+    if(dragging){
+
+        context.moveTo(clickX[clickX.length-2],clickY[clickY.length-2]);
+        context.lineTo(x,y);
+
+    }else if(!dragging){
+        context.moveTo(x,y);
+        context.lineTo(x,y);
+    }
+
+    context.closePath();
+    context.stroke();
+
+
+
+/*
     for (var i = 0; i < clickX.length; i++) {
 
         context.beginPath();
-        if (clickDrag[i] /*&& i*/) {
+        if (clickDrag[i]) {
             context.moveTo(clickX[i - 1], clickY[i - 1]);
         } else {
 
-            context.moveTo(clickX[i] - 1, clickY[i]);
+            context.moveTo(clickX[i] - 1, clickY[i] - 1);
         }
         context.lineTo(clickX[i], clickY[i]);
 
 
         context.closePath();
         context.stroke();
-    }
+    }*/
 }
 
 function deleteCanvas(context) {
@@ -102,6 +124,7 @@ function deleteCanvas(context) {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
+/*
 function getData(context) {
     socket.on('json', function (msg) {
 
@@ -122,7 +145,7 @@ function getData(context) {
         context.closePath();
         context.stroke();
     });
-}
+}*/
 
 function actualDraw(x, y, drag) {
     var canvaswidth = $("#imgpanel").width();

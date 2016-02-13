@@ -101,7 +101,6 @@ socket.on('status', function (data) {
             user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name': tactic.getTacticname(), 'map': tactic.getMap(), 'id': tactic.getId(), 'drag': tactic.getDrag() }));
         }
         alertMessage("Taktik <u>" + tactic.getTacticname() + "</u> erfolgreich erstellt", "green")
-
     }
 
     if (data.status == "createTacFailed") {
@@ -204,8 +203,6 @@ socket.on('status', function (data) {
 
         setTimeout(function () {
             var livemember = new Array();
-
-
             $('#livememberlist').children().each(function () {
                 livemember.push($(this).text());
             });
@@ -225,13 +222,10 @@ socket.on('status', function (data) {
                     for (var liveuser in livemember) {
                         if (isInArray(data.live, livemember[liveuser]).length == 0) {
                             $("[data-name = " + livemember[liveuser] + "]").remove();
-
                         }
                     }
                 }
             }
-
-
         }, 1000);
 
 
@@ -250,7 +244,7 @@ function setLiveModus(on, data) {
             });
 
         });
-        draw(true);
+        draw(true, data.room);
 
     }
 };

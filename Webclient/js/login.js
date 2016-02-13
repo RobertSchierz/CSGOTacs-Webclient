@@ -48,7 +48,7 @@ function checkLoggedIn(logout) {
             "<span id='login_usernametext'> " + storagevar + " </span>" +
             "<i class='material-icons headericons'  id='login_logout'>exit_to_app</i></div>");
 
-        $("#login_logout").on("click", function () {
+        $("#userinnercanvas").on("click", function () {
             checkLoggedIn(true);
         });
 
