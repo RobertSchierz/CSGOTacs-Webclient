@@ -118,7 +118,16 @@ function setTooltipToElement(element, text) {
 
 }
 
-function setChangeName(target, dest, id, changevalueelement, option) {
+function changeNameOfTactic(id, newvalue, option, target, changevalueelement) {
+
+    user.changeTacticName(id, newvalue, option);
+    $(".changename_textfield").remove();
+    $(target).show();
+    $(changevalueelement).html(newvalue);
+}
+
+
+function setChangeName(target, dest, id) {
 
     $(target).hide();
     $(dest).append("<textarea class='changename_textfield'></textarea>");
@@ -127,11 +136,6 @@ function setChangeName(target, dest, id, changevalueelement, option) {
         var newvalue = $('.changename_textfield').val();
         if (newvalue != "") {
             socket.emit("changeTacName",  JSON.stringify({ 'id': id, 'name': newvalue }));
-            user.changeTacticName(id, newvalue, option);
-
-            $(".changename_textfield").remove();
-            $(target).show();
-            $(changevalueelement).html(newvalue);
         }
 
 

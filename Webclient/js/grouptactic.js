@@ -145,7 +145,7 @@ function optionPanel(id, source, group) {
 
             $("[data-tacticchangenamebutton =" + id + "]").on("click", function () {
                 var id = $(this).attr("data-tacticchangenamebutton");
-                setChangeName("[data-tacticchangenamebutton =" + id + "]", "[data-changenametd =" + id + "]", id, "[data-grouptactic = " + id + "]", "group");
+                setChangeName("[data-tacticchangenamebutton =" + id + "]", "[data-changenametd =" + id + "]", id);
             });
 
             setTooltipToElement("[data-tacticloadbutton =" + id + "]", "Taktik weiterzeichnen");

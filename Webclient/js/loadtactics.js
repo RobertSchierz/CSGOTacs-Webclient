@@ -28,7 +28,7 @@ if(mapnames.length != 0){
 
                     $("[data-edit =" + data[o].id + "]").on("click", function () {
                         var id = $(this).attr("data-edit");
-                        setChangeName("[data-edit =" + id + "]", "[data-edittd =" + id + "]", id, "[data-name =" + id + "]");
+                        setChangeName("[data-edit =" + id + "]", "[data-edittd =" + id + "]", id);
                     });
 
 

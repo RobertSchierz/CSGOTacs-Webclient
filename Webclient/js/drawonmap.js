@@ -111,22 +111,6 @@ function redraw(context, optionlive, x, y, dragging) {
 
 
 
-/*
-    for (var i = 0; i < clickX.length; i++) {
-
-        context.beginPath();
-        if (clickDrag[i]) {
-            context.moveTo(clickX[i - 1], clickY[i - 1]);
-        } else {
-
-            context.moveTo(clickX[i] - 1, clickY[i] - 1);
-        }
-        context.lineTo(clickX[i], clickY[i]);
-
-
-        context.closePath();
-        context.stroke();
-    }*/
 }
 
 function drawLive(x,y,dragging, xstart, ystart){
@@ -165,28 +149,7 @@ function deleteCanvas(context) {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
-/*
-function getData(context) {
-    socket.on('json', function (msg) {
 
-        context.strokeStyle = "#df4b26";
-        context.lineJoin = "round";
-        context.lineWidth = 8;
-
-        context.beginPath();
-
-        context.moveTo(msg.X, msg.Y);
-
-
-        //  context.moveTo(msg.X-1, msg.Y);
-
-        context.lineTo(msg.X, msg.Y);
-
-
-        context.closePath();
-        context.stroke();
-    });
-}*/
 
 function actualDraw(x, y, drag) {
     var canvaswidth = $("#imgpanel").width();

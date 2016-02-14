@@ -126,6 +126,12 @@ socket.on('status', function (data) {
             break;
 
         case "changeTacNameSuccess":
+            if(data.group != null){
+                changeNameOfTactic(data.id, data.name, "group", "[data-tacticchangenamebutton =" + data.id + "]", " [data-grouptactic = " + data.id + "]");
+
+            }else if(data.group == null){
+                changeNameOfTactic(data.id, data.name, null, "[data-edit =" + data.id + "]", " [data-name =" + data.id + "]");
+            }
             alertMessage("Taktikname erfolgreich geändert!", "green");
             break;
 
