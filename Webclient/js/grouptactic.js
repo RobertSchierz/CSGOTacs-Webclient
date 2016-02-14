@@ -151,7 +151,7 @@ function optionPanel(id, source, group) {
             setTooltipToElement("[data-tacticloadbutton =" + id + "]", "Taktik weiterzeichnen");
             setTooltipToElement("[data-tacticchangenamebutton =" + id + "]", "Taktiknamen bearbeiten");
             setTooltipToElement("[data-tacticdeletebutton =" + id + "]", "Taktik Löschen");
-            // setTooltipToElement("[data-tacticlivebutton =" + id + "]", "Live Modus");
+
 
 
 

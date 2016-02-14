@@ -41,6 +41,12 @@ function setListenerToCanvas(context, contextid, optionlive) {
     context.lineWidth = 8;
 
     $(contextid).mousedown(function (e) {
+
+        if(optionlive != null){
+            $("[data-brush ="+localStorage.getItem("benutzername") +"]").show();
+            $(".livebrush").not("[data-brush =" + localStorage.getItem("benutzername") + "]").hide();
+        }
+
         closeHeader();
         paint = true;
         context.beginPath();
@@ -56,6 +62,7 @@ function setListenerToCanvas(context, contextid, optionlive) {
 
     $(contextid).mouseup(function (e) {
         paint = false;
+
     });
 
     $(contextid).mouseleave(function (e) {

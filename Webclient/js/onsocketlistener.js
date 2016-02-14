@@ -202,19 +202,22 @@ socket.on('status', function (data) {
 
         setTimeout(function () {
             var livemember = new Array();
-            $('#livememberlist').children().each(function () {
+            $('#livememberlist').children().find("span").each(function () {
                 livemember.push($(this).text());
             });
 
             if (livemember.length == 0) {
                 for (var liveuser in data.live) {
-                    $("#livememberlist").append("<div data-name='" + data.live[liveuser] + "'>" + data.live[liveuser] + "</div>");
+                    $("#livememberlist").append("<div class='live_userdiv' data-name='" + data.live[liveuser] + "'>" +
+                        "<i data-brush='"+data.live[liveuser]+"' style='margin-right: 5px; display: none' class='material-icons livebrush'>brush</i> <span>" + data.live[liveuser] + "</span></div>");
+
                 }
             } else {
                 if (data.live.length > livemember.length) {
                     for (var liveuser in data.live) {
                         if (isInArray(livemember, data.live[liveuser]).length == 0) {
-                            $("#livememberlist").append("<div data-name='" + data.live[liveuser] + "'>" + data.live[liveuser] + "</div>");
+                            $("#livememberlist").append("<div class='live_userdiv' data-name='" + data.live[liveuser] + "'><" +
+                                "i data-brush='"+data.live[liveuser]+"' style='margin-right: 5px; display: none' class='material-icons livebrush'>brush</i><span>" + data.live[liveuser] + "</span></div>");
                         }
                     }
                 } else if (data.live.length < livemember.length) {
@@ -233,7 +236,15 @@ socket.on('status', function (data) {
     if(data.status == "liveContent"){
 
         drawLive(data.x,data.y,data.drag, data.xstart,data.ystart);
+        $("[data-brush ="+ data.user +"]").show();
 
+        $(".livebrush").not("[data-brush =" + data.user + "]").hide();
+
+        /*$('#livememberlist').each(function () {
+            if ($(this).attr('class') == "livebrush" && $(this).attr('data-brush') != data.user) {
+                $(this).hide(500);
+            }
+        });*/
 
 
     }
