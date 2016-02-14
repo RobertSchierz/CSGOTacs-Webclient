@@ -3,7 +3,6 @@
  */
 
 
-
 socket.on('status', function (data) {
 
     console.log(data);
@@ -227,6 +226,14 @@ socket.on('status', function (data) {
                 }
             }
         }, 1000);
+
+
+    }
+
+    if(data.status == "liveContent"){
+
+        drawLive(data.x,data.y,data.drag, data.xstart,data.ystart);
+
 
 
     }

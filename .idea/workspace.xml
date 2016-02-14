@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b63bd385-267d-4bf0-9d65-3a37a9eefd5f" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\Dokumente\Bachelorarbeit\Webclient\images\mapselections\de_cobblestone.jpg" afterPath="" />
-      <change type="DELETED" beforePath="E:\Dokumente\Bachelorarbeit\Webclient\images\mapselections\de_dust2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="E:\Dokumente\Bachelorarbeit\Webclient\images\mapselections\de_inferno.jpg" afterPath="" />
-      <change type="DELETED" beforePath="E:\Dokumente\Bachelorarbeit\Webclient\images\mapselections\de_mirage.jpg" afterPath="" />
+      <change type="DELETED" beforePath="E:\Dokumente\Bachelorarbeit\Webclient\style.css" afterPath="" />
+      <change type="DELETED" beforePath="E:\Dokumente\Bachelorarbeit\Webclient\test.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/images/callouts/no_callouts_available.png" afterPath="$PROJECT_DIR$/Webclient/images/callouts/no_callouts_available.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/drawonmap.js" afterPath="$PROJECT_DIR$/Webclient/js/drawonmap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/loadtactics.js" afterPath="$PROJECT_DIR$/Webclient/js/loadtactics.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/login.js" afterPath="$PROJECT_DIR$/Webclient/js/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/main.js" afterPath="$PROJECT_DIR$/Webclient/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/jsons/mapselections.json" afterPath="$PROJECT_DIR$/Webclient/jsons/mapselections.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" afterPath="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webclient/css/style.css" afterPath="$PROJECT_DIR$/Webclient/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Bachelorarbeit.iws" />
@@ -28,37 +25,17 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="mapselections.json" pinned="false" current="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/Webclient/jsons/mapselections.json">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.84956455" vertical-offset="1359" max-vertical-offset="2622">
-                    <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="Bachelorarbeit" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
+      <file leaf-file-name="drawonmap.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Webclient/js/drawonmap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64253396" vertical-offset="2652" max-vertical-offset="4959">
-              <caret line="162" column="23" selection-start-line="162" selection-start-column="23" selection-end-line="162" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.35515547" vertical-offset="2234" max-vertical-offset="4351">
+              <caret line="129" column="6" selection-start-line="129" selection-start-column="6" selection-end-line="129" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -67,8 +44,38 @@
       <file leaf-file-name="onsocketlistener.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3870" max-vertical-offset="5149">
-              <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="262" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4041" max-vertical-offset="5282">
+              <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mapselections.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Webclient/jsons/mapselections.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.892858" vertical-offset="1644" max-vertical-offset="2622">
+              <caret line="107" column="23" selection-start-line="107" selection-start-column="23" selection-end-line="107" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.75" vertical-offset="4515" max-vertical-offset="15884">
+              <caret line="252" column="12" selection-start-line="252" selection-start-column="12" selection-end-line="252" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3189" max-vertical-offset="4959">
+              <caret line="157" column="33" selection-start-line="157" selection-start-column="33" selection-end-line="157" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -77,8 +84,8 @@
       <file leaf-file-name="util.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="627" max-vertical-offset="3078">
-              <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="3078">
+              <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -104,20 +111,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="drawonmap.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Webclient/js/drawonmap.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="974" max-vertical-offset="3705">
-              <caret line="78" column="157" selection-start-line="78" selection-start-column="157" selection-end-line="78" selection-end-column="157" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="loadtactics.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/loadtactics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1183" max-vertical-offset="2318">
+            <state vertical-scroll-proportion="0.0" vertical-offset="820" max-vertical-offset="2318">
               <caret line="94" column="73" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="73" />
               <folding />
             </state>
@@ -127,8 +124,8 @@
       <file leaf-file-name="login.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Webclient/js/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-36.642857" vertical-offset="323" max-vertical-offset="2071">
-              <caret line="71" column="20" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
+            <state vertical-scroll-proportion="-9.5" vertical-offset="1007" max-vertical-offset="2071">
+              <caret line="67" column="53" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="53" />
               <folding>
                 <marker date="1455395644419" expanded="false" signature="812:828" placeholder="..." />
               </folding>
@@ -177,22 +174,22 @@
         <option value="$PROJECT_DIR$/Webclient/iosocket/connection.js" />
         <option value="$PROJECT_DIR$/Webclient/js/util.js" />
         <option value="$PROJECT_DIR$/Webclient/js/tactic.js" />
-        <option value="$PROJECT_DIR$/Webclient/css/style.css" />
         <option value="$PROJECT_DIR$/Webclient/js/grouptactic.js" />
-        <option value="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
-        <option value="$PROJECT_DIR$/Webclient/js/drawonmap.js" />
         <option value="$PROJECT_DIR$/Webclient/js/loadtactics.js" />
         <option value="$PROJECT_DIR$/Webclient/js/login.js" />
         <option value="$PROJECT_DIR$/Webclient/js/main.js" />
         <option value="$PROJECT_DIR$/Webclient/jsons/mapselections.json" />
+        <option value="$PROJECT_DIR$/Webclient/css/style.css" />
+        <option value="$PROJECT_DIR$/Webclient/js/onsocketlistener.js" />
+        <option value="$PROJECT_DIR$/Webclient/js/drawonmap.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="179" />
-    <option name="y" value="423" />
-    <option name="width" value="1091" />
-    <option name="height" value="836" />
+    <option name="x" value="1340" />
+    <option name="y" value="263" />
+    <option name="width" value="1192" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -339,46 +336,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="iosocket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bachelorarbeit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bachelorarbeit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Webclient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bachelorarbeit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bachelorarbeit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Webclient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapselections" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -545,8 +502,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="179" y="423" width="1091" height="836" extended-state="1" />
-    <editor active="false" />
+    <frame x="1340" y="263" width="1192" height="784" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28462127" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -559,7 +516,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24186046" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20323129" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -768,13 +725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2753623" vertical-offset="0" max-vertical-offset="1242">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/jquery/jqueryui/jquery-ui.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315818">
@@ -863,26 +813,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="703" max-vertical-offset="912">
-          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/tactic.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1330" max-vertical-offset="2717">
           <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="72" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="627" max-vertical-offset="3078">
-          <caret line="82" column="34" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -900,18 +834,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/drawonmap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="974" max-vertical-offset="3705">
-          <caret line="78" column="157" selection-start-line="78" selection-start-column="157" selection-end-line="78" selection-end-column="157" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.5714285" vertical-offset="1287" max-vertical-offset="2394">
           <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.75" vertical-offset="4515" max-vertical-offset="15884">
+          <caret line="252" column="12" selection-start-line="252" selection-start-column="12" selection-end-line="252" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -924,26 +858,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1178" max-vertical-offset="15846">
-          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3870" max-vertical-offset="5149">
-          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="262" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-36.642857" vertical-offset="323" max-vertical-offset="2071">
-          <caret line="71" column="20" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
+        <state vertical-scroll-proportion="-9.5" vertical-offset="1007" max-vertical-offset="2071">
+          <caret line="67" column="53" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="53" />
           <folding>
             <marker date="1455395644419" expanded="false" signature="812:828" placeholder="..." />
           </folding>
@@ -952,16 +870,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64253396" vertical-offset="2652" max-vertical-offset="4959">
-          <caret line="162" column="23" selection-start-line="162" selection-start-column="23" selection-end-line="162" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2652" max-vertical-offset="4959">
+          <caret line="157" column="33" selection-start-line="157" selection-start-column="33" selection-end-line="157" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Webclient/jsons/mapselections.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84956455" vertical-offset="1359" max-vertical-offset="2622">
-          <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
+        <state vertical-scroll-proportion="-13.892858" vertical-offset="1644" max-vertical-offset="2622">
+          <caret line="107" column="23" selection-start-line="107" selection-start-column="23" selection-end-line="107" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="3078">
+          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/onsocketlistener.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4041" max-vertical-offset="5282">
+          <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Webclient/js/drawonmap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35515547" vertical-offset="2234" max-vertical-offset="4351">
+          <caret line="129" column="6" selection-start-line="129" selection-start-column="6" selection-end-line="129" selection-end-column="6" />
           <folding />
         </state>
       </provider>

@@ -76,7 +76,15 @@ function addClick(x, y, dragging, context, optionlive) {
 function redraw(context, optionlive, x, y, dragging) {
 
     if(optionlive != null){
-        socket.emit("broadcastGroupLive",({'room' : optionlive, 'user' : localStorage.getItem("benutzername"), 'x' : clickX, 'y' : clickY, 'drag' : clickDrag})  );
+        socket.emit("broadcastGroupLive",  JSON.stringify(({
+            'status' : 'liveContent',
+            'room' : optionlive,
+            'user' : localStorage.getItem("benutzername"),
+            'xstart': (clickX[clickX.length -2] / $("#imgpanel").width()),
+            'ystart': (clickY[clickY.length -2] / $("#imgpanel").height()),
+            'x' : (x / $("#imgpanel").width()),
+            'y' : (y / $("#imgpanel").height()),
+            'drag' : dragging}))  );
     }
 
 
@@ -112,6 +120,32 @@ function redraw(context, optionlive, x, y, dragging) {
         context.closePath();
         context.stroke();
     }*/
+}
+
+function drawLive(x,y,dragging, xstart, ystart){
+    var context = document.getElementById('imgpanel').getContext("2d");
+    var imgcanvaswidth = $("#imgpanel").width();
+    var imgcanvasheight = $("#imgpanel").height();
+
+    //console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
+
+
+    context.beginPath();
+    if(dragging == true){
+
+        context.moveTo(xstart * imgcanvaswidth,ystart * imgcanvasheight);
+        context.lineTo(x * imgcanvaswidth,y * imgcanvasheight);
+
+    }else if(dragging == false){
+
+        context.moveTo(x * imgcanvaswidth,y * imgcanvasheight);
+        context.lineTo(x * imgcanvaswidth,y * imgcanvasheight);
+    }
+
+    context.closePath();
+    context.stroke();
+
+
 }
 
 function deleteCanvas(context) {
