@@ -1,3 +1,4 @@
+
 /**
  * Created by Robert on 21.01.2016.
  */
@@ -61,7 +62,7 @@ socket.on('status', function (data) {
             break;
 
         case "authGroupFailed":
-            alertMessage("Beitreten der Gruppe Fehlgeschlagen", "red");
+            alertMessage("Gruppe existiert nicht, oder Passwort ist falsch", "red");
             break;
 
         case "authGroupSuccess":
@@ -210,33 +211,7 @@ socket.on('status', function (data) {
 
         case "connectedClients":
             setTimeout(function () {
-                var livemember = new Array();
-                $('#livememberlist').children().find("span").each(function () {
-                    livemember.push($(this).text());
-                });
-
-                if (livemember.length == 0) {
-                    for (var liveuser in data.live) {
-                        $("#livememberlist").append("<div class='live_userdiv' data-name='" + data.live[liveuser] + "'>" +
-                            "<i data-brush='" + data.live[liveuser] + "' style='margin-right: 5px; display: none' class='material-icons livebrush'>brush</i> <span>" + data.live[liveuser] + "</span></div>");
-
-                    }
-                } else {
-                    if (data.live.length > livemember.length) {
-                        for (var liveuser in data.live) {
-                            if (isInArray(livemember, data.live[liveuser]).length == 0) {
-                                $("#livememberlist").append("<div class='live_userdiv' data-name='" + data.live[liveuser] + "'><" +
-                                    "i data-brush='" + data.live[liveuser] + "' style='margin-right: 5px; display: none' class='material-icons livebrush'>brush</i><span>" + data.live[liveuser] + "</span></div>");
-                            }
-                        }
-                    } else if (data.live.length < livemember.length) {
-                        for (var liveuser in livemember) {
-                            if (isInArray(data.live, livemember[liveuser]).length == 0) {
-                                $("[data-name = " + livemember[liveuser] + "]").remove();
-                            }
-                        }
-                    }
-                }
+                handleLiveUserlist(data);
             }, 1000);
 
 
@@ -290,3 +265,33 @@ function afterLivemodusLoaded(data) {
 
     })
 };
+
+function handleLiveUserlist(data) {
+    var livemember = new Array();
+    $('#livememberlist').children().find("span").each(function () {
+        livemember.push($(this).text());
+    });
+
+    if (livemember.length == 0) {
+        for (var liveuser in data.live) {
+            $("#livememberlist").append("<div class='live_userdiv' data-name='" + data.live[liveuser] + "'>" +
+                "<i data-brush='" + data.live[liveuser] + "' style='margin-right: 5px; display: none' class='material-icons livebrush'>brush</i> <span>" + data.live[liveuser] + "</span></div>");
+
+        }
+    } else {
+        if (data.live.length > livemember.length) {
+            for (var liveuser in data.live) {
+                if (isInArray(livemember, data.live[liveuser]).length == 0) {
+                    $("#livememberlist").append("<div class='live_userdiv' data-name='" + data.live[liveuser] + "'><" +
+                        "i data-brush='" + data.live[liveuser] + "' style='margin-right: 5px; display: none' class='material-icons livebrush'>brush</i><span>" + data.live[liveuser] + "</span></div>");
+                }
+            }
+        } else if (data.live.length < livemember.length) {
+            for (var liveuser in livemember) {
+                if (isInArray(data.live, livemember[liveuser]).length == 0) {
+                    $("[data-name = " + livemember[liveuser] + "]").remove();
+                }
+            }
+        }
+    }
+}

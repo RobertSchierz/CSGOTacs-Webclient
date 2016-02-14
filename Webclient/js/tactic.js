@@ -6,8 +6,8 @@ function Tactic() {
 
     this.maps;
     this.strokestyle;
-    this.X;
-    this.Y;
+    this.x;
+    this.y;
     this.user;
     this.tacticname;
     this.id;
@@ -114,18 +114,27 @@ function Tactic() {
     this.normalizeKoordinates = function(array ,canvaswidth){
         var normalizedarray = new Array();
         for(var value in array){
-            normalizedarray.push(array[value] / canvaswidth);
+
+            try {
+                normalizedarray.push(array[value] / canvaswidth);
+            } catch (e) {
+                console.log(e.message);
+            }
         }
-        console.log(normalizedarray);
+
         return normalizedarray;
     }
 
     this.unnormalizeKoordinates = function(array ,canvaswidth){
         var normalizedarray = new Array();
         for(var value in array){
-            normalizedarray.push(array[value] * canvaswidth);
+            try {
+                normalizedarray.push(array[value] * canvaswidth);
+            } catch (e) {
+                console.log(e.message)
+            }
         }
-        console.log(normalizedarray);
+
         return normalizedarray;
     }
 }

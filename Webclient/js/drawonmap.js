@@ -118,7 +118,7 @@ function drawLive(x,y,dragging, xstart, ystart){
     var imgcanvaswidth = $("#imgpanel").width();
     var imgcanvasheight = $("#imgpanel").height();
 
-    //console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
+    console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
 
 
     context.beginPath();
