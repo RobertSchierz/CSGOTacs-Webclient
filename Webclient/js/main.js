@@ -63,7 +63,7 @@ function handleMapselectorStates(map, loadmap) {
 function closeHeader() {
     $("#absolute_header").animate({
         top: "-170"
-    }, 1000, function () {
+    }, 100, function () {
         openheader = false;
         $("#header_arrow").attr('src', "images/icons/header/arrowdown.png");
     });
@@ -71,7 +71,7 @@ function closeHeader() {
 function openHeader() {
     $("#absolute_header").animate({
         top: "0"
-    }, 1000, function () {
+    }, 100, function () {
         openheader = true;
         $("#header_arrow").attr('src', "images/icons/header/arrowup.png");
 
@@ -227,17 +227,27 @@ function loadAllImagesMapselector() {
 
                 // Mache das erste Objekt aktiv
                 if (i == 0) {
-                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection active'>");
+                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection active'><div data-name='"+data.images[i].name+"' class='selectorimageoverlay'> "+data.images[i].name+"</div>");
                     setCanvasImage(data.images[i].mapname, false);
                     maketactic = false;
                     handleTacticEvents(false);
                 } else {
-                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'>");
+                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'> <div data-name='"+data.images[i].name+"' class='selectorimageoverlay'> "+data.images[i].name+"</div>");
                 }
 
                 $('#'+data.images[i].name).on("click", function () {
                     handleMapselectorStates(this, false);
                 });
+
+                $('#'+data.images[i].name).hover( function () {
+                   $("[data-name =" +$(this).attr("id")+ "]").slideDown(200);
+                },function(){
+
+                    $("[data-name =" +$(this).attr("id")+ "]").delay(1000).slideUp(200);
+                });
+
+
+
 
 
 
