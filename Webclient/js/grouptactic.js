@@ -198,14 +198,14 @@ function setListenerToModButton(id, group) {
         case "remove":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("unsetGroupMod", JSON.stringify({'user': id, 'name': group}));
+                socket.emit("unsetGroupMod", JSON.stringify({'user': localStorage.getItem("benutzername") ,'unset': id, 'name': group}));
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator entfernen");
             break;
         case "add":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("setGroupMod", JSON.stringify({'user': id, 'name': group}));
+                socket.emit("setGroupMod", JSON.stringify({'user': localStorage.getItem("benutzername"), 'set': id, 'name': group}));
 
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator hinzufügen");

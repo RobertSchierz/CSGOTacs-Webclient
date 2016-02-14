@@ -87,8 +87,8 @@ function redraw(context, optionlive, x, y, dragging) {
             'status' : 'liveContent',
             'room' : optionlive,
             'user' : localStorage.getItem("benutzername"),
-            'xstart': (clickX[clickX.length -2] / $("#imgpanel").width()),
-            'ystart': (clickY[clickY.length -2] / $("#imgpanel").height()),
+            'startX': (clickX[clickX.length -2] / $("#imgpanel").width()),
+            'startY': (clickY[clickY.length -2] / $("#imgpanel").height()),
             'x' : (x / $("#imgpanel").width()),
             'y' : (y / $("#imgpanel").height()),
             'drag' : dragging}))  );
