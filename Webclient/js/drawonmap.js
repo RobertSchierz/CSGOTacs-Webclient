@@ -82,16 +82,29 @@ function addClick(x, y, dragging, context, optionlive) {
 
 function redraw(context, optionlive, x, y, dragging) {
 
+
+
     if(optionlive != null){
+
+        var startx = (clickX[clickX.length -2] / $("#imgpanel").width());
+        var starty = (clickY[clickY.length -2] / $("#imgpanel").height());
+
+        if(isNaN(clickX[clickX.length -2] / $("#imgpanel").width()) || isNaN(clickY[clickY.length -2] / $("#imgpanel").height())){
+            startx = x / $("#imgpanel").width();
+            starty = y / $("#imgpanel").height();
+        }
+
         socket.emit("broadcastGroupLive",  JSON.stringify(({
             'status' : 'liveContent',
             'room' : optionlive,
             'user' : localStorage.getItem("benutzername"),
-            'startX': (clickX[clickX.length -2] / $("#imgpanel").width()),
-            'startY': (clickY[clickY.length -2] / $("#imgpanel").height()),
+            'startX': startx,
+            'startY': starty,
             'x' : (x / $("#imgpanel").width()),
             'y' : (y / $("#imgpanel").height()),
             'drag' : dragging}))  );
+
+
     }
 
 
