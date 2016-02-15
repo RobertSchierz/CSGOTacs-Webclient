@@ -6,13 +6,14 @@ function Tactic() {
 
     this.maps;
     this.strokestyle;
-    this.X;
-    this.Y;
+    this.x;
+    this.y;
     this.user;
     this.tacticname;
     this.id;
     this.drag;
     this.group;
+    this.canvasmapwidth;
 
 
     this.setMaps = function(Maps)
@@ -102,10 +103,44 @@ function Tactic() {
     }
 
 
+    this.getCanvasmapwidth = function(){
+        return this.canvasmapwidth;
+    }
 
+    this.setCanvasmapwidth = function(canvas){
+        this.canvasmapwidth = canvas;
+    }
+
+    this.normalizeKoordinates = function(array ,canvaswidth){
+        var normalizedarray = new Array();
+        for(var value in array){
+
+            try {
+                normalizedarray.push(array[value] / canvaswidth);
+            } catch (e) {
+                console.log(e.message);
+            }
+        }
+
+        return normalizedarray;
+    }
+
+    this.unnormalizeKoordinates = function(array ,canvaswidth){
+        var normalizedarray = new Array();
+        for(var value in array){
+            try {
+                normalizedarray.push(array[value] * canvaswidth);
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
+
+        return normalizedarray;
+    }
 }
 
 var tactic = new Tactic();
+
 
 
 

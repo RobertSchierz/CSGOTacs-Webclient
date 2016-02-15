@@ -7,79 +7,67 @@ var refreshmember = false;
 
 function openOverlaypanel(source, groupname) {
 
+    closeHeader();
 
     if (popup_zustand == false) {
 
-        if(source == "register"){
+        if (source == "register") {
             openRegister();
             overlaypanel_header("Registrieren");
         }
 
-        if(source == "tacticname"){
-           // $(".overlaypanel").css({"height": "300px"});
-           // $(".overlaypanel_close").css({"left" : "525px"});
-                openTacticname();
+        if (source == "tacticname") {
+
+            openTacticname();
             overlaypanel_header("Taktik Speichern");
         }
 
-        if(source == "loadtactics"){
-           /* $(".overlaypanel").css({"width": "550px", "height": "550px", "margin-left" : "-250px"});
-            $(".overlaypanel_close").css({"left" : "525px"});*/
+        if (source == "loadtactics") {
             getMaps(user.getTactics());
             console.log(user.getTactics());
             overlaypanel_header("Taktik Laden");
         }
 
-        if(source == "groupcreate"){
+        if (source == "groupcreate") {
             creategroup();
             overlaypanel_header("Gruppe Erstellen");
         }
 
-        if(source == "grouplogin"){
+        if (source == "grouplogin") {
             logingroup();
             overlaypanel_header("Gruppe Beitreten");
         }
 
-        if(source == "grouptactic"){
+        if (source == "grouptactic") {
             refreshmember = true;
-            socket.emit('getGroups', ({'user': localStorage.getItem("benutzername")}));
+            socket.emit('getGroups',  JSON.stringify({'user': localStorage.getItem("benutzername")}));
             requestgroup = groupname;
-            socket.emit("getMaps", ({'group' : groupname}));
-
+            socket.emit("getTacs",  JSON.stringify({'group': groupname}));
 
 
         }
 
-        $(".overlaypanel").fadeIn("normal");
+
         $(".opacitybox").css("opacity", "0.4");
-        $(".opacitybox").fadeIn("normal");
+        $(".opacitybox").fadeIn("5000");
+        $(".overlaypanel").fadeIn("1000");
 
 
         popup_zustand = true;
-
-
         return false;
     }
 }
 
-function closeOverlaypanel(){
+function closeOverlaypanel() {
     requerstsource = null;
-    if(popup_zustand == true) {
+    if (popup_zustand == true) {
+        refreshmember = null;
 
+        $(".overlaypanel").fadeOut("2000");
 
-        $(".overlaypanel").fadeOut("normal");
-
-        $(".opacitybox").fadeOut("normal", function(){
+        $(".opacitybox").fadeOut("2000", function () {
             $("#overlaypanel_insidebox").empty();
-
-            if($("#overlaypanel_headertext").length){
-                $("#overlaypanel_headertext").remove();
-            }
-
-            if($("#groupdelete").length){
-                $("#groupdelete").remove();
-            }
-
+            $("#overlaypanel_header").contents(':not(#overlaypanel_close)').remove();
         });
 
         popup_zustand = false;
@@ -87,67 +75,35 @@ function closeOverlaypanel(){
     }
 }
 
-function overlaypanel_header(headertext){
-        $("#overlaypanel_header").append("<h3 id='overlaypanel_headertext'>"+headertext+"</h3>");
+function overlaypanel_header(headertext) {
+    $("#overlaypanel_header").append("<h3 id='overlaypanel_headertext'>" + headertext + "</h3>");
 }
 
-function ActualSaveTactic(option){
-    var canvas = document.getElementById("imgpanel");
-    var img    = canvas.toDataURL("./testimages");
+function ActualSaveTactic(option) {
+    var canvaswidth = $("#imgpanel").width();
+    var canvasheight = $("#imgpanel").height();
 
+    /* var canvas = document.getElementById("imgpanel");
+     var img    = canvas.toDataURL("./testimages");*/
+    var generatedid = (new Date()).getTime();
 
-    if(option == "group"){
-        tactic.setX(clickX);
-        tactic.setY(clickY);
-        tactic.setUser(localStorage.getItem("benutzername"));
-        tactic.setMaps($("#mapselector").find(".active").attr("id"));
-        tactic.setTacticname($("#grouptacticname_tacticnameinput").val());
-        tactic.setDrag(clickDrag);
-        tactic.setId((new Date()).getTime());
-        user.addGrouptactic(({'group' : $("#grouptacticname_groups option:selected" ).text(), 'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
-        console.log(tactic);
-        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), $("#grouptacticname_groups option:selected" ).text());
+    if (option == "group") {
+
+          sendLocaltactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,  tactic.normalizeKoordinates(clickX,canvaswidth),tactic.normalizeKoordinates(clickY,canvasheight) , $("#grouptacticname_tacticnameinput").val(), $("#grouptacticname_groups option:selected").text());
+
     }
+    if (option == "new") {
 
-    if(option == "new"){
-        tactic.setX(clickX);
-        tactic.setY(clickY);
-        tactic.setUser(localStorage.getItem("benutzername"));
-        tactic.setMaps($("#mapselector").find(".active").attr("id"));
-        tactic.setTacticname($("#tacticname_tacticnameinput").val());
-        tactic.setDrag(clickDrag);
-        tactic.setId((new Date()).getTime());
-        user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name' : tactic.getTacticname(), 'map' : tactic.getMap(), 'id' : tactic.getId(), 'drag' : tactic.getDrag() }));
+          sendLocaltactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,tactic.normalizeKoordinates(clickX,canvaswidth) , tactic.normalizeKoordinates(clickY,canvasheight), $("#tacticname_tacticnameinput").val(), null);
 
-        sendLocaltactic(tactic.getId(), tactic.getUser(), tactic.getMap(), tactic.getDrag(), tactic.getX(), tactic.getY(), tactic.getTacticname(), null);
-    }else if(option == "loaded"){
-        tactic.setDrag(tactic.getDrag().concat(clickDrag));
-        tactic.setX(tactic.getX().concat(clickX));
-        tactic.setY(tactic.getY().concat(clickY));
-        user.changeTacticData(tactic);
-        //console.log(tactic.getId() + " " + tactic.getDrag() + " " + tactic.getX().length +" " + tactic.getY().length);
-        socket.emit('changeMap', ({'id' : tactic.getId(), 'drag' : tactic.getDrag(),  'x' : tactic.getX(), 'y' : tactic.getY()}));
+
+    } else if (option == "loaded") {
+        socket.emit('changeTac',  JSON.stringify({'id': tactic.getId(), 'drag': tactic.getDrag().concat(clickDrag), 'x': tactic.getX().concat( tactic.normalizeKoordinates(clickX,canvaswidth)), 'y': tactic.getY().concat( tactic.normalizeKoordinates(clickY, canvasheight))}));
     }
 
 }
 
-
-function ActualDeleteTactic(id){
-    socket.emit('deleteMap', ({'id' : id}));
-    user.deleteTacticName(id);
-    $("#tactic_" + id).hide(2000, function(){
-
-    });
-
-}
-
-function splittId(id){
-    var splittedid = id.split("_");
-    return splittedid[1];
-}
-
-function setTooltipToElement(element, text){
-
+function setTooltipToElement(element, text) {
 
 
     $(element).attr('title', text).tooltip({
@@ -155,31 +111,54 @@ function setTooltipToElement(element, text){
         position: {
             my: "center bottom-20",
             at: "center top",
-            using: function( position, feedback ) {
-                $( this ).css( position );
-                $( "<div>" )
-                    .addClass( "arrow" )
-                    .appendTo( this );
+            using: function (position, feedback) {
+                $(this).css(position);
+                $("<div>")
+                    .addClass("arrow")
+                    .appendTo(this);
             }
         }
     });
 
 }
 
-function setChangeName(target, dest, id, changevalueelement, option){
+function changeNameOfTactic(id, newvalue, option, target, changevalueelement) {
+
+    user.changeTacticName(id, newvalue, option);
+    $(".changename_textfield").remove();
+    $(target).show();
+    $(changevalueelement).html(newvalue);
+}
+
+
+function setChangeName(target, dest, id) {
 
     $(target).hide();
     $(dest).append("<textarea class='changename_textfield'></textarea>");
 
     $(".changename_textfield").on("focusout", function () {
         var newvalue = $('.changename_textfield').val();
+        if (newvalue != "") {
+            socket.emit("changeTacName",  JSON.stringify({ 'id': id, 'name': newvalue }));
+        }
 
-        socket.emit("changeMapName", ({ 'id' : id, 'name' : newvalue }));
-        user.changeTacticName(id, newvalue, option);
-
-        $(".changename_textfield").remove();
-        $(target).show();
-        $(changevalueelement).html(newvalue);
 
     });
+}
+
+function isInArray(array, value) {
+    if (array.length != 0) {
+
+
+        var tempindexarray = new Array();
+        for (var element in array) {
+            if (array[element] == value) {
+                tempindexarray.push(element);
+            }
+        }
+
+        return tempindexarray;
+    } else {
+        return new Array();
+    }
 }

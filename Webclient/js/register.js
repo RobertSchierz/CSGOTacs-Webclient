@@ -14,7 +14,7 @@ function openRegister(){
 }
 
 function sendRegisterData(username, password){
-    socket.emit('reg', ({'user': username, 'pw' : password }));
+    socket.emit('reg',  JSON.stringify({'user': username, 'pw' : password }));
 }
 
 

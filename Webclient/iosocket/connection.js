@@ -1,7 +1,11 @@
 /**
  * Created by Robert on 22.12.2015.
  */
+
 var socket = io('https://p4dme.shaula.uberspace.de/');
+
+
+
 
 /*
  function sendData(x, y){
@@ -11,10 +15,11 @@ var socket = io('https://p4dme.shaula.uberspace.de/');
  */
 
 function sendLocaltactic(id, username, map, drag, x, y, tacticname, group ){
+
     if(group != null){
-        socket.emit('createMap', ({'id' : id, 'user' : username ,'map': map, 'name' : tacticname , 'drag' : drag, 'x' : x, 'y' : y, 'group' : group}));
+        socket.emit('createTac',  JSON.stringify({'id' : id, 'user' : username ,'map': map, 'name' : tacticname , 'drag' : drag, 'x' : x, 'y' : y, 'group' : group}));
     }else {
-        socket.emit('createMap', ({'id': id, 'user': username, 'map': map, 'name': tacticname, 'drag': drag, 'x': x, 'y': y}));
+        socket.emit('createTac',  JSON.stringify({'id': id, 'user': username, 'map': map, 'name': tacticname, 'drag': drag, 'x': x, 'y': y}));
     }
     }
 

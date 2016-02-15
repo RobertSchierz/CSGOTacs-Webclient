@@ -10,12 +10,12 @@ function logingroup(){
 }
 
 function sendGroupLogin(groupname, grouppassword){
-    socket.emit('authGroup', ({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
+    socket.emit('authGroup',  JSON.stringify({'user': localStorage.getItem("benutzername"),'name' : groupname,  'pw' : grouppassword }));
 }
 
 function grouplogin(data) {
     data.member.push(localStorage.getItem("benutzername"));
-    var group = ({'name': $("#grouplogin_nameinput").val(), 'member': data.member});
+    var group = ({'name': $("#grouplogin_nameinput").val(), 'member': data.member, 'admin' : data.admin, 'mods' : data.mods});
     user.addGroup(group);
     appendGroupMenu(group);
     closeOverlaypanel();

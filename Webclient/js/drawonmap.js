@@ -7,86 +7,153 @@ var clickY = new Array();
 var clickDrag = new Array();
 var paint;
 
-$( document ).ready(function() {
+
+
+
+$(document).ready(function () {
 //getData(document.getElementById('imgpanel').getContext("2d"));
+
+
 
 });
 
-function draw(on){
+function draw(on, optionlive) {
+
 
     var context = document.getElementById('imgpanel').getContext("2d");
+
     var contextid = '#' + context.canvas.id;
 
-    if(on){
-        setListenerToCanvas(context, contextid);
-    }else if(!on){
+    if (on) {
+        setListenerToCanvas(context, contextid, optionlive);
+    } else if (!on) {
 
-        deleteCanvas(context);
+        deleteCanvas();
     }
 
 
-
 }
 
 
-function setListenerToCanvas(context, contextid){
-    $(contextid).mousedown(function(e){
-        paint = true;
-
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
-        redraw(context);
-    });
-
-    $(contextid).mousemove(function(e){
-        if(paint){
-            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-            redraw(context);
-        }
-    });
-
-    $(contextid).mouseup(function(e){
-        paint = false;
-    });
-
-    $(contextid).mouseleave(function(e){
-        paint = false;
-    });
-}
-
-
-function addClick(x, y, dragging)
-{
-    clickX.push(x);
-    clickY.push(y);
-    clickDrag.push(dragging);
-    //sendData(x, y);
-
-}
-
-function redraw(context){
-
+function setListenerToCanvas(context, contextid, optionlive) {
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     context.lineWidth = 8;
 
-    for(var i=0; i < clickX.length; i++) {
+    $(contextid).mousedown(function (e) {
 
-        context.beginPath();
-        if(clickDrag[i] /*&& i*/){
-            context.moveTo(clickX[i-1], clickY[i-1]);
-        }else{
-
-            context.moveTo(clickX[i]-1, clickY[i]);
+        if(optionlive != null){
+            $("[data-brush ="+localStorage.getItem("benutzername") +"]").show();
+            $(".livebrush").not("[data-brush =" + localStorage.getItem("benutzername") + "]").hide();
         }
-        context.lineTo(clickX[i], clickY[i]);
 
+        closeHeader();
+        paint = true;
+        context.beginPath();
 
-        context.closePath();
-        context.stroke();
-    }
+        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false, context, optionlive);
+    });
+
+    $(contextid).mousemove(function (e) {
+        if (paint) {
+            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true, context, optionlive);
+        }
+    });
+
+    $(contextid).mouseup(function (e) {
+        paint = false;
+
+    });
+
+    $(contextid).mouseleave(function (e) {
+        paint = false;
+    });
 }
 
-function deleteCanvas(context){
+
+function addClick(x, y, dragging, context, optionlive) {
+    clickX.push(x);
+    clickY.push(y);
+    clickDrag.push(dragging);
+    redraw(context, optionlive, x, y, dragging);
+
+
+}
+
+function redraw(context, optionlive, x, y, dragging) {
+
+
+
+    if(optionlive != null){
+
+        var startx = (clickX[clickX.length -2] / $("#imgpanel").width());
+        var starty = (clickY[clickY.length -2] / $("#imgpanel").height());
+
+        if(isNaN(clickX[clickX.length -2] / $("#imgpanel").width()) || isNaN(clickY[clickY.length -2] / $("#imgpanel").height())){
+            startx = x / $("#imgpanel").width();
+            starty = y / $("#imgpanel").height();
+        }
+
+        socket.emit("broadcastGroupLive",  JSON.stringify(({
+            'status' : 'liveContent',
+            'room' : optionlive,
+            'user' : localStorage.getItem("benutzername"),
+            'startX': startx,
+            'startY': starty,
+            'x' : (x / $("#imgpanel").width()),
+            'y' : (y / $("#imgpanel").height()),
+            'drag' : dragging}))  );
+
+
+    }
+
+
+    context.beginPath();
+    if(dragging){
+
+        context.moveTo(clickX[clickX.length-2],clickY[clickY.length-2]);
+        context.lineTo(x,y);
+
+    }else if(!dragging){
+        context.moveTo(x,y);
+        context.lineTo(x,y);
+    }
+
+    context.closePath();
+    context.stroke();
+
+
+
+}
+
+function drawLive(x,y,dragging, xstart, ystart){
+    var context = document.getElementById('imgpanel').getContext("2d");
+    var imgcanvaswidth = $("#imgpanel").width();
+    var imgcanvasheight = $("#imgpanel").height();
+
+    console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
+
+
+    context.beginPath();
+    if(dragging == true){
+
+        context.moveTo(xstart * imgcanvaswidth,ystart * imgcanvasheight);
+        context.lineTo(x * imgcanvaswidth,y * imgcanvasheight);
+
+    }else if(dragging == false){
+
+        context.moveTo(x * imgcanvaswidth,y * imgcanvasheight);
+        context.lineTo(x * imgcanvaswidth,y * imgcanvasheight);
+    }
+
+    context.closePath();
+    context.stroke();
+
+
+}
+
+function deleteCanvas(context) {
+    var context = document.getElementById('imgpanel').getContext("2d");
     $("#imgpanel").off();
     clickX = new Array();
     clickY = new Array();
@@ -95,46 +162,30 @@ function deleteCanvas(context){
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
-function getData(context){
-    socket.on('json', function(msg){
-
-        context.strokeStyle = "#df4b26";
-        context.lineJoin = "round";
-        context.lineWidth = 8;
-
-        context.beginPath();
-
-            context.moveTo(msg.X, msg.Y);
 
 
-          //  context.moveTo(msg.X-1, msg.Y);
+function actualDraw(x, y, drag) {
+    var canvaswidth = $("#imgpanel").width();
+    var canvasheight = $("#imgpanel").height();
 
-        context.lineTo(msg.X, msg.Y);
-
-
-        context.closePath();
-        context.stroke();
-    });
-}
-
-function actualDraw(x, y, drag){
+    var x =  tactic.unnormalizeKoordinates(x,canvaswidth);
+    var y = tactic.unnormalizeKoordinates(y, canvasheight);
 
     var context = document.getElementById('imgpanel').getContext("2d");
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     context.lineWidth = 8;
 
-    for(var i=0; i < x.length; i++) {
+    for (var i = 0; i < x.length; i++) {
 
         context.beginPath();
-        if(drag[i] /*&& i*/){
-            context.moveTo(x[i-1], y[i-1]);
-        }else{
+        if (drag[i] /*&& i*/) {
+            context.moveTo(x[i - 1], y[i - 1]);
+        } else {
 
-            context.moveTo(x[i]-1, y[i]);
+            context.moveTo(x[i] - 1, y[i]);
         }
         context.lineTo(x[i], y[i]);
-
 
 
         context.closePath();
@@ -142,14 +193,14 @@ function actualDraw(x, y, drag){
     }
 }
 
-function drawSavedMap(tactic){
+function drawSavedMap(tactic) {
     actualDraw(tactic.x, tactic.y, tactic.drag);
 }
 
-function saveTactic(){
+function saveTactic() {
     openOverlaypanel("tacticname");
 }
 
-function loadTactics(){
+function loadTactics() {
     openOverlaypanel("loadtactics");
 }

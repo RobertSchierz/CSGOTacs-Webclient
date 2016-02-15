@@ -18,13 +18,24 @@ function openTacticname(){
             $("#grouptacticname_groups").append("<option>" + user.groupNamesArray()[names] + "</option>");
         }
         $("#grouptacticname_submit").on( "click", function() {
-            ActualSaveTactic("group");
-            closeOverlaypanel();
+
+            if(($("#grouptacticname_tacticnameinput").val() != "" && $("#grouptacticname_tacticnameinput").val() != null)){
+                ActualSaveTactic("group");
+                closeOverlaypanel();
+            }else{
+                alertMessage("Der Taktikname ist nicht eingetragen!", "red")
+            }
+
         });
 
         $("#tacticname_submit").on( "click", function() {
+
+            if(($("#tacticname_tacticnameinput").val() != "" && $("#tacticname_tacticnameinput").val() != null)){
                 ActualSaveTactic("new");
                 closeOverlaypanel();
+            }else{
+                alertMessage("Der Taktikname ist nicht eingetragen!", "red")
+            }
         });
 
 

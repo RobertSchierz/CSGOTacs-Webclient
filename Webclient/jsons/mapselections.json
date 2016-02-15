@@ -1,29 +1,133 @@
 {"images": [
     {
-        "name": "dust2",
-        "url": "images/mapselections/de_dust2.jpg",
-        "mapname" : "dust2",
-        "map": "images/map_dust2.jpg"
+        "name": "Dust2",
+        "url": "images/mapselections/Dust2.jpg",
+        "mapname" : "Dust2",
+        "map": "images/map_dust2.jpg",
+        "callout" : "images/callouts/de_dust2_callout.png"
     },
     {
 
-        "name": "cobblestone",
-        "url": "images/mapselections/de_cobblestone.jpg",
-        "mapname" : "cobblestone",
-        "map": "images/map_cobblestone.jpg"
+        "name": "Cobblestone",
+        "url": "images/mapselections/Cobblestone.jpg",
+        "mapname" : "Cobblestone",
+        "map": "images/map_cobblestone.jpg",
+        "callout" : "images/callouts/de_cobblestone_callout.png"
     },
     {
 
-        "name": "inferno",
-        "url": "images/mapselections/de_inferno.jpg",
-        "mapname" : "inferno",
-        "map": "images/map_inferno.jpg"
+        "name": "Inferno",
+        "url": "images/mapselections/Inferno.jpg",
+        "mapname" : "Inferno",
+        "map": "images/map_inferno.jpg",
+        "callout" : "images/callouts/de_inferno_callout.png"
     },
     {
 
-        "name": "mirage",
-        "url": "images/mapselections/de_mirage.jpg",
-        "mapname" : "mirage",
-        "map": "images/map_mirage.jpg"
+        "name": "Mirage",
+        "url": "images/mapselections/Mirage.jpg",
+        "mapname" : "Mirage",
+        "map": "images/map_mirage.jpg",
+        "callout" : "images/callouts/de_mirage_callout.png"
+    },
+
+    {
+
+        "name": "Overpass",
+        "url": "images/mapselections/Overpass.jpg",
+        "mapname" : "Overpass",
+        "map": "images/map_overpass.jpg",
+        "callout" : "images/callouts/de_overpass_callout.png"
+    },
+
+    {
+
+        "name": "Cache",
+        "url": "images/mapselections/Cache.jpg",
+        "mapname" : "Cache",
+        "map": "images/map_cache.jpg",
+        "callout" : "images/callouts/de_cache_callout.png"
+    },
+
+    {
+
+        "name": "Train",
+        "url": "images/mapselections/Train.jpg",
+        "mapname" : "Train",
+        "map": "images/map_train.jpg",
+        "callout" : "images/callouts/de_train_callout.png"
+    },
+
+    {
+
+        "name": "Italy",
+        "url": "images/mapselections/Italy.jpg",
+        "mapname" : "Italy",
+        "map": "images/map_italy.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Assault",
+        "url": "images/mapselections/Assault.jpg",
+        "mapname" : "Assault",
+        "map": "images/map_assault.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Aztec",
+        "url": "images/mapselections/Aztec.jpg",
+        "mapname" : "Aztec",
+        "map": "images/map_aztec.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Dust",
+        "url": "images/mapselections/Dust.jpg",
+        "mapname" : "Dust",
+        "map": "images/map_dust.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Militia",
+        "url": "images/mapselections/Militia.jpg",
+        "mapname" : "Militia",
+        "map": "images/map_militia.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Nuke",
+        "url": "images/mapselections/Nuke.jpg",
+        "mapname" : "Nuke",
+        "map": "images/map_nuke.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Office",
+        "url": "images/mapselections/Office.jpg",
+        "mapname" : "Office",
+        "map": "images/map_office.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
+    },
+
+    {
+
+        "name": "Vertigo",
+        "url": "images/mapselections/Vertigo.jpg",
+        "mapname" : "Vertigo",
+        "map": "images/map_vertigo.jpg",
+        "callout" : "images/callouts/no_callouts_available.png"
     }
+
 ] }
