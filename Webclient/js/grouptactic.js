@@ -184,9 +184,9 @@ function optionPanel(id, source, group) {
             return false;
         })
 
-        $("[data-optionpanel =" + id + "]").show(500);
+        $("[data-optionpanel =" + id + "]").show(200);
     } else {
-        $("[data-optionpanel =" + id + "]").hide(500);
+        $("[data-optionpanel =" + id + "]").hide(200);
         $("[data-optionpanel =" + id + "]").remove();
 
     }

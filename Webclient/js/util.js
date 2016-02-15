@@ -134,7 +134,7 @@ function changeNameOfTactic(id, newvalue, option, target, changevalueelement) {
 function setChangeName(target, dest, id) {
 
     $(target).hide();
-    $(dest).append("<textarea class='changename_textfield'></textarea>");
+    $(dest).append("<textarea class='changename_textfield' maxlength='20'></textarea>");
 
     $(".changename_textfield").on("focusout", function () {
         var newvalue = $('.changename_textfield').val();
@@ -161,4 +161,30 @@ function isInArray(array, value) {
     } else {
         return new Array();
     }
+}
+
+function pressEnter(source){
+
+
+    $(document).bind("keypress.key13", function(event) {
+
+
+            if (event.which == 13) {
+
+                        if ($('.overlaypanel').css('display') == 'none') {
+                            authentification($("#login_username").val(), $("#login_password").val());
+                        }
+
+
+                        if ($('.overlaypanel').css('display') == 'block') {
+                            sendRegisterData($("#register_usernameinput").val(), $("#register_passwordinput").val());
+
+                        }
+            }
+
+
+
+    });
+
+
 }

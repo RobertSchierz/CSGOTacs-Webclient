@@ -26,21 +26,26 @@ function checkLoggedIn(logout) {
     var storagevar = localStorage.getItem("benutzername");
     if (storagevar == null) {
         $('#usercanvas').html("<span  class='userloginelement'>Benutzername:</span> " +
-            "<input type='input' id='login_username' class='form-control userloginelement'> " +
+            "<input type='input' id='login_username' class='form-control userloginelement' maxlength='20'> " +
             "<span  style = 'margin-top:10px;' class='userloginelement' >Passwort:</span> " +
-            "<input type='password' id='login_password' class='form-control userloginelement'> " +
+            "<input type='password' id='login_password' class='form-control userloginelement' maxlength='20'> " +
             "<input type='button' id='login_submit' value='Login' class='userloginelement'> " +
             "<span id='login_register' class='userloginelement'>Registrieren</span>");
 
         $("#login_submit").on("click", function () {
             authentification($("#login_username").val(), $("#login_password").val());
         });
+
+
+
         $("#login_register").on("click", function () {
             openOverlaypanel("register");
 
         });
+
         $(".tacticelement").hide();
         $("#groupcanvas").hide();
+
     } else {
 
 

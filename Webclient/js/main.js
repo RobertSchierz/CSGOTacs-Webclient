@@ -74,10 +74,13 @@ function openHeader() {
     }, 100, function () {
         openheader = true;
         $("#header_arrow").attr('src', "images/icons/header/arrowup.png");
+        $("#login_username").focus();
 
     });
 }
 function setListenerToElements() {
+    pressEnter();
+
 
     $("#tacticcanvas").on("click", function () {
         return false;
