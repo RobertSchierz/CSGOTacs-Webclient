@@ -8,8 +8,8 @@
 function User() {
 
     this.groups = new Array();
-    this.tactics = new Array();;
-    this.grouptactics = new Array();;
+    this.tactics = new Array();
+    this.grouptactics = new Array();
 
     this.setGroups = function(Groups)
     {
@@ -46,6 +46,7 @@ function User() {
 
     this.getIndexofGroupByName = function(groupname){
         for(var group in this.groups){
+            //noinspection JSUnfilteredForInLoop
             if(this.groups[group].name == groupname){
                 return group;
             }
@@ -87,7 +88,7 @@ function User() {
 
     this.addTactic = function(addedtactic){
         this.tactics.push(addedtactic);
-    }
+    };
 
     this.changeTacticName = function(id, newname, option){
         if(option == "group"){
@@ -104,7 +105,7 @@ function User() {
             }
         }
 
-    }
+    };
 
     this.deleteTacticName = function(id){
         for(var tactic = 0; tactic < this.tactics.length; tactic++){
@@ -112,7 +113,7 @@ function User() {
                 this.tactics.splice(tactic,1);
             }
         }
-    }
+    };
 
 
     this.setGrouptactics = function(Grouptactics)
@@ -127,7 +128,7 @@ function User() {
 
     this.addGrouptactic = function(addedgrouptactic){
         this.grouptactics.push(addedgrouptactic);
-    }
+    };
 
     this.setLocalToGroupTactic = function(id){
         /*
@@ -143,7 +144,7 @@ function User() {
         }
 */
         this.deleteTacticName(id);
-    }
+    };
 
     this.getGroupByName = function(groupname){
 
@@ -153,7 +154,7 @@ function User() {
             return this.groups[group];
         }
         }
-    }
+    };
 
     this.getGrouptacticsByName = function(groupname){
         var grouptacticsarray = new Array();
@@ -164,7 +165,7 @@ function User() {
         }
 
         return grouptacticsarray;
-    }
+    };
 
     this.getGrouptacticByID = function(id){
         for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
@@ -174,7 +175,7 @@ function User() {
         }
 
         return grouptacticsarray;
-    }
+    };
 
     this.changeTacticData = function(tactic){
 

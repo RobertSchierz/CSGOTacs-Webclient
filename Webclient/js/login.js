@@ -33,7 +33,11 @@ function checkLoggedIn(logout) {
             "<span id='login_register' class='userloginelement'>Registrieren</span>");
 
         $("#login_submit").on("click", function () {
-            authentification($("#login_username").val(), $("#login_password").val());
+            if(($("#login_username").val() != "" && $("#login_username").val() != null) && ($("#login_password").val() != "" &&  $("#login_password").val() != null )) {
+                authentification($("#login_username").val(), $("#login_password").val());
+            }else{
+                alertMessage("Felder müssen befüllt sein", "red")
+            }
         });
 
 

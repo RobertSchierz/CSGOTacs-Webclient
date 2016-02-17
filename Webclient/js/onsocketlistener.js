@@ -13,14 +13,6 @@ socket.on('status', function (data) {
             authSuccess(data);
             break;
 
-        case "authSuccess":
-            authSuccess(data);
-            break;
-
-        case "authSuccess":
-            authSuccess(data);
-            break;
-
         case "authFailed":
             alertMessage("Passwort oder Benutzername nicht vorhanden!", "red");
             break;
@@ -108,11 +100,11 @@ socket.on('status', function (data) {
                 tactic.setId(data.tacs[0].id);
                 user.addTactic(({'x': tactic.getX(), 'y': tactic.getY(), 'user': tactic.getUser(), 'name': tactic.getTacticname(), 'map': tactic.getMap(), 'id': tactic.getId(), 'drag': tactic.getDrag() }));
             }
-            alertMessage("Taktik <u>" + tactic.getTacticname() + "</u> erfolgreich erstellt", "green")
+            alertMessage("Taktik <u>" + tactic.getTacticname() + "</u> erfolgreich erstellt", "green");
             break;
 
         case "createTacFailed":
-            alertMessage("Taktik konnte nicht gespeichert werden", "red")
+            alertMessage("Taktik konnte nicht gespeichert werden", "red");
             break;
 
         case "bindTacSuccess":
@@ -202,7 +194,7 @@ socket.on('status', function (data) {
             break;
 
         case "deleteTacFailed":
-            alertMessage("Fehler beim Löschen der Taktik aufgetreten", "red")
+            alertMessage("Fehler beim Löschen der Taktik aufgetreten", "red");
             break;
 
         case "provideRoomName":
@@ -248,7 +240,7 @@ function setLiveModus(on, data) {
         draw(true, data.room);
 
     }
-};
+}
 
 function afterLivemodusLoaded(data) {
 
@@ -264,7 +256,7 @@ function afterLivemodusLoaded(data) {
         draw(false);
 
     })
-};
+}
 
 function handleLiveUserlist(data) {
     var livemember = new Array();

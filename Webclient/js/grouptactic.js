@@ -182,7 +182,7 @@ function optionPanel(id, source, group) {
 
         $(".optionpanel").on("click", function(){
             return false;
-        })
+        });
 
         $("[data-optionpanel =" + id + "]").show(200);
     } else {

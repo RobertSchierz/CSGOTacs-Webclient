@@ -10,6 +10,7 @@ var paint;
 
 
 
+
 $(document).ready(function () {
 //getData(document.getElementById('imgpanel').getContext("2d"));
 
@@ -36,9 +37,7 @@ function draw(on, optionlive) {
 
 
 function setListenerToCanvas(context, contextid, optionlive) {
-    context.strokeStyle = "#df4b26";
-    context.lineJoin = "round";
-    context.lineWidth = 8;
+
 
     $(contextid).mousedown(function (e) {
 
@@ -82,7 +81,9 @@ function addClick(x, y, dragging, context, optionlive) {
 
 function redraw(context, optionlive, x, y, dragging) {
 
-
+    context.strokeStyle = "#FB8C00";
+    context.lineJoin = "round";
+    context.lineWidth = 4;
 
     if(optionlive != null){
 
@@ -128,6 +129,10 @@ function redraw(context, optionlive, x, y, dragging) {
 
 function drawLive(x,y,dragging, xstart, ystart){
     var context = document.getElementById('imgpanel').getContext("2d");
+    context.strokeStyle = "#df4b26";
+    context.lineJoin = "round";
+    context.lineWidth = 4;
+
     var imgcanvaswidth = $("#imgpanel").width();
     var imgcanvasheight = $("#imgpanel").height();
 
@@ -158,7 +163,7 @@ function deleteCanvas(context) {
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();
-    this.tactic = new Tactic();
+    tactic = Tactic.createTactic();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
@@ -172,14 +177,14 @@ function actualDraw(x, y, drag) {
     var y = tactic.unnormalizeKoordinates(y, canvasheight);
 
     var context = document.getElementById('imgpanel').getContext("2d");
-    context.strokeStyle = "#df4b26";
+    context.strokeStyle = "#FB8C00";
     context.lineJoin = "round";
-    context.lineWidth = 8;
+    context.lineWidth = 4;
 
     for (var i = 0; i < x.length; i++) {
 
         context.beginPath();
-        if (drag[i] /*&& i*/) {
+        if (drag[i]) {
             context.moveTo(x[i - 1], y[i - 1]);
         } else {
 

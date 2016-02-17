@@ -152,6 +152,7 @@ function isInArray(array, value) {
 
         var tempindexarray = new Array();
         for (var element in array) {
+            //noinspection JSUnfilteredForInLoop
             if (array[element] == value) {
                 tempindexarray.push(element);
             }
@@ -172,12 +173,22 @@ function pressEnter(source){
             if (event.which == 13) {
 
                         if ($('.overlaypanel').css('display') == 'none') {
-                            authentification($("#login_username").val(), $("#login_password").val());
+                            if(($("#login_username").val() != "" && $("#login_username").val() != null) && ($("#login_password").val() != "" &&  $("#login_password").val() != null )) {
+                                authentification($("#login_username").val(), $("#login_password").val());
+                            }else{
+                                alertMessage("Felder müssen befüllt sein", "red")
+                            }
+
+
                         }
 
 
                         if ($('.overlaypanel').css('display') == 'block') {
-                            sendRegisterData($("#register_usernameinput").val(), $("#register_passwordinput").val());
+                            if(($("#register_usernameinput").val() != "" && $("#register_usernameinput").val() != null) && ($("#register_passwordinput").val() != "" &&  $("#register_passwordinput").val() != null )) {
+                                sendRegisterData($("#register_usernameinput").val(), $("#register_passwordinput").val())
+                            }else{
+                                alertMessage("Felder müssen befüllt sein", "red")
+                            }
 
                         }
             }

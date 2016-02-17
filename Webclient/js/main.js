@@ -133,7 +133,7 @@ function setListenerToElements() {
         handleMapselectorScroll($(this).attr("id"));
 
 
-    })
+    });
 
     $("#mapselector_arrowright").on("click", function () {
         handleMapselectorScroll($(this).attr("id"));
@@ -201,6 +201,7 @@ function handleTacticEvents(loadtactics) {
 function setCanvasImage(id, loadtactic) {
 
     for(var mapobject in imagearray){
+        //noinspection JSUnfilteredForInLoop
         if(imagearray[mapobject].mapname == id){
 
             $("#callout").attr('src', imagearray[mapobject].callout);

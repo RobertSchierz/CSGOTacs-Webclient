@@ -2,7 +2,8 @@
  * Created by Robert on 26.12.2015.
  */
 
-function Tactic() {
+function Tactic(){
+
 
     this.maps;
     this.strokestyle;
@@ -14,6 +15,8 @@ function Tactic() {
     this.drag;
     this.group;
     this.canvasmapwidth;
+    this.tactic;
+
 
 
     this.setMaps = function(Maps)
@@ -88,34 +91,35 @@ function Tactic() {
 
     this.setDrag = function(drag){
         this.drag = drag;
-    }
+    };
 
     this.getDrag = function(){
         return this.drag;
-    }
+    };
 
     this.setGroup = function(group){
         this.group = group;
-    }
+    };
 
     this.getGroup = function(){
         return this.group;
-    }
+    };
 
 
     this.getCanvasmapwidth = function(){
         return this.canvasmapwidth;
-    }
+    };
 
     this.setCanvasmapwidth = function(canvas){
         this.canvasmapwidth = canvas;
-    }
+    };
 
     this.normalizeKoordinates = function(array ,canvaswidth){
         var normalizedarray = new Array();
         for(var value in array){
 
             try {
+                //noinspection JSUnfilteredForInLoop
                 normalizedarray.push(array[value] / canvaswidth);
             } catch (e) {
                 console.log(e.message);
@@ -123,7 +127,7 @@ function Tactic() {
         }
 
         return normalizedarray;
-    }
+    };
 
     this.unnormalizeKoordinates = function(array ,canvaswidth){
         var normalizedarray = new Array();
@@ -136,11 +140,23 @@ function Tactic() {
         }
 
         return normalizedarray;
+    };
+};
+
+Tactic.createTactic = function(){
+    var newtactic = new Tactic();
+    return newtactic;
+};
+
+Tactic.getTactic = function(){
+    if(!this.tactic){
+        this.tactic = this.createTactic();
     }
-}
+    return this.tactic;
+};
 
-var tactic = new Tactic();
 
 
+var tactic = Tactic.getTactic();
 
 
