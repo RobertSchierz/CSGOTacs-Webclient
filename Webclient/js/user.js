@@ -11,9 +11,9 @@ function User() {
     this.tactics = new Array();
     this.grouptactics = new Array();
 
-    this.setGroups = function(Groups)
+    this.setGroups = function(groups)
     {
-        this.groups = Groups;
+        this.groups = groups;
     };
 
     this.getGroups = function()
@@ -21,13 +21,13 @@ function User() {
         return this.groups;
     };
 
-    this.deleteGroup = function(Groups, groupname){
-        for(var z = 0; z < Groups.length; z++){
-            if(Groups[z].name == groupname){
-                Groups.splice(z,1);
+    this.deleteGroup = function(group, groupname){
+        for(var z = 0; z < group.length; z++){
+            if(group[z].name == groupname){
+                group.splice(z,1);
             }
         }
-        user.setGroups(Groups);
+        user.setGroups(group);
     };
 
     this.addGroup = function(addedgroup){
@@ -76,9 +76,9 @@ function User() {
     };*/
 
 
-    this.setTactics = function(Tactics)
+    this.setTactics = function(tactics)
     {
-        this.tactics = Tactics;
+        this.tactics = tactics;
     };
 
     this.getTactics = function()
@@ -116,9 +116,9 @@ function User() {
     };
 
 
-    this.setGrouptactics = function(Grouptactics)
+    this.setGrouptactics = function(grouptactics)
     {
-        this.grouptactics = Grouptactics;
+        this.grouptactics = grouptactics;
     };
 
     this.getGrouptactics = function()
@@ -174,7 +174,7 @@ function User() {
             }
         }
 
-        return grouptacticsarray;
+        return false;
     };
 
     this.changeTacticData = function(tactic){

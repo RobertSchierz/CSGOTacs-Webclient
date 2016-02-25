@@ -5,43 +5,31 @@
 function Tactic(){
 
 
-    this.maps;
-    this.strokestyle;
+    this.map;
     this.x;
     this.y;
     this.user;
     this.tacticname;
     this.id;
     this.drag;
-    this.group;
-    this.canvasmapwidth;
+    this.group ;
     this.tactic;
 
 
 
-    this.setMaps = function(Maps)
+    this.setMap = function(map)
     {
-        this.maps = Maps;
+        this.map = map;
     };
 
     this.getMap = function()
     {
-        return this.maps;
+        return this.map;
     };
 
-    this.setStrokestyle = function(strokeStyle)
+    this.setX = function(x)
     {
-        this.strokestyle = strokeStyle;
-    };
-
-    this.getStrokestyle = function()
-    {
-        return this.strokestyle;
-    };
-
-    this.setX = function(X)
-    {
-         this.x = X;
+         this.x = x;
     };
 
     this.getX = function()
@@ -49,9 +37,9 @@ function Tactic(){
         return this.x;
     };
 
-    this.setY = function(Y)
+    this.setY = function(y)
     {
-        this.y = Y;
+        this.y = y;
     };
 
     this.getY = function()
@@ -59,9 +47,9 @@ function Tactic(){
         return this.y;
     };
 
-    this.setUser = function(User)
+    this.setUser = function(user)
     {
-        this.user = User;
+        this.user = user;
     };
 
     this.getUser = function()
@@ -69,9 +57,9 @@ function Tactic(){
         return this.user;
     };
 
-    this.setTacticname = function(Tacticname)
+    this.setTacticname = function(tacticname)
     {
-        this.tacticname = Tacticname;
+        this.tacticname = tacticname;
     };
 
     this.getTacticname = function()
@@ -79,9 +67,9 @@ function Tactic(){
         return this.tacticname;
     };
 
-    this.setId = function(Id)
+    this.setId = function(id)
     {
-        this.id = Id;
+        this.id = id;
     };
 
     this.getId = function()
@@ -105,14 +93,6 @@ function Tactic(){
         return this.group;
     };
 
-
-    this.getCanvasmapwidth = function(){
-        return this.canvasmapwidth;
-    };
-
-    this.setCanvasmapwidth = function(canvas){
-        this.canvasmapwidth = canvas;
-    };
 
     this.normalizeKoordinates = function(array ,canvaswidth){
         var normalizedarray = new Array();

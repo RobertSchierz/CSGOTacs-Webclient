@@ -85,7 +85,7 @@ socket.on('status', function (data) {
                 tactic.setX(data.tacs[0].x);
                 tactic.setY(data.tacs[0].y);
                 tactic.setUser(data.tacs[0].user);
-                tactic.setMaps(data.tacs[0].map);
+                tactic.setMap(data.tacs[0].map);
                 tactic.setTacticname(data.tacs[0].name);
                 tactic.setDrag(data.tacs[0].drag);
                 tactic.setId(data.tacs[0].id);
@@ -94,7 +94,7 @@ socket.on('status', function (data) {
                 tactic.setX(data.tacs[0].x);
                 tactic.setY(data.tacs[0].y);
                 tactic.setUser(data.tacs[0].user);
-                tactic.setMaps(data.tacs[0].map);
+                tactic.setMap(data.tacs[0].map);
                 tactic.setTacticname(data.tacs[0].name);
                 tactic.setDrag(data.tacs[0].drag);
                 tactic.setId(data.tacs[0].id);

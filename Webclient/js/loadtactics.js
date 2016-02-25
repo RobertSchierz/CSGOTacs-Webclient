@@ -105,7 +105,7 @@ function setArrayData(data) {
     if (data.group != null) {
         tactic.setGroup(data.group);
     }
-    tactic.setMaps(data.map);
+    tactic.setMap(data.map);
     tactic.setX(data.x);
     tactic.setY(data.y);
     tactic.setUser(data.user);
