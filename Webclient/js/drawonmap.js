@@ -9,15 +9,6 @@ var paint;
 
 
 
-
-
-$(document).ready(function () {
-//getData(document.getElementById('imgpanel').getContext("2d"));
-
-
-
-});
-
 function draw(on, optionlive) {
 
 
@@ -40,7 +31,6 @@ function setListenerToCanvas(context, contextid, optionlive) {
 
 
     $(contextid).mousedown(function (e) {
-
         if(optionlive != null){
             $("[data-brush ="+localStorage.getItem("benutzername") +"]").show();
             $(".livebrush").not("[data-brush =" + localStorage.getItem("benutzername") + "]").hide();
@@ -48,9 +38,8 @@ function setListenerToCanvas(context, contextid, optionlive) {
 
         closeHeader();
         paint = true;
-        context.beginPath();
-
         addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false, context, optionlive);
+
     });
 
     $(contextid).mousemove(function (e) {
@@ -74,16 +63,18 @@ function addClick(x, y, dragging, context, optionlive) {
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(dragging);
-    redraw(context, optionlive, x, y, dragging);
-
-
+    redraw(context, optionlive);
 }
 
-function redraw(context, optionlive, x, y, dragging) {
+function redraw(context, optionlive) {
 
     context.strokeStyle = "#FB8C00";
     context.lineJoin = "round";
     context.lineWidth = 4;
+    var x = clickX[clickX.length-1];
+    var y = clickY[clickY.length-1];
+    var dragging  = clickDrag[clickDrag.length-1];
+
 
     if(optionlive != null){
 
@@ -136,7 +127,7 @@ function drawLive(x,y,dragging, xstart, ystart){
     var imgcanvaswidth = $("#imgpanel").width();
     var imgcanvasheight = $("#imgpanel").height();
 
-    console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
+    //console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
 
 
     context.beginPath();
@@ -188,7 +179,7 @@ function actualDraw(x, y, drag) {
             context.moveTo(x[i - 1], y[i - 1]);
         } else {
 
-            context.moveTo(x[i] - 1, y[i]);
+            context.moveTo(x[i], y[i]);
         }
         context.lineTo(x[i], y[i]);
 

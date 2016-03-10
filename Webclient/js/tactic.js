@@ -94,13 +94,12 @@ function Tactic(){
     };
 
 
-    this.normalizeKoordinates = function(array ,canvaswidth){
+    this.normalizeKoordinates = function(array ,canvasattribut){
         var normalizedarray = new Array();
         for(var value in array){
 
             try {
-                //noinspection JSUnfilteredForInLoop
-                normalizedarray.push(array[value] / canvaswidth);
+                normalizedarray.push(array[value] / canvasattribut);
             } catch (e) {
                 console.log(e.message);
             }

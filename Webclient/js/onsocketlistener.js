@@ -20,7 +20,6 @@ socket.on('status', function (data) {
         case "regSuccess":
             alertMessage("Registrieren erfolgreich!", "green");
             authSuccess(data);
-            closeOverlaypanel();
             break;
 
         case  "regFailed":

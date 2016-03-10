@@ -5,7 +5,7 @@
 
 
 
-var socket = io('https://p4dme.shaula.uberspace.de/');
+
 
 var openheader = false;
 var maketactic = false;
@@ -37,13 +37,6 @@ $(document).ready(function () {
     loadAllImagesMapselector();
     setListenerToElements();
 
-/*
-    $(document).ajaxComplete(function () {
-        console.log("AMK");
-        $('#mapselector img').on("click", function () {
-            handleMapselectorStates(this, false);
-        });
-    });*/
 
 
 });
@@ -119,7 +112,7 @@ function setListenerToElements() {
         }
 
         if (tactic.getId() != undefined) {
-            ActualSaveTactic("loaded");
+            actualSaveTactic("loaded");
         } else {
             saveTactic();
         }
@@ -201,7 +194,6 @@ function handleTacticEvents(loadtactics) {
 function setCanvasImage(id, loadtactic) {
 
     for(var mapobject in imagearray){
-        //noinspection JSUnfilteredForInLoop
         if(imagearray[mapobject].mapname == id){
 
             $("#callout").attr('src', imagearray[mapobject].callout);
@@ -228,6 +220,7 @@ function loadAllImagesMapselector() {
 
             for (i = 0; i < data.images.length; i++) {
                 imagearray.push(data.images[i]);
+
 
                 // Mache das erste Objekt aktiv
                 if (i == 0) {
@@ -260,7 +253,7 @@ function loadAllImagesMapselector() {
 
         error: function () {
 
-            alert("Fehler beim Zugriff auf das Image JSON aufgetreten");
+            alertMessage("Fehler beim Zugriff auf das Image JSON aufgetreten", "red");
 
         }
 

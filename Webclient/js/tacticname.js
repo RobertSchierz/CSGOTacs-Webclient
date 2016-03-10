@@ -20,7 +20,7 @@ function openTacticname(){
         $("#grouptacticname_submit").on( "click", function() {
 
             if(($("#grouptacticname_tacticnameinput").val() != "" && $("#grouptacticname_tacticnameinput").val() != null)){
-                ActualSaveTactic("group");
+                actualSaveTactic("group");
                 closeOverlaypanel();
             }else{
                 alertMessage("Der Taktikname ist nicht eingetragen!", "red")
@@ -31,7 +31,7 @@ function openTacticname(){
         $("#tacticname_submit").on( "click", function() {
 
             if(($("#tacticname_tacticnameinput").val() != "" && $("#tacticname_tacticnameinput").val() != null)){
-                ActualSaveTactic("new");
+                actualSaveTactic("new");
                 closeOverlaypanel();
             }else{
                 alertMessage("Der Taktikname ist nicht eingetragen!", "red")

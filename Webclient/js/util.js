@@ -79,22 +79,20 @@ function overlaypanel_header(headertext) {
     $("#overlaypanel_header").append("<h3 id='overlaypanel_headertext'>" + headertext + "</h3>");
 }
 
-function ActualSaveTactic(option) {
+function actualSaveTactic(option) {
     var canvaswidth = $("#imgpanel").width();
     var canvasheight = $("#imgpanel").height();
 
-    /* var canvas = document.getElementById("imgpanel");
-     var img    = canvas.toDataURL("./testimages");*/
     var generatedid = (new Date()).getTime();
 
     if (option == "group") {
 
-          sendLocaltactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,  tactic.normalizeKoordinates(clickX,canvaswidth),tactic.normalizeKoordinates(clickY,canvasheight) , $("#grouptacticname_tacticnameinput").val(), $("#grouptacticname_groups option:selected").text());
+          sendTactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,  tactic.normalizeKoordinates(clickX,canvaswidth),tactic.normalizeKoordinates(clickY,canvasheight) , $("#grouptacticname_tacticnameinput").val(), $("#grouptacticname_groups option:selected").text());
 
     }
     if (option == "new") {
 
-          sendLocaltactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,tactic.normalizeKoordinates(clickX,canvaswidth) , tactic.normalizeKoordinates(clickY,canvasheight), $("#tacticname_tacticnameinput").val(), null);
+          sendTactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,tactic.normalizeKoordinates(clickX,canvaswidth) , tactic.normalizeKoordinates(clickY,canvasheight), $("#tacticname_tacticnameinput").val(), null);
 
 
     } else if (option == "loaded") {
