@@ -3,7 +3,6 @@
  */
 function alertMessage(text, color, option, source){
     if(option == "password"){
-        console.log("AMK");
         $("body").append("<div id='alertmessage'><span class='alert_message'>"+text+"</span>" +
             "<input type='password' class='alert_passwordinput'" +
             "<div></div>" +

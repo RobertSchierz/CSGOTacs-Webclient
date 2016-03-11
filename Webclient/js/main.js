@@ -11,26 +11,28 @@ var openheader = false;
 var maketactic = false;
 var imagearray = new Array();
 
+function calloutVisibility() {
+    if ($("#callout_visibility").attr("data-option") == "on") {
+        $("#callout").fadeOut(700, function () {
+            $("#callout_visibility").html("visibility_off");
+            $("#callout_visibility").attr("data-option", "off")
+        });
+
+    } else if ($("#callout_visibility").attr("data-option") == "off") {
+        $("#callout").fadeIn(700, function () {
+            $("#callout_visibility").html("visibility");
+            $("#callout_visibility").attr("data-option", "on")
+        });
+
+    }
+}
 $(document).ready(function () {
 
 
 
 
     $("#callout_visibility").on("click", function(){
-       if($(this).attr("data-option") == "on"){
-            $("#callout").fadeOut(700, function(){
-                $("#callout_visibility").html("visibility_off");
-                $("#callout_visibility").attr("data-option", "off")
-            });
-
-       }else if($(this).attr("data-option") == "off"){
-           $("#callout").fadeIn(700, function(){
-               $("#callout_visibility").html("visibility");
-               $("#callout_visibility").attr("data-option", "on")
-           });
-
-       }
-
+        calloutVisibility();
     });
 
     checkLoggedIn(false);

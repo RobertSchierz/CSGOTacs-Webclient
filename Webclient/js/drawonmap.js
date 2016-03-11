@@ -148,7 +148,7 @@ function drawLive(x,y,dragging, xstart, ystart){
 
 }
 
-function deleteCanvas(context) {
+function deleteCanvas() {
     var context = document.getElementById('imgpanel').getContext("2d");
     $("#imgpanel").off();
     clickX = new Array();
