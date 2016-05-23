@@ -1,12 +1,17 @@
 /**
- * Created by Robert on 06.01.2016.
+ * Created by Robert Schierz on 06.01.2016.
+ */
+
+/**
+ * Öffnet das Overlaypanel zum Speichern einer Taktik
+ *
+ *
  */
 function openTacticname(){
 
     $("#overlaypanel_insidebox").load(("./html/tacticname.html"),function(){
 
         $( "#tacticname_tabmenu" ).tabs();
-        console.log(user.getGroups());
         if(user.getGroups().length == 0){
             $( "#tacticname_tabmenu" ).tabs( "option", "disabled", [ 1 ] );
         }else{

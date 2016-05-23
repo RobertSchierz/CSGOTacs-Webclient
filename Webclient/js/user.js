@@ -1,9 +1,7 @@
 /**
- * Created by Robert on 24.01.2016.
+ * Created by Robert Schierz on 24.01.2016.
  */
-/**
- * Created by Robert on 26.12.2015.
- */
+
 
 function User() {
 
@@ -21,6 +19,11 @@ function User() {
         return this.groups;
     };
 
+    /**
+     * Löscht eine Gruppe aus dem Objekt user
+     *
+     * @param group = Gruppenname aus der gelöscht werden soll, groupname = Gruppenname der gelöscht werden soll
+     */
     this.deleteGroup = function(group, groupname){
         for(var z = 0; z < group.length; z++){
             if(group[z].name == groupname){
@@ -30,10 +33,20 @@ function User() {
         user.setGroups(group);
     };
 
+    /**
+     * Fügt dem Array groups ein Wert hinzu
+     *
+     * @param addedgroup = Gruppe die hinzugefügt werden soll
+     */
     this.addGroup = function(addedgroup){
         this.groups.push(addedgroup);
     };
 
+    /**
+     * Gibt alle Gruppennamen im Array zurück
+     *
+     * @return namesarray = Rückgabearray
+     */
     this.groupNamesArray = function(){
         var namesarray = new Array();
         for(var name = 0; name < this.groups.length; name++){
@@ -44,6 +57,12 @@ function User() {
 
     };
 
+    /**
+     * Gibt den Index einer Gruppe anhand des Namens zurück
+     *
+     * @param groupname = Gruppenname
+     * @return group = Index an der dieser Gruppenname im Array groups gefunden wurde
+     */
     this.getIndexofGroupByName = function(groupname){
         for(var group in this.groups){
             //noinspection JSUnfilteredForInLoop
@@ -53,27 +72,23 @@ function User() {
         }
     };
 
+    /**
+     * Füge der Gruppe einen Moderator hinzu
+     *
+     * @param group = Gruppenname, mod = Benutzername des Moderators
+     */
     this.setModToGroup = function(group, mod){
         this.groups[this.getIndexofGroupByName(group)].mods.push(mod);
     };
 
+    /**
+     * Entfernt einen Moderator aus einer Gruppe
+     *
+     * @param group = Gruppenname, mod = Benutzername des Moderators
+     */
     this.deleteModofGroup = function(group, mod){
           this.groups[this.getIndexofGroupByName(group)].mods.splice(isInArray(this.groups[this.getIndexofGroupByName(group)].mods, mod),1);
     };
-
-
-
-   /* this.getUserByName = function(name, groupname){
-        for(var group in this.groups){
-            if(this.groups[group].name == groupname){
-                for(var member in this.groups[group].member){
-                    if(this.groups[group].member[member] == name){
-                        return this.groups[group].member[member];
-                    }
-                }
-            }
-        }
-    };*/
 
 
     this.setTactics = function(tactics)
@@ -86,10 +101,20 @@ function User() {
         return this.tactics;
     };
 
+    /**
+     * Fügt dem Array tactics ein Wert hinzu
+     *
+     * @param addedtactic = Taktik die hinzugefügt werden soll
+     */
     this.addTactic = function(addedtactic){
         this.tactics.push(addedtactic);
     };
 
+    /**
+     * Ändert einen Taktikname in dem Objekt user
+     *
+     * @param id = id der Taktik, newname = Neue Taktikname, option = prüfwert für Gruppen
+     */
     this.changeTacticName = function(id, newname, option){
         if(option == "group"){
             for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
@@ -107,6 +132,11 @@ function User() {
 
     };
 
+    /**
+     * Löscht einen Taktiknamen aus dem Objekt user
+     *
+     * @param id = Id der Taktik
+     */
     this.deleteTacticName = function(id){
         for(var tactic = 0; tactic < this.tactics.length; tactic++){
             if(this.tactics[tactic].id == id){
@@ -114,6 +144,7 @@ function User() {
             }
         }
     };
+
 
 
     this.setGrouptactics = function(grouptactics)
@@ -126,26 +157,30 @@ function User() {
         return this.grouptactics;
     };
 
+    /**
+     * Fügt dem Array grouptactics einen Wert hinzu
+     *
+     * @param addedgrouptactic = Gruppentaktik die hinzugefügt werden soll
+     */
     this.addGrouptactic = function(addedgrouptactic){
         this.grouptactics.push(addedgrouptactic);
     };
 
+    /**
+     * Setzt eine Lokale Taktik als Gruppentaktik
+     *
+     * @param id = Id der Taktik
+     */
     this.setLocalToGroupTactic = function(id){
-        /*
-        for(var tactic = 0; tactic < this.tactics.length; tactic++){
-            if(this.tactics[tactic].id == id){
-                this.addGrouptactic(this.tactics[tactic]);
-            }
-        }
-        for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
-            if(this.grouptactics[tactic].id == id){
-                this.grouptactics[tactic].group = group;
-            }
-        }
-*/
         this.deleteTacticName(id);
     };
 
+    /**
+     * Liefert eine Gruppe anhand des Namens zurück
+     *
+     * @param groupname = Gruppenname
+     * @return this.groups[group] = Gruppenobjekt
+     */
     this.getGroupByName = function(groupname){
 
         for(var group = 0; group < this.groups.length; group++){
@@ -156,6 +191,12 @@ function User() {
         }
     };
 
+    /**
+     * Gibt alle Gruppentaktiken einer Gruppe zurück
+     *
+     * @param groupname = Gruppenname
+     * @return grouptacticsarray = alle Gruppentaktiken der Gruppe
+     */
     this.getGrouptacticsByName = function(groupname){
         var grouptacticsarray = new Array();
         for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
@@ -167,6 +208,12 @@ function User() {
         return grouptacticsarray;
     };
 
+    /**
+     * Gibt Gruppentaktik anhand der ID zurück
+     *
+     * @param id = Id der Gruppe
+     * @return this.grouptactics[tactic] = angeforderte Taktik
+     */
     this.getGrouptacticByID = function(id){
         for(var tactic = 0; tactic < this.grouptactics.length; tactic++){
             if(this.grouptactics[tactic].id == id){
@@ -177,6 +224,11 @@ function User() {
         return false;
     };
 
+    /**
+     * Verändert die Klassenattribute einer Taktik
+     *
+     * @param taktik = Die zu veränderne Taktik
+     */
     this.changeTacticData = function(tactic){
 
         if(this.getGrouptacticsByName(tactic.name).length == 0){

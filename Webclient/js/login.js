@@ -1,11 +1,22 @@
 /**
- * Created by Robert on 03.01.2016.
+ * Created by Robert Schierz on 03.01.2016.
+ */
+
+/**
+ * Sendet die Informationen an den Server die benötigt werden um einen Anwender systemseitig einzuloggen
+ *
+ * @param username = Benutzername, password = Passwort des Benutzers
  */
 function authentification(username, password) {
     socket.emit('auth',  JSON.stringify({'user': username, 'pw': password }));
 
 }
 
+/**
+ * Versetzt die Webseite in den Modus, den der Anwender sieht wenn dieser eingeloggt ist
+ *
+ * @param data = Rückgabewert vom Server
+ */
 function authSuccess(data) {
 
     localStorage.setItem("benutzername", data.user);
@@ -13,6 +24,11 @@ function authSuccess(data) {
     closeOverlaypanel();
 }
 
+/**
+ * Handling der Bedienelemente, sobald überprüft werden muss ob der Anwender eingeloggt ist oder nicht
+ *
+ * @param logout = Boolescher Wert, welcher das eingeloggt sein bestimmt
+ */
 function checkLoggedIn(logout) {
 
     if (logout) {
@@ -85,6 +101,11 @@ function checkLoggedIn(logout) {
     }
 }
 
+/**
+ * Zeigt die beigetretenen Gruppen des Anwenders im Gruppenpanel an
+ *
+ * @param data = Rückgabewert vom Server
+ */
 function getGroups(data) {
     $(document).ready(function () {
         $("#groupcanvasmenu").empty();
@@ -94,6 +115,11 @@ function getGroups(data) {
     });
 }
 
+/**
+ * Fügt die Gruppen im Gruppenpanel an
+ *
+ * @param data = Rückgabewert vom Server
+ */
 function appendGroupMenu(data) {
 
     $("#groupcanvasmenu").append("<span id='" + data.name + "' class ='groupname'>" + data.name + " </span>");

@@ -1,5 +1,5 @@
 /**
- * Created by Robert on 26.12.2015.
+ * Created by Robert Schierz on 26.12.2015.
  */
 
 function Tactic(){
@@ -94,6 +94,11 @@ function Tactic(){
     };
 
 
+    /**
+     * Normalisiert die Werte des Arrays der zu speichernden Taktik
+     *
+     * @param array = Das zu bearbeitende Array, canvasattribut = Der Faktor mit dem das Array bearbeitet werden soll
+     */
     this.normalizeKoordinates = function(array ,canvasattribut){
         var normalizedarray = new Array();
         for(var value in array){
@@ -108,11 +113,16 @@ function Tactic(){
         return normalizedarray;
     };
 
-    this.unnormalizeKoordinates = function(array ,canvaswidth){
+    /**
+     * Gegenoperation zu "normalizeKoordinates"
+     *
+     * @param array = Das zu bearbeitende Array, canvasattribut = Der Faktor mit dem das Array bearbeitet werden soll
+     */
+    this.unnormalizeKoordinates = function(array ,canvasattribut){
         var normalizedarray = new Array();
         for(var value in array){
             try {
-                normalizedarray.push(array[value] * canvaswidth);
+                normalizedarray.push(array[value] * canvasattribut);
             } catch (e) {
                 console.log(e.message)
             }
@@ -122,11 +132,21 @@ function Tactic(){
     };
 };
 
+/**
+ * Erstellt ein neues Tactic Objekt
+ *
+ *
+ */
 Tactic.createTactic = function(){
     var newtactic = new Tactic();
     return newtactic;
 };
 
+/**
+ * Singleton Pattern Funktion der Klasse Tactic
+ *
+ *
+ */
 Tactic.getTactic = function(){
     if(!this.tactic){
         this.tactic = this.createTactic();

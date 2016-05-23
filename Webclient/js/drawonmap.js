@@ -1,14 +1,20 @@
 /**
- * Created by Robert on 26.12.2015.
+ * Created by Robert Schierz on 26.12.2015.
  */
 
-var clickX = new Array();
-var clickY = new Array();
-var clickDrag = new Array();
+var coordinateX = new Array();
+var coordinateY = new Array();
+var coordinateDrag = new Array();
 var paint;
 
 
-
+/**
+ * handling des Zeichnen auf dem Canvas
+ *
+ * @param on = Boolescher Wert ob zeichnen oder nicht, optionlive = wenn der Livemodus aktiviert wird
+ *
+ *
+ */
 function draw(on, optionlive) {
 
 
@@ -26,7 +32,13 @@ function draw(on, optionlive) {
 
 }
 
-
+/**
+ * Bindet die verschiedenen Eventhandler an das Canvas
+ *#
+ * @param context = Kontext des Canvas, centextid = ID des Context, optionlive = Information aus dem Livemodus
+ *
+ *
+ */
 function setListenerToCanvas(context, contextid, optionlive) {
 
 
@@ -58,30 +70,43 @@ function setListenerToCanvas(context, contextid, optionlive) {
     });
 }
 
-
+/**
+ * Bildet eine Anwenderinteraktion in den Arrays ab
+ *
+ * @param x = x Koordinate des Klicks, y = y Koordinate des Klicks, drag = Dragwert des Klicks, context = Context des Canvas, optionlive = Information aus dem Livemodus
+ *
+ *
+ */
 function addClick(x, y, dragging, context, optionlive) {
-    clickX.push(x);
-    clickY.push(y);
-    clickDrag.push(dragging);
+    coordinateX.push(x);
+    coordinateY.push(y);
+    coordinateDrag.push(dragging);
     redraw(context, optionlive);
 }
 
+/**
+ * Zeichnet die Anwenderinteraktion auf das Canvas
+ *
+ * @param context = Context des Canvas, optionlive = Information aus dem Livemodus
+ *
+ *
+ */
 function redraw(context, optionlive) {
 
     context.strokeStyle = "#FB8C00";
     context.lineJoin = "round";
     context.lineWidth = 4;
-    var x = clickX[clickX.length-1];
-    var y = clickY[clickY.length-1];
-    var dragging  = clickDrag[clickDrag.length-1];
+    var x = coordinateX[coordinateX.length-1];
+    var y = coordinateY[coordinateY.length-1];
+    var dragging  = coordinateDrag[coordinateDrag.length-1];
 
 
     if(optionlive != null){
 
-        var startx = (clickX[clickX.length -2] / $("#imgpanel").width());
-        var starty = (clickY[clickY.length -2] / $("#imgpanel").height());
+        var startx = (coordinateX[coordinateX.length -2] / $("#imgpanel").width());
+        var starty = (coordinateY[coordinateY.length -2] / $("#imgpanel").height());
 
-        if(isNaN(clickX[clickX.length -2] / $("#imgpanel").width()) || isNaN(clickY[clickY.length -2] / $("#imgpanel").height())){
+        if(isNaN(startx) || isNaN(starty)){
             startx = x / $("#imgpanel").width();
             starty = y / $("#imgpanel").height();
         }
@@ -103,7 +128,7 @@ function redraw(context, optionlive) {
     context.beginPath();
     if(dragging){
 
-        context.moveTo(clickX[clickX.length-2],clickY[clickY.length-2]);
+        context.moveTo(coordinateX[coordinateX.length-2],coordinateY[coordinateY.length-2]);
         context.lineTo(x,y);
 
     }else if(!dragging){
@@ -118,6 +143,13 @@ function redraw(context, optionlive) {
 
 }
 
+/**
+ * Zeichnet Anwenderinteraktion im Livemodus
+ *
+ * @param x = x Koordinate des Klicks, y = y Koordinate des Klicks, dragging = Dragwert des Klicks, xstart = Startkoordinate x, ystart = Startkoordinate y
+ *
+ *
+ */
 function drawLive(x,y,dragging, xstart, ystart){
     var context = document.getElementById('imgpanel').getContext("2d");
     context.strokeStyle = "#df4b26";
@@ -127,16 +159,14 @@ function drawLive(x,y,dragging, xstart, ystart){
     var imgcanvaswidth = $("#imgpanel").width();
     var imgcanvasheight = $("#imgpanel").height();
 
-    //console.log("x: " +x * imgcanvaswidth+ " y: " +y * imgcanvaswidth+ " drag: " +dragging+ " startx: " +xstart * imgcanvaswidth+ " ystart: " + ystart * imgcanvasheight );
-
 
     context.beginPath();
-    if(dragging == true){
+    if(dragging){
 
         context.moveTo(xstart * imgcanvaswidth,ystart * imgcanvasheight);
         context.lineTo(x * imgcanvaswidth,y * imgcanvasheight);
 
-    }else if(dragging == false){
+    }else if(!dragging){
 
         context.moveTo(x * imgcanvaswidth,y * imgcanvasheight);
         context.lineTo(x * imgcanvaswidth,y * imgcanvasheight);
@@ -148,18 +178,31 @@ function drawLive(x,y,dragging, xstart, ystart){
 
 }
 
+/**
+ * Löscht den Inhalt des Canvas
+ *
+ *
+ *
+ *
+ */
 function deleteCanvas() {
     var context = document.getElementById('imgpanel').getContext("2d");
     $("#imgpanel").off();
-    clickX = new Array();
-    clickY = new Array();
-    clickDrag = new Array();
+    coordinateX = new Array();
+    coordinateY = new Array();
+    coordinateDrag = new Array();
     tactic = Tactic.createTactic();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
 
-
+/**
+ * Zeichnet eine gespeicherte Taktik in das Canvas
+ *
+ * @param x = x Koordinate des Klicks, y = y Koordinate des Klicks, drag = Dragwert des Klicks
+ *
+ *
+ */
 function actualDraw(x, y, drag) {
     var canvaswidth = $("#imgpanel").width();
     var canvasheight = $("#imgpanel").height();
@@ -189,14 +232,36 @@ function actualDraw(x, y, drag) {
     }
 }
 
+/**
+ * Auslösen des Ladevorgangs einer gespeicherten Taktik
+ *
+ * @param tactic = Taktikobjekt der zu ladenen Taktik
+ *
+ *
+ */
 function drawSavedMap(tactic) {
     actualDraw(tactic.x, tactic.y, tactic.drag);
+    handleMapselectorStates("#" + tactic.getMap(), true);
 }
 
+/**
+ * Öffnet das Overlaypanel um eine Taktik zu speichern
+ *
+ *
+ *
+ *
+ */
 function saveTactic() {
     openOverlaypanel("tacticname");
 }
 
+/**
+ * Öffnet das Overlaypanel um eine Taktik zu laden
+ *
+ *
+ *
+ *
+ */
 function loadTactics() {
     openOverlaypanel("loadtactics");
 }

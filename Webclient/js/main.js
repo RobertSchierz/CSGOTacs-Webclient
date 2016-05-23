@@ -1,5 +1,5 @@
 /**
- * Created by Robert on 23.12.2015.
+ * Created by Robert Schierz on 23.12.2015.
  */
 
 
@@ -11,6 +11,11 @@ var openheader = false;
 var maketactic = false;
 var imagearray = new Array();
 
+/**
+ * Handling der Callouts
+ *
+ *
+ */
 function calloutVisibility() {
     if ($("#callout_visibility").attr("data-option") == "on") {
         $("#callout").fadeOut(700, function () {
@@ -29,9 +34,7 @@ function calloutVisibility() {
 $(document).ready(function () {
 
 
-
-
-    $("#callout_visibility").on("click", function(){
+    $("#callout_visibility").on("click", function () {
         calloutVisibility();
     });
 
@@ -40,9 +43,13 @@ $(document).ready(function () {
     setListenerToElements();
 
 
-
 });
 
+/**
+ * Handling der Kartenauswahl
+ *
+ * @param map = Id des zu ladenen Vorschbilds der Karte, loadmap = Boolescher wert ob es sich beim Ausführen um das Laden einer Karte handelt.
+ */
 function handleMapselectorStates(map, loadmap) {
 
     if ($(map).hasClass("passive")) {
@@ -54,7 +61,11 @@ function handleMapselectorStates(map, loadmap) {
 
 }
 
-
+/**
+ * Schließt den Header Bereich der Webseite
+ *
+ *
+ */
 function closeHeader() {
     $("#absolute_header").animate({
         top: "-170"
@@ -63,6 +74,12 @@ function closeHeader() {
         $("#header_arrow").attr('src', "images/icons/header/arrowdown.png");
     });
 }
+
+/**
+ * Öffnet den Header Bereich der Webseite
+ *
+ *
+ */
 function openHeader() {
     $("#absolute_header").animate({
         top: "0"
@@ -73,6 +90,12 @@ function openHeader() {
 
     });
 }
+
+/**
+ * Bindet die Eventlistener an die Bedienelemente im Header Bereich
+ *
+ *
+ */
 function setListenerToElements() {
     pressEnter();
 
@@ -137,6 +160,11 @@ function setListenerToElements() {
 
 }
 
+/**
+ * Handling der Scrollpfeile im Kartenvorschaubereich
+ *
+ * @param source = Id des geklickten Pfeils
+ */
 function handleMapselectorScroll(source) {
 
     var leftPos = $('#mapselector').scrollLeft();
@@ -149,6 +177,11 @@ function handleMapselectorScroll(source) {
     }
 }
 
+/**
+ * Durchläuft alle Elemente des Kartenvorschaubereichs und setzt deren Attribute "class" auf einen bestimmten Wert
+ *
+ * @param setclass = Die zu setzende Klasse, removeclass = Die Klasse die entfernt werden soll
+ */
 function setAllChildsClass(setclass, removeclass) {
     $('#mapselector').children().each(function () {
         if ($(this).hasClass(removeclass)) {
@@ -158,21 +191,31 @@ function setAllChildsClass(setclass, removeclass) {
     })
 }
 
+/**
+ * Handling des Taktikbuttons, ob Taktik erstellt oder gespeichert werden soll
+ *
+ * @param option = Wert der den Zustand des Taktikbuttons bestimmt
+ */
 function handleTacticButtons(option) {
-   if(option){
-       maketactic=true;
-       $("#maketacticbutton").html("Taktik Verwerfen <i class='material-icons headericons'>delete</i>");
-       $("#savetacticbutton").removeClass("disabled");
-       $("#savetacticbutton").addClass("active");
-   }else if(!option){
-       maketactic=false;
-       $("#maketacticbutton").html("Taktik Erstellen <i class='material-icons headericons'>gesture</i>");
-       $("#savetacticbutton").removeClass("active");
-       $("#savetacticbutton").addClass("disabled");
-   }
+    if (option) {
+        maketactic = true;
+        $("#maketacticbutton").html("Taktik Verwerfen <i class='material-icons headericons'>delete</i>");
+        $("#savetacticbutton").removeClass("disabled");
+        $("#savetacticbutton").addClass("active");
+    } else if (!option) {
+        maketactic = false;
+        $("#maketacticbutton").html("Taktik Erstellen <i class='material-icons headericons'>gesture</i>");
+        $("#savetacticbutton").removeClass("active");
+        $("#savetacticbutton").addClass("disabled");
+    }
 
 }
 
+/**
+ * Handling des Zustandes der Bedienelemente im Header Bereich
+ *
+ * @param loadtactic = Prüfwert ob Taktik geladen wurde
+ */
 function handleTacticEvents(loadtactics) {
     if (loadtactics) {
         maketactic = false;
@@ -192,11 +235,15 @@ function handleTacticEvents(loadtactics) {
 
 }
 
-
+/**
+ * Setzt das Kartenbild der anzuzeigenden Karte auf einen bestimmten Wert
+ *
+ * @param id = Name der Karte, loadtactic = Prüfwert ob Taktik geladen wurde
+ */
 function setCanvasImage(id, loadtactic) {
 
-    for(var mapobject in imagearray){
-        if(imagearray[mapobject].mapname == id){
+    for (var mapobject in imagearray) {
+        if (imagearray[mapobject].mapname == id) {
 
             $("#callout").attr('src', imagearray[mapobject].callout);
             $("#map").attr('src', imagearray[mapobject].map);
@@ -209,7 +256,11 @@ function setCanvasImage(id, loadtactic) {
 }
 
 
-
+/**
+ * Lädt die Kartenvorschaubilder in den Kartenvorschaubilderbereich mittels des JSON mapselection
+ *
+ *
+ */
 function loadAllImagesMapselector() {
     $.ajax({
 
@@ -224,30 +275,25 @@ function loadAllImagesMapselector() {
                 imagearray.push(data.images[i]);
 
 
-                // Mache das erste Objekt aktiv
                 if (i == 0) {
-                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection active'><div data-name='"+data.images[i].name+"' class='selectorimageoverlay'> "+data.images[i].name+"</div>");
+                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection active'><div data-name='" + data.images[i].name + "' class='selectorimageoverlay'> " + data.images[i].name + "</div>");
                     setCanvasImage(data.images[i].mapname, false);
-                    maketactic = false;
+                    maketactic = true;
                     handleTacticEvents(false);
                 } else {
-                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'> <div data-name='"+data.images[i].name+"' class='selectorimageoverlay'> "+data.images[i].name+"</div>");
+                    $("#mapselector").append("<img id='" + data.images[i].name + "' src='" + data.images[i].url + "' class='mapselection passive'> <div data-name='" + data.images[i].name + "' class='selectorimageoverlay'> " + data.images[i].name + "</div>");
                 }
 
-                $('#'+data.images[i].name).on("click", function () {
+                $('#' + data.images[i].name).on("click", function () {
                     handleMapselectorStates(this, false);
                 });
 
-                $('#'+data.images[i].name).hover( function () {
-                   $("[data-name =" +$(this).attr("id")+ "]").slideDown(200);
-                },function(){
+                $('#' + data.images[i].name).hover(function () {
+                    $("[data-name =" + $(this).attr("id") + "]").slideDown(200);
+                }, function () {
 
-                    $("[data-name =" +$(this).attr("id")+ "]").delay(1000).slideUp(200);
+                    $("[data-name =" + $(this).attr("id") + "]").delay(1000).slideUp(200);
                 });
-
-
-
-
 
 
             }

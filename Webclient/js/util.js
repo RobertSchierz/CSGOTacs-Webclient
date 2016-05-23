@@ -1,10 +1,16 @@
 /**
- * Created by Robert on 06.01.2016.
+ * Created by Robert Schierz on 06.01.2016.
  */
 var popup_zustand = false;
 var requestgroup = null;
 var refreshmember = false;
 
+/**
+ * Öffnet die verschiedenen Overlaypanels
+ *
+ *@param source = Option die bestimmt, welches Overlaypanel geöffnet wird, groupname = Gruppenname für Gruppenoverlaypanel
+ *
+ */
 function openOverlaypanel(source, groupname) {
 
     closeHeader();
@@ -58,8 +64,12 @@ function openOverlaypanel(source, groupname) {
     }
 }
 
+/**
+ * Schließt das jeweilige Overlaypanel
+ *
+ */
 function closeOverlaypanel() {
-    requerstsource = null;
+    var requerstsource = null;
     if (popup_zustand == true) {
         refreshmember = null;
 
@@ -75,10 +85,22 @@ function closeOverlaypanel() {
     }
 }
 
+/**
+ * Setzt den Headertext der Overlaypanels
+ *
+ *  @param headertext = Text der in den Header geschrieben wird
+ *
+ */
 function overlaypanel_header(headertext) {
     $("#overlaypanel_header").append("<h3 id='overlaypanel_headertext'>" + headertext + "</h3>");
 }
 
+/**
+ * Funktion zum Speichern einer Taktik
+ *
+ * @param option = Option des Speichervorgangs
+ *
+ */
 function actualSaveTactic(option) {
     var canvaswidth = $("#imgpanel").width();
     var canvasheight = $("#imgpanel").height();
@@ -87,20 +109,25 @@ function actualSaveTactic(option) {
 
     if (option == "group") {
 
-          sendTactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,  tactic.normalizeKoordinates(clickX,canvaswidth),tactic.normalizeKoordinates(clickY,canvasheight) , $("#grouptacticname_tacticnameinput").val(), $("#grouptacticname_groups option:selected").text());
+          sendTactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), coordinateDrag,  tactic.normalizeKoordinates(coordinateX,canvaswidth),tactic.normalizeKoordinates(coordinateY,canvasheight) , $("#grouptacticname_tacticnameinput").val(), $("#grouptacticname_groups option:selected").text());
 
     }
     if (option == "new") {
 
-          sendTactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), clickDrag,tactic.normalizeKoordinates(clickX,canvaswidth) , tactic.normalizeKoordinates(clickY,canvasheight), $("#tacticname_tacticnameinput").val(), null);
+          sendTactic(generatedid, localStorage.getItem("benutzername"), $("#mapselector").find(".active").attr("id"), coordinateDrag,tactic.normalizeKoordinates(coordinateX,canvaswidth) , tactic.normalizeKoordinates(coordinateY,canvasheight), $("#tacticname_tacticnameinput").val(), null);
 
 
     } else if (option == "loaded") {
-        socket.emit('changeTac',  JSON.stringify({'id': tactic.getId(), 'drag': tactic.getDrag().concat(clickDrag), 'x': tactic.getX().concat( tactic.normalizeKoordinates(clickX,canvaswidth)), 'y': tactic.getY().concat( tactic.normalizeKoordinates(clickY, canvasheight))}));
+        socket.emit('changeTac',  JSON.stringify({'id': tactic.getId(), 'drag': tactic.getDrag().concat(coordinateDrag), 'x': tactic.getX().concat( tactic.normalizeKoordinates(coordinateX,canvaswidth)), 'y': tactic.getY().concat( tactic.normalizeKoordinates(coordinateY, canvasheight))}));
     }
 
 }
 
+/**
+ * Bindet ein Tooltip Element an ein HTML Element
+ *
+ * @param element = HTML Element auf das ein Tooltip angebunden werden soll, text = Der Text der in dem Tooltip stehen soll
+ */
 function setTooltipToElement(element, text) {
 
 
@@ -120,6 +147,11 @@ function setTooltipToElement(element, text) {
 
 }
 
+/**
+ * Ändert den Namen des HTML ELements, das den Namen einer Taktik anzeigt
+ * @param id = Id des Elements, newvalue = Neue Name der Taktik, option = Prüfvariable ob es eine Gruppentaktik ist, target = Zielelement das geändert wird, changevalueelement = Id des Zielelements
+ *
+ */
 function changeNameOfTactic(id, newvalue, option, target, changevalueelement) {
 
     user.changeTacticName(id, newvalue, option);
@@ -128,7 +160,11 @@ function changeNameOfTactic(id, newvalue, option, target, changevalueelement) {
     $(changevalueelement).html(newvalue);
 }
 
-
+/**
+ * Ändert den Namen des HTML ELements, das den Namen einer Taktik anzeigt
+ * @param id = Id des Elements, newvalue = Neue Name der Taktik, option = Prüfvariable ob es eine Gruppentaktik ist, target = Zielelement das geändert wird, changevalueelement = Id des Zielelements
+ *
+ */
 function setChangeName(target, dest, id) {
 
     $(target).hide();
@@ -144,6 +180,11 @@ function setChangeName(target, dest, id) {
     });
 }
 
+/**
+ * Prüft ob ein Wert in einem Array vorkommt
+ * @param array = Das zu testende Array, value = Der Wert nach dem gesucht werden soll
+ * @return tempindexarray = Das array mit dem gesuchten Wert
+ */
 function isInArray(array, value) {
     if (array.length != 0) {
 
@@ -162,6 +203,11 @@ function isInArray(array, value) {
     }
 }
 
+/**
+ * Prüft auf die Anwenderinteraktion mittels Entertaste
+ * @param source = Aus welcher Funktion es aufgerufen wird
+ *
+ */
 function pressEnter(source){
 
 

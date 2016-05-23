@@ -1,3 +1,12 @@
+/**
+ * Created by Robert Schierz on 06.01.2016.
+ */
+
+/**
+ * Öffnet das Gruppenpanel der jeweiligen Gruppe
+ *
+ * @param groupname = Name der Gruppe
+ */
 function openGroupTactic(groupname) {
 
     var groupobject = user.getGroupByName(groupname);
@@ -61,11 +70,7 @@ function openGroupTactic(groupname) {
 
         }
 
-       /* $("[data-groupmembertableoption=" + membername + "]").on("click", function () {
-            optionPanel($(this).attr("data-groupmembertableoption"), "member", groupobject);
-        });*/
-
-        if($("[data-groupmembertableoption=" + membername + "]").length != 0){
+        if ($("[data-groupmembertableoption=" + membername + "]").length != 0) {
             $("[data-member = " + membername + "]").on("click", function () {
                 optionPanel($(this).attr("data-member"), "member", groupobject);
             })
@@ -88,10 +93,6 @@ function openGroupTactic(groupname) {
             $("[data-grouptactic = " + tacticid + "]").append("" + grouptacticsarray[grouptactic].name + "");
             $("[data-grouptactictableoptiontd = " + tacticid + "]").append("<i data-grouptactictableoption =" + tacticid + " class='material-icons grouptactic_option'>keyboard_arrow_down</i>");
 
-            /*$("[data-grouptactictableoption = " + tacticid + "]").on("click", function () {
-                optionPanel($(this).attr("data-grouptactictableoption"), "tactic");
-            });*/
-
             $("[data-tactic = " + tacticid + "]").on("click", function () {
                 optionPanel($(this).attr("data-tactic"), "tactic");
             })
@@ -102,6 +103,7 @@ function openGroupTactic(groupname) {
 
 }
 
+
 $(document).click(function (e) {
     if ($(e.target).closest(".optionpanel").length == 0 && $(e.target).closest(".tacticrow").length == 0 && $(e.target).closest(".memberrow").length == 0) {
         if ($(".optionpanel").length != 0) {
@@ -111,6 +113,11 @@ $(document).click(function (e) {
     }
 });
 
+/**
+ * Erstellt die Optionpanel, die benötigt werden um Funktionen seitens der Anwender im Gruppenpanel auszuführen
+ *
+ * @param id = Id des Elements für welches das Panel erstellt werden soll, source = Optionsparameter für Benutzer oder Taktik Optionpanel, group = Gruppenobjekt
+ */
 function optionPanel(id, source, group) {
     var request;
     optionPanelDelete(id);
@@ -153,8 +160,6 @@ function optionPanel(id, source, group) {
             setTooltipToElement("[data-tacticdeletebutton =" + id + "]", "Taktik Löschen");
 
 
-
-
         } else if (source == "member") {
 
             $("[data-" + request + "=" + id + "]").append("<div class='optionpanel' data-optionpanel = " + id + "><table><tr>" +
@@ -180,7 +185,7 @@ function optionPanel(id, source, group) {
 
         }
 
-        $(".optionpanel").on("click", function(){
+        $(".optionpanel").on("click", function () {
             return false;
         });
 
@@ -192,13 +197,18 @@ function optionPanel(id, source, group) {
     }
 }
 
+/**
+ * Bindet nötige Eventlistener an Moderatorbuttons
+ *
+ * @param id = Id des Elements, group = Gruppenname
+ */
 function setListenerToModButton(id, group) {
     var membermodelement = "[data-membermodoption =" + id + "]";
     switch ($(membermodelement).attr("data-type")) {
         case "remove":
             $(membermodelement).unbind("click");
             $(membermodelement).on("click", function () {
-                socket.emit("unsetGroupMod", JSON.stringify({'user': localStorage.getItem("benutzername") ,'unset': id, 'name': group}));
+                socket.emit("unsetGroupMod", JSON.stringify({'user': localStorage.getItem("benutzername"), 'unset': id, 'name': group}));
             });
             setTooltipToElement(membermodelement, "Gruppenmoderator entfernen");
             break;
@@ -213,7 +223,11 @@ function setListenerToModButton(id, group) {
     }
 }
 
-
+/**
+ * Entfernt das Optionpanel
+ *
+ * @param id = Id des Optionpanel
+ */
 function optionPanelDelete(id) {
     $('div').each(function () {
         if ($(this).attr('class') == "optionpanel" && $(this).attr('data-optionpanel') != id) {
@@ -223,6 +237,11 @@ function optionPanelDelete(id) {
     });
 }
 
+/**
+ * Lädt das Kartenvorschaubild der Taktik in das Gruppenpanel
+ *
+ * @param currenttactic = Objekt der momentanen Taktik im Gruppenpanel
+ */
 function loadTacticImage(currenttactic) {
     $.ajax({
         url: "./jsons/mapselections.json",
@@ -241,6 +260,11 @@ function loadTacticImage(currenttactic) {
     });
 }
 
+/**
+ * Verässt das Gruppenpanel, und schließt es gleichzeitig
+ *
+ * @param data = Rückgabewert vom Server
+ */
 function leaveGroup(data) {
     var group;
     if (data.group == undefined) {

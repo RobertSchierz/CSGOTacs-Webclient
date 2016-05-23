@@ -2,7 +2,6 @@ QUnit.config.reorder = false;
 authentification("robdebang", "123");
 
 
-
 QUnit.module("Test Classfunctions");
 
 QUnit.test("Test Funktion normalizeKoordinates and unnormalizeKoordinates ", function (assert) {
@@ -94,7 +93,6 @@ QUnit.test("Canvas Tests", function (assert) {
 
     handleMapselectorStates("#Cobblestone", false);
     assert.ok($("#map").attr("src") == "images/map_cobblestone.jpg", "Changed Map with handleMapselectorStates Function to Cobblestone");
-
 
 
     var context = document.getElementById('imgpanel').getContext("2d");

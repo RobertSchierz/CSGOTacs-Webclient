@@ -1,9 +1,13 @@
 
 /**
- * Created by Robert on 21.01.2016.
+ * Created by Robert Schierz on 21.01.2016.
  */
 
-
+/**
+ * Eventlistener für die Kommunikation mit dem Server
+ *
+ * @param data = Rückgabewert vom Server
+ */
 socket.on('status', function (data) {
 
     console.log(data);
@@ -224,7 +228,11 @@ socket.on('status', function (data) {
 
 });
 
-
+/**
+ * Startet den Livemodus
+ *
+ * @param on = Boolescher Prüfwert, data = Rückgabewert vom Server
+ */
 function setLiveModus(on, data) {
     if (on) {
         deleteCanvas();
@@ -241,6 +249,11 @@ function setLiveModus(on, data) {
     }
 }
 
+/**
+ * Beendet den Livemodus
+ *
+ * @param data = Rückgabewert vom Server
+ */
 function afterLivemodusLoaded(data) {
 
     setTooltipToElement("#leavelivemodus", "Livemodus beenden");
@@ -257,6 +270,11 @@ function afterLivemodusLoaded(data) {
     })
 }
 
+/**
+ * Handling des Mitgliedspanel des Livemodus
+ *
+ * @param data = Rückgabewert vom Server
+ */
 function handleLiveUserlist(data) {
     var livemember = new Array();
     $('#livememberlist').children().find("span").each(function () {
